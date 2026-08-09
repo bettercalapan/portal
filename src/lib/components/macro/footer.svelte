@@ -134,8 +134,9 @@
 				}
 			}
 			.footer-sections {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+				margin-top: 1.75rem;
+				display: flex;
+				flex-direction: column;
 				gap: 2rem;
 
 				.footer-section {
@@ -170,6 +171,12 @@
 				display: grid;
 				grid-template-columns: 24rem 1fr;
 				gap: 16rem;
+
+				.footer-sections {
+					margin: 0;
+					display: grid;
+					grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+				}
 			}
 		}
 	}

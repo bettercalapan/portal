@@ -150,14 +150,14 @@
 			max-width: 80rem;
 			display: flex;
 			flex-direction: column;
-			gap: 2rem;
+			gap: 1.75rem;
 
 			.heading {
 				max-width: 50rem;
 				color: var(--fg);
 				font-weight: 700;
 				font-size: 2.5rem;
-				line-height: 1.125;
+				line-height: 1.25;
 			}
 			.search {
 				position: relative;

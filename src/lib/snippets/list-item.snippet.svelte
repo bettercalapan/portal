@@ -32,10 +32,9 @@
 <style>
 	:global(.item) {
 		width: 100%;
-		border-bottom: 1px solid var(--bg);
 
 		:global(&:hover) {
-			border-color: var(--fg);
+			text-decoration: underline;
 		}
 
 		:global(.link) {
