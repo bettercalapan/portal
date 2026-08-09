@@ -1,11 +1,19 @@
 import { spawn } from "node:child_process";
+import { rm } from "node:fs/promises";
+import { writeBenchmarkSummary } from "./benchmark-summary.mjs";
 
 const PREVIEW_URL = "http://localhost:4173";
 const PREVIEW_START_TIMEOUT = 60_000;
 const mode = process.argv[2] ?? "mobile";
+const ciDevice = process.argv[3];
 
 if (!["mobile", "desktop", "ci"].includes(mode)) {
 	console.error(`Unknown benchmark mode: ${mode}`);
+	process.exit(1);
+}
+
+if (ciDevice && (mode !== "ci" || !["mobile", "desktop"].includes(ciDevice))) {
+	console.error(`Unknown CI benchmark device: ${ciDevice}`);
 	process.exit(1);
 }
 
@@ -61,13 +69,22 @@ process.once("SIGTERM", handleSigterm);
 let status = 0;
 try {
 	await waitForPreview();
-	const devices = mode === "ci" ? ["mobile", "desktop"] : [mode];
+	const devices = mode === "ci" ? (ciDevice ? [ciDevice] : ["mobile", "desktop"]) : [mode];
 	const command = mode === "ci" ? "unlighthouse-ci" : "unlighthouse";
 	for (const device of devices) {
+		if (mode === "ci") await rm(`.unlighthouse/${device}`, { recursive: true, force: true });
 		const scanStatus = await run("pnpm", ["exec", command], {
 			env: { ...process.env, UNLIGHTHOUSE_DEVICE: device }
 		});
 		if (scanStatus !== 0) status = scanStatus;
+		if (mode === "ci") {
+			try {
+				await writeBenchmarkSummary(device, `.unlighthouse/${device}/ci-result.json`);
+			} catch (error) {
+				console.error(error instanceof Error ? error.message : error);
+				status = 1;
+			}
+		}
 	}
 } catch (error) {
 	console.error(error instanceof Error ? error.message : error);

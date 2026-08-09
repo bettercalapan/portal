@@ -65,12 +65,14 @@ pnpm benchmark:ci
 
 `pnpm benchmark` builds the site, serves it locally, and opens the interactive mobile Unlighthouse dashboard at `http://localhost:5678`. Use `pnpm benchmark:desktop` for the desktop dashboard.
 
-`pnpm benchmark:ci` runs every route on both viewports and fails if any page's category score drops below the budget:
+`pnpm benchmark:ci` reads every route from the generated `/sitemap.xml`, runs both viewports, and fails if any page's category score drops below the budget:
 
 - Mobile: 90
 - Desktop: 70
 
-Budgets apply to all four Lighthouse categories (performance, accessibility, best-practices, SEO). Reports are written to `.unlighthouse/`. CI runs `pnpm benchmark:ci` on every push to `main`.
+Budgets apply to all four Lighthouse categories (performance, accessibility, best-practices, SEO). Reports are written to `.unlighthouse/` locally. CI runs each viewport on a separate runner for every push to `main` and publishes compact Markdown job summaries instead of report artifacts.
+
+The XML sitemap is generated from static `+page.svelte` and `+page.svx` routes. New static pages are included automatically; parameterized routes must provide concrete URLs before they can be added.
 
 <!-- TODO: add automated accessibility checks here once implemented. -->
 
