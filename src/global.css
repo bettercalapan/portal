@@ -92,6 +92,7 @@ html {
 }
 html {
 	scrollbar-color: var(--neutral-2) var(--bg);
+	scroll-behavior: smooth;
 }
 body {
 	min-height: 100dvh;
