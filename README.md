@@ -48,11 +48,29 @@ pnpm check
 
 # Run tests
 pnpm test
+
+# Open the mobile performance dashboard at http://localhost:5678
+pnpm benchmark
+
+# Open the desktop performance dashboard
+pnpm benchmark:desktop
+
+# Run mobile and desktop budget checks
+pnpm benchmark:ci
 ```
 
 **Don't have pnpm?** See the [installation](https://pnpm.io/installation).
 
-<!-- TODO: add automated Lighthouse checks here once implemented. -->
+## Performance Checks
+
+`pnpm benchmark` builds the site, serves it locally, and opens the interactive mobile Unlighthouse dashboard at `http://localhost:5678`. Use `pnpm benchmark:desktop` for the desktop dashboard.
+
+`pnpm benchmark:ci` runs every route on both viewports and fails if any page's category score drops below the budget:
+
+- Mobile: 90
+- Desktop: 70
+
+Budgets apply to all four Lighthouse categories (performance, accessibility, best-practices, SEO). Reports are written to `.unlighthouse/`. CI runs `pnpm benchmark:ci` on every push to `main`.
 
 <!-- TODO: add automated accessibility checks here once implemented. -->
 

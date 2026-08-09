@@ -1,7 +1,6 @@
 allowBuilds:
   esbuild: true
   workerd: true
-onlyBuiltDependencies:
-  - workerd
-  - sharp
-  - esbuild
+  sharp: true
+  puppeteer: false
+  vue-demi: false
