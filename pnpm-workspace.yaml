@@ -2,5 +2,5 @@ allowBuilds:
   esbuild: true
   workerd: true
   sharp: true
-  puppeteer: false
+  puppeteer: true
   vue-demi: false

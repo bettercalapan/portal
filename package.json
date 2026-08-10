@@ -18,7 +18,11 @@
 		"benchmark": "node scripts/benchmark.mjs mobile",
 		"benchmark:mobile": "node scripts/benchmark.mjs mobile",
 		"benchmark:desktop": "node scripts/benchmark.mjs desktop",
-		"benchmark:ci": "node scripts/benchmark.mjs ci"
+		"benchmark:ci": "node scripts/benchmark.mjs ci",
+		"pa11y": "node scripts/pa11y.mjs all",
+		"pa11y:mobile": "node scripts/pa11y.mjs mobile",
+		"pa11y:desktop": "node scripts/pa11y.mjs desktop",
+		"pa11y:ci": "node scripts/pa11y.mjs ci"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
@@ -33,6 +37,7 @@
 		"eslint-plugin-svelte": "^3.19.0",
 		"globals": "^17.6.0",
 		"mdsvex": "^0.12.8",
+		"pa11y-ci": "^4.1.1",
 		"playwright": "^1.60.0",
 		"prettier": "^3.8.3",
 		"prettier-plugin-svelte": "^4.1.0",
