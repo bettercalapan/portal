@@ -27,3 +27,6 @@ worker-configuration.d.ts
 
 # Lighthouse 
 .unlighthouse
+
+# Pa11y
+.pa11y

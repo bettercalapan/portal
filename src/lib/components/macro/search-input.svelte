@@ -60,6 +60,7 @@
 		type="text"
 		name="term"
 		id="search"
+		aria-label="Search BetterCalapan.org"
 		autocomplete="off"
 		spellcheck="false"
 		placeholder="Occupational permit"

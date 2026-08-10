@@ -57,6 +57,9 @@ pnpm benchmark:desktop
 
 # Run mobile and desktop budget checks
 pnpm benchmark:ci
+
+# Run mobile and desktop accessibility checks
+pnpm pa11y
 ```
 
 **Don't have pnpm?** See the [installation](https://pnpm.io/installation).
@@ -74,7 +77,13 @@ Budgets apply to all four Lighthouse categories (performance, accessibility, bes
 
 The XML sitemap is generated from static `+page.svelte` and `+page.svx` routes. New static pages are included automatically; parameterized routes must provide concrete URLs before they can be added.
 
-<!-- TODO: add automated accessibility checks here once implemented. -->
+## Accessibility Checks
+
+`pnpm pa11y` builds and serves the site locally, then checks every route in `/sitemap.xml` at mobile and desktop widths using Pa11y. Use `pnpm pa11y:mobile` or `pnpm pa11y:desktop` to run one viewport.
+
+The checks use the axe and HTML CodeSniffer runners at WCAG 2 AA and fail on any confirmed accessibility error. Axe findings that require manual review remain non-blocking warnings. Pa11y requires Node.js 20, 22, or 24; CI uses Node.js 22 and runs both viewports as separate jobs on every push.
+
+Each CI job publishes a compact Markdown summary with route and error totals plus any failing rule codes. Full selectors, HTML context, and remediation links remain in the job log. The temporary JSON reports in `.pa11y/` are ignored by Git and are not uploaded as artifacts.
 
 ## Contributing
 

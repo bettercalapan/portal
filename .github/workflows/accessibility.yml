@@ -1,0 +1,43 @@
+name: Accessibility
+
+on: push
+
+permissions:
+  contents: read
+
+jobs:
+  pa11y:
+    name: pa11y (${{ matrix.device }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [mobile, desktop]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Configure Chrome
+        shell: bash
+        run: |
+          chrome_path="$(command -v google-chrome)"
+          test -x "$chrome_path"
+          printf 'PA11Y_CHROME_PATH=%s\n' "$chrome_path" >> "$GITHUB_ENV"
+          "$chrome_path" --version
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+
+      - name: Run ${{ matrix.device }} Pa11y checks
+        run: pnpm pa11y:ci ${{ matrix.device }}
