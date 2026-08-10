@@ -1,0 +1,17 @@
+format = "detailed"
+scheme = ["http", "https"]
+# Some government sites deny automated clients even though the page is publicly reachable.
+accept = ["100..=103", "200..=299", "403"]
+timeout = 30
+max_retries = 3
+retry_wait_time = 2
+max_concurrency = 32
+host_concurrency = 2
+host_request_interval = "100ms"
+user_agent = "BetterCalapan link checker"
+
+# Page inputs come from the local sitemap, but only off-site targets should be checked.
+exclude = [
+	'^https?://(?:localhost|127\.0\.0\.1|\[::1\]):4173(?:/|$)',
+	'^https?://(?:www\.)?bettercalapan\.org(?:/|$)',
+]

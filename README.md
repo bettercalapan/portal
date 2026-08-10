@@ -60,6 +60,9 @@ pnpm benchmark:ci
 
 # Run mobile and desktop accessibility checks
 pnpm pa11y
+
+# Check external links across the site
+pnpm lychee
 ```
 
 **Don't have pnpm?** See the [installation](https://pnpm.io/installation).
@@ -84,6 +87,16 @@ The XML sitemap is generated from static `+page.svelte` and `+page.svx` routes. 
 The checks use the axe and HTML CodeSniffer runners at WCAG 2 AA and fail on any confirmed accessibility error. Axe findings that require manual review remain non-blocking warnings. Pa11y requires Node.js 20, 22, or 24; CI uses Node.js 22 and runs both viewports as separate jobs on every push.
 
 Each CI job publishes a compact Markdown summary with route and error totals plus any failing rule codes. Full selectors, HTML context, and remediation links remain in the job log. The temporary JSON reports in `.pa11y/` are ignored by Git and are not uploaded as artifacts.
+
+## External Link Checks
+
+`pnpm lychee` builds and serves the site locally, reads every route from `/sitemap.xml`, and uses [Lychee](https://lychee.cli.rs/) to check external HTTP and HTTPS links found in the rendered pages. New static pages are included automatically without maintaining a route list.
+
+Install the Lychee CLI before running the local check. The project currently tests with Lychee 0.24.2; see the [official installation options](https://github.com/lycheeverse/lychee#installation). The similarly named `lychee` npm package is unrelated.
+
+The check fails on broken external links. BetterCalapan's local preview and canonical production origins are excluded as internal links, while email addresses are outside the HTTP link-checking scope. HTTP 403 responses are accepted because several government sites block automated clients while remaining publicly reachable. CI installs the pinned Lychee version and runs `pnpm lychee:ci` on every push.
+
+CI publishes a Markdown job summary with one row per unique external URL, its result, and every sitemap page where it appears. Successful links, accepted 403 responses, redirects, failures, and timeouts are labeled separately. The temporary JSON report and `.lychee/summary.md` are ignored by Git and are not uploaded as artifacts.
 
 ## Contributing
 

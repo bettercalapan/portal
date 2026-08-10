@@ -22,7 +22,9 @@
 		"pa11y": "node scripts/pa11y.mjs all",
 		"pa11y:mobile": "node scripts/pa11y.mjs mobile",
 		"pa11y:desktop": "node scripts/pa11y.mjs desktop",
-		"pa11y:ci": "node scripts/pa11y.mjs ci"
+		"pa11y:ci": "node scripts/pa11y.mjs ci",
+		"lychee": "node scripts/lychee.mjs",
+		"lychee:ci": "node scripts/lychee.mjs ci"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",

@@ -30,3 +30,6 @@ worker-configuration.d.ts
 
 # Pa11y
 .pa11y
+
+# Lychee
+.lychee
