@@ -15,6 +15,7 @@
 
 	let searchTerm = $derived(term);
 	let submittedSearchTerm: string | null = $state(null);
+	let hasFocus = $state(false);
 	let timer: ReturnType<typeof setTimeout> | undefined;
 	const DURATION = 500;
 
@@ -36,8 +37,33 @@
 				return;
 			}
 			submittedSearchTerm = normalizedTerm;
-			showResults = true;
+			showResults = hasFocus;
 		}, DURATION);
+	}
+	function handlerFocusIn(e: FocusEvent) {
+		if (e.currentTarget instanceof Node && e.relatedTarget instanceof Node) {
+			if (e.currentTarget.contains(e.relatedTarget)) return;
+		}
+
+		hasFocus = true;
+		const normalizedTerm = normalizeSearchTerm(searchTerm);
+		if (!normalizedTerm) return;
+
+		if (submittedSearchTerm === normalizedTerm) {
+			showResults = true;
+			return;
+		}
+
+		handlerSearch();
+	}
+	function handlerFocusOut(e: FocusEvent) {
+		if (e.currentTarget instanceof Node && e.relatedTarget instanceof Node) {
+			if (e.currentTarget.contains(e.relatedTarget)) return;
+		}
+
+		hasFocus = false;
+		showResults = false;
+		clearTimer();
 	}
 	function handlerSubmit(e: SubmitEvent) {
 		e.preventDefault();
@@ -55,28 +81,30 @@
 	onDestroy(clearTimer);
 </script>
 
-<form class="search-input" action={resolve("/search")} method="GET" onsubmit={handlerSubmit}>
-	<input
-		type="text"
-		name="term"
-		id="search"
-		aria-label="Search BetterCalapan.org"
-		autocomplete="off"
-		spellcheck="false"
-		placeholder="Occupational permit"
-		required
-		bind:value={searchTerm}
-		oninput={handlerSearch}
-	/>
-	<button type="submit" class="search-button" aria-label="Search button">
-		<div class="icon">
-			<Search />
-		</div>
-	</button>
-</form>
-{#if submittedSearchTerm && showResults}
-	<SearchResults term={submittedSearchTerm} />
-{/if}
+<div class="search-widget" onfocusin={handlerFocusIn} onfocusout={handlerFocusOut}>
+	<form class="search-input" action={resolve("/search")} method="GET" onsubmit={handlerSubmit}>
+		<input
+			type="text"
+			name="term"
+			id="search"
+			aria-label="Search BetterCalapan.org"
+			autocomplete="off"
+			spellcheck="false"
+			placeholder="Occupational permit"
+			required
+			bind:value={searchTerm}
+			oninput={handlerSearch}
+		/>
+		<button type="submit" class="search-button" aria-label="Search button">
+			<div class="icon">
+				<Search />
+			</div>
+		</button>
+	</form>
+	{#if submittedSearchTerm && showResults}
+		<SearchResults term={submittedSearchTerm} />
+	{/if}
+</div>
 
 <style>
 	.search-input {

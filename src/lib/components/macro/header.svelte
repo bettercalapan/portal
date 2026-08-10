@@ -13,6 +13,13 @@
 	function handlerSearchButton() {
 		showSearchInput = !showSearchInput;
 	}
+	function handlerSearchFocusOut(e: FocusEvent) {
+		if (e.currentTarget instanceof Node && e.relatedTarget instanceof Node) {
+			if (e.currentTarget.contains(e.relatedTarget)) return;
+		}
+
+		showSearchInput = false;
+	}
 
 	let inputValue = $state("");
 	function handlerSearchInput(e: SubmitEvent) {
@@ -39,29 +46,35 @@
 		<div class="right">
 			<NavigationMenuMobile />
 			<NavigationMenu />
-			<button class="search-button" aria-label="Toggle search input" onclick={handlerSearchButton}>
-				<Search />
-			</button>
-			<form
-				class="search-input-wrapper"
-				class:open={showSearchInput}
-				inert={!showSearchInput}
-				action={resolve("/search")}
-				method="GET"
-				onsubmit={handlerSearchInput}
-			>
-				<input
-					class="search-input"
-					type="text"
-					name="term"
-					aria-label="Search BetterCalapan.org"
-					bind:value={inputValue}
-					required
-				/>
-				<button type="submit" class="search-input-button" aria-label="Search button">
-					<ArrowRight />
+			<div class="search-widget" onfocusout={handlerSearchFocusOut}>
+				<button
+					class="search-button"
+					aria-label="Toggle search input"
+					onclick={handlerSearchButton}
+				>
+					<Search />
 				</button>
-			</form>
+				<form
+					class="search-input-wrapper"
+					class:open={showSearchInput}
+					inert={!showSearchInput}
+					action={resolve("/search")}
+					method="GET"
+					onsubmit={handlerSearchInput}
+				>
+					<input
+						class="search-input"
+						type="text"
+						name="term"
+						aria-label="Search BetterCalapan.org"
+						bind:value={inputValue}
+						required
+					/>
+					<button type="submit" class="search-input-button" aria-label="Search button">
+						<ArrowRight />
+					</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </header>
@@ -104,6 +117,12 @@
 				display: flex;
 				align-items: center;
 				gap: 0.5rem;
+
+				.search-widget {
+					position: relative;
+					display: grid;
+					place-items: center;
+				}
 
 				.search-button {
 					padding: 0.25rem;
