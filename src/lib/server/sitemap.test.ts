@@ -5,9 +5,9 @@ describe("getSitemapPaths", () => {
 	it("converts SvelteKit page files into sorted public routes", () => {
 		expect(
 			getSitemapPaths([
-				"/workspace/src/routes/(app)/(content)/services/+page.svx",
-				"/workspace/src/routes/(app)/search/+page.svelte",
-				"/workspace/src/routes/(app)/+page.svelte",
+				"/workspace/src/routes/(content)/services/+page.svx",
+				"/workspace/src/routes/search/+page.svelte",
+				"/workspace/src/routes/+page.svelte",
 				"/workspace/src/routes/+error.svelte",
 				"/workspace/src/routes/api/+server.ts"
 			])
@@ -16,14 +16,14 @@ describe("getSitemapPaths", () => {
 
 	it("rejects routes that need concrete parameter values", () => {
 		expect(() =>
-			getSitemapPaths(["/workspace/src/routes/(app)/services/[service]/+page.svelte"])
+			getSitemapPaths(["/workspace/src/routes/(content)/services/[service]/+page.svelte"])
 		).toThrow("Sitemap route requires concrete parameters");
 	});
 
 	it("rejects duplicate public routes", () => {
 		expect(() =>
 			getSitemapPaths([
-				"/workspace/src/routes/(app)/about/+page.svelte",
+				"/workspace/src/routes/(content)/about/+page.svelte",
 				"/workspace/src/routes/(marketing)/about/+page.svx"
 			])
 		).toThrow("Multiple page files resolve to the same sitemap URL");

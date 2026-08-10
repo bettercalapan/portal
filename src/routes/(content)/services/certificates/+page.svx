@@ -1,0 +1,40 @@
+---
+layout: content
+title: Certificates
+breadcrumbs:
+  - name: Services
+    url: /(content)/services
+---
+
+<script>
+	import { resolveRoute } from "$lib/utils/paths";
+	import { certificates } from "$lib/data/services.data";
+	import { listItem } from "$lib/snippets/list-item.snippet.svelte";
+</script>
+
+# {title}
+
+{certificates.description}
+
+<ul class="certificates-list">
+	{#each certificates.data as certificate (certificate.name)}
+		{@render listItem(certificate.name, certificate.url)}
+	{/each}
+</ul>
+
+<p class="office">
+	If you need any of these, head to the
+	<a class="link" href={resolveRoute("/(content)/contact")}>Calapan City Hall</a>
+	and ask for what you need.
+</p>
+
+<style>
+	.certificates-list {
+		margin: 2rem 0;
+        padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+        list-style-type: none;
+	}
+</style>

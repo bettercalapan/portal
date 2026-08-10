@@ -1,0 +1,106 @@
+---
+layout: content
+title: Death Certificate
+breadcrumbs:
+  - name: Services
+    url: /(content)/services
+  - name: Certificates
+    url: /(content)/services/certificates
+onThisPage:
+  - name: Death Certificate
+    id: title
+  - name: Requirements
+    id: requirements
+  - name: Step-by-step process
+    id: step-by-step-process
+  - name: Office info
+    id: office-info
+  - name: Frequently asked questions
+    id: frequently-asked-questions
+relatedContent:
+  - name: Birth Certificate
+    url: /(content)/services/certificates/birth-certificate
+  - name: Marriage Certificate
+    url: /(content)/services/certificates/marriage-certificate
+  - name: Barangay Clearance
+    url: /(content)/services/certificates/barangay-clearance
+---
+
+<script>
+	import Accordion from "$lib/components/macro/accordion.svelte";
+	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+
+	const faq = [
+		{
+			question: "How soon must death be registered?",
+			answer: "Within 48 hours of death. Late registration requires additional documents and fees."
+		},
+		{
+			question: "Do I need a burial permit?",
+			answer: "Yes, burial permit is required before interment in any cemetery."
+		},
+		{
+			question: "How long is the posting period for late registration?",
+			answer: "Evaluator shall prepare documents for posting within 10 days, and the release of Certified True Copy is expiration of 10 days posting period."
+		}
+	];
+</script>
+
+# {title}
+
+Register death certificate and obtain burial/transfer permit.
+
+## Requirements
+
+The requirements depend on whether your registration is timely or not.
+
+### For timely registration
+
+- Certificate of Death - 4 copies
+- Valid ID of informant
+- Valid ID of deceased (if available)
+
+### For late registration
+
+- Negative Certification from Philippine Statistics Authority
+- Duly accomplished Certificate of Death or Certificate of Fetal Death
+- Certification from the Cemetery
+- Valid ID of informant
+- Valid ID of deceased (if available)
+
+## Step-by-step process
+
+Follow these steps to register your marriage certificate.
+
+1. ### Obtain medical certificate
+
+    Get certificate of death from attending physician or hospital.
+
+2. ### Visit Civil Registry
+
+    Go to the Civil Registry Department in the Calapan City Hall with death certificate within 48 hours. Office hours: Mon-Fri, 8 AM - 5 PM.
+
+3. ### Complete registry
+
+    Staff registers death in civil registry.
+
+4. ### Pay fees
+
+    Pay registration of ₱75, ₱150 if late, and burial permit fees at the Civil Registry Department in the Calapan City Hall.
+
+5. ### Claim permits
+
+    Receive burial permit and certified death certificate.
+
+## Office info
+
+<OfficeInfo
+	landmark="Calapan City Hall"
+	location="95HM+H9J Calapan City Hall, Roxas Dr, Calapan City, 5200 Oriental Mindoro"
+	phone="(043) 288-2412"
+	time="Mon-Fri: 8AM - 5PM"
+/>
+
+## Frequently asked questions
+
+<Accordion {faq} />

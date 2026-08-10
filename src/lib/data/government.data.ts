@@ -1,6 +1,6 @@
 import type { Link } from "$lib/types/link.types";
 
-const governmentPrefix = "/(app)/(content)/government";
+const governmentPrefix = "/(content)/government";
 export const government: {
 	heading: string;
 	description: string;

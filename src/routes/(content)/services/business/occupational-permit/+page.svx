@@ -1,0 +1,109 @@
+---
+layout: content
+title: Occupational Permit
+breadcrumbs:
+  - name: Services
+    url: /(content)/services
+  - name: Business
+    url: /(content)/services/business
+onThisPage:
+  - name: Occupational Permit
+    id: title
+  - name: Requirements
+    id: requirements
+  - name: Step-by-step process
+    id: step-by-step-process
+  - name: Office info
+    id: office-info
+  - name: Frequently asked questions
+    id: frequently-asked-questions
+relatedContent:
+  - name: Business Permit
+    url: /(content)/services/business/business-permit
+  - name: Special Permit
+    url: /(content)/services/business/special-permit
+  - name: Business Status Certificate
+    url: /(content)/services/business/business-status-certificate
+---
+
+<script>
+	import Accordion from "$lib/components/macro/accordion.svelte";
+	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+	import { resolveRoute } from "$lib/utils/paths";
+
+	const faq = [
+		{
+			question: "What is the processing time for the permit?",
+			answer: "The BPLO classifies the issuance of the Occupational Mayor's Permit as a simple transaction, typically taking around 3 hours depending on the volume of applicants."
+		},
+		{
+			question: "Do I need to apply in person?",
+			answer: "While in-person application is standard, the city has been integrating services online. Please check the official Calapan City website for recent updates."
+		},
+		{
+			question: "Who is considered a first-time job seeker?",
+			answer: "A first-time job seeker is defined as a Filipino citizen looking for work for the first time, who is between 15 to 30 years old, and not currently receiving benefits from other government job programs."
+		},
+		{
+			question: "Are all fees waived under RA 11261?",
+			answer: "Yes, government regulatory fees for standard documents such as the Occupational Permit, Barangay Clearance, and NBI Clearance are free of charge for valid first-time job seekers."
+		},
+		{
+			question: "What if I am a food handler?",
+			answer: "If you are applying as a food handler, you will be required to submit specific test results (Urine and Stool) and also undergo a seminar at the Sanitation Office."
+		}
+	];
+</script>
+
+# {title}
+
+Issued to all workers or employees (temporary or permanent) employed within the territorial jurisdiction of Calapan.
+
+## Requirements
+
+There are additional documents if you are a first-time job seeker.
+
+### Documents
+
+- Application Form (2 copies - secured from BPLO)
+- Community Tax Certificate (Cedula)
+- NBI Clearance or Police Clearance
+
+### If first-time job seeker
+
+- Barangay Certificate with an undertaking stating you are a first-time job seeker to avail the assistance.
+- Medical Results (X-Ray Result)
+- Urine and Stool test results (specifically required for food handlers)
+
+## Step-by-step process
+
+Follow these steps to claim your permit.
+
+1. ### Secure application form
+
+    Secure and fill out the application form at the Business Permit and Licensing Office (BPLO).
+
+2. ### Submit requirements
+
+    Submit the application form along with the required documents such as Cedula and NBI/Police Clearance for evaluation.
+
+3. ### Assessment and payment
+
+    Proceed through the assessment and pay the assessed fees as directed by the BPLO personnel.
+
+4. ### Claim permit
+
+    Claim the Occupational Permit once processed and approved.
+
+## Office info
+
+<OfficeInfo
+	landmark="Calapan City Hall"
+	location="95HM+H9J Calapan City Hall, Roxas Dr, Calapan City, 5200 Oriental Mindoro"
+	phone="+63432882496"
+	time="Mon-Fri: 8AM - 5PM"
+/>
+
+## Frequently asked questions
+
+<Accordion {faq} />

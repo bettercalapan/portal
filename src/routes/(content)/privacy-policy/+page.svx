@@ -1,0 +1,174 @@
+---
+layout: content
+title: Privacy Policy
+onThisPage:
+  - name: Privacy Policy
+    id: title
+  - name: Who is responsible for your information
+    id: who-is-responsible-for-your-information
+  - name: Information we handle
+    id: information-we-handle
+  - name: Technical request information
+    id: technical-request-information
+  - name: Search information
+    id: search-information
+  - name: Local storage and cookies
+    id: local-storage-and-cookies
+  - name: Analytics and advertising
+    id: analytics-and-advertising
+  - name: Messages you send us
+    id: messages-you-send-us
+  - name: Public officials and contact information
+    id: public-officials-and-contact-information
+  - name: Why we process information
+    id: why-we-process-information
+  - name: Who information may be shared with
+    id: who-information-may-be-shared-with
+  - name: How long information is kept
+    id: how-long-information-is-kept
+  - name: Where information may be processed
+    id: where-information-may-be-processed
+  - name: How we protect information
+    id: how-we-protect-information
+  - name: Your privacy rights
+    id: your-privacy-rights
+  - name: Children's privacy
+    id: childrens-privacy
+  - name: Links to other websites
+    id: links-to-other-websites
+  - name: Changes to this policy
+    id: changes-to-this-policy
+relatedContent:
+  - name: Terms of Use
+    url: /(content)/terms-of-use
+  - name: Accessibility
+    url: /(content)/accessibility
+---
+
+<script>
+	import Info from "$lib/components/macro/info.svelte";
+	import { resolveRoute } from "$lib/utils/paths";
+
+	const termsOfUseUrl = resolveRoute("/(content)/terms-of-use");
+</script>
+
+# {title}
+
+This policy explains how BetterCalapan handles information when you use bettercalapan.org.
+
+## Who is responsible for your information
+
+BetterCalapan is an independent, open-source initiative maintained by community contributors. The BetterCalapan maintainers are responsible for personal information handled through this website.
+
+BetterCalapan is not operated by, affiliated with, or endorsed by the City Government of Calapan or any other government agency. Information you provide directly to a government office is controlled by that office and covered by its own privacy notice.
+
+## Information we handle
+
+Depending on how you use BetterCalapan, the information handled may include:
+
+- technical request information, such as your IP address, requested page, date and time, browser details, referring page, and security or network information
+- words or phrases you enter into the website search
+- your selected series on the competitiveness chart
+- your email address, message, and any other information you choose to send to us by email
+
+BetterCalapan does not provide user accounts, accept payments, process municipal applications, or allow document uploads. Do not send us identification numbers, financial information, medical records, or other sensitive personal information unless it is necessary for a privacy request.
+
+## Technical request information
+
+BetterCalapan is hosted on Cloudflare. When you visit the website, Cloudflare processes technical request information to deliver pages, maintain reliability, prevent abuse, and protect the website from security threats.
+
+Cloudflare may provide us with aggregated traffic statistics, such as the number of requests or visits to the website. We do not use this information to identify individual visitors.
+
+## Search information
+
+Search results are calculated in your browser against a static search index. BetterCalapan does not maintain a separate database of your search history.
+
+When you submit a search, the words you enter become part of the page address after `?term=`. This means a search may appear in your browser history, a copied or shared link, and temporary hosting or security records. Do not enter names, identification numbers, or other private information into search.
+
+## Local storage and cookies
+
+BetterCalapan stores your competitiveness-chart selection in your browser under `bettercalapan:competitiveness:selected-series`. This functional preference does not identify you and is not sent to BetterCalapan by the chart. It remains on your device until you change it or clear the website's stored data in your browser.
+
+The BetterCalapan application does not set cookies. Cloudflare may set strictly necessary cookies if it needs to manage traffic or present a security challenge. These are used to protect and operate the website, not for BetterCalapan advertising.
+
+## Analytics and advertising
+
+BetterCalapan does not currently install a client-side analytics beacon or use advertising trackers. We do not build advertising profiles or track you across other websites.
+
+If we introduce analytics that changes how information is handled, we will update this policy to explain what is collected, why it is needed, and what choices you have.
+
+## Messages you send us
+
+If you email [contact@bettercalapan.org](mailto:contact@bettercalapan.org), we and our email provider process your address, message, and related delivery information so we can respond and keep an appropriate record of your request.
+
+Messages sent through GitHub, Facebook, or another external service are also handled under that service's privacy policy. GitHub issues are public, so you should never post personal or sensitive information in an issue.
+
+## Public officials and contact information
+
+BetterCalapan publishes names, roles, office contact details, emergency numbers, and similar civic information obtained from public or official sources. We use this information to help people find government services and understand local government.
+
+If public information about you is inaccurate, outdated, or should not be displayed, email us with the page address and an explanation of the correction you are requesting.
+
+## Why we process information
+
+We process information only when necessary to:
+
+- provide, maintain, and secure BetterCalapan
+- return search results and remember your chart preference
+- measure aggregate website traffic and reliability
+- respond to messages, corrections, and privacy requests
+- make relevant public civic information accessible
+- comply with a legal obligation or a lawful request
+
+Under the Philippine Data Privacy Act of 2012, we rely on our legitimate interests in operating and protecting a public-interest civic website, provided those interests do not override your rights. Where appropriate, we rely on your consent when you voluntarily provide information.
+
+## Who information may be shared with
+
+Information may be processed or shared with:
+
+- Cloudflare, which hosts, delivers, and protects the website
+- our email provider when you contact us
+- maintainers who need the information to respond to your request
+- authorities or other parties when disclosure is required by law
+
+We do not sell or rent personal information, and we do not share it with third parties for their advertising or direct-marketing purposes.
+
+## How long information is kept
+
+We keep personal information only for as long as it is needed for the purpose described in this policy or as required by law. Technical records follow the retention settings and schedules of the hosting and security services we use.
+
+Correspondence is removed when it is no longer reasonably needed to answer the request, maintain an appropriate record, or meet a legal obligation. Public civic information remains available until it is outdated, corrected, removed, or no longer relevant. Browser storage remains on your device until you clear it.
+
+## Where information may be processed
+
+Cloudflare operates a global network, and our hosting and email providers may process information outside the Philippines. When this happens, the provider's safeguards and privacy terms apply alongside applicable Philippine law.
+
+## How we protect information
+
+We use reasonable technical and organisational safeguards appropriate to the limited information BetterCalapan handles. These include encrypted HTTPS connections and Cloudflare's hosting and security controls.
+
+No internet service can guarantee absolute security. Please avoid sending information that is not needed for your request.
+
+## Your privacy rights
+
+Subject to the Data Privacy Act of 2012 and other applicable law, you may have the right to be informed, access your personal information, correct inaccurate information, object to or restrict processing, request erasure or blocking, obtain portable information where applicable, and seek compensation for unlawful processing.
+
+To exercise a right or ask a privacy question, email [contact@bettercalapan.org](mailto:contact@bettercalapan.org). Describe your request and the information or page involved. We may ask for enough information to verify your identity before acting on a request, but we will not ask for more than is necessary.
+
+You may also raise a complaint with the <a href="https://privacy.gov.ph/" target="_blank" rel="external noopener noreferrer">National Privacy Commission</a>.
+
+## Children's privacy
+
+BetterCalapan provides general civic information and is not designed to collect personal information from children. A child, parent, or guardian should not enter a child's personal or sensitive information into search or a public issue.
+
+## Links to other websites
+
+This policy applies only to BetterCalapan. Government services and other websites linked from BetterCalapan decide how they process information you provide to them. Read their privacy policies before submitting personal information.
+
+## Changes to this policy
+
+We may update this policy when BetterCalapan or the services supporting it change. The date at the bottom of this page shows when it was last updated. Material changes will be described here before or when the new processing begins.
+
+Read our <a href={termsOfUseUrl}>Terms of Use</a> for the rules that apply when using BetterCalapan.
+
+<Info text="Last updated August 5, 2026" />

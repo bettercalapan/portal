@@ -3,12 +3,12 @@ import type { RouteId } from "$app/types";
 export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	{
 		title: "Government",
-		url: "/(app)/(content)/government",
+		url: "/(content)/government",
 		keywords: ["government", "officials", "departments", "barangays"]
 	},
 	{
 		title: "Officials",
-		url: "/(app)/(content)/government/officials",
+		url: "/(content)/government/officials",
 		keywords: [
 			"government",
 			"officials",
@@ -21,17 +21,17 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Departments",
-		url: "/(app)/(content)/government/departments",
+		url: "/(content)/government/departments",
 		keywords: ["government", "departments"]
 	},
 	{
 		title: "Barangays",
-		url: "/(app)/(content)/government/barangays",
+		url: "/(content)/government/barangays",
 		keywords: ["government", "barangays", "bayanan II"]
 	},
 	{
 		title: "Services",
-		url: "/(app)/(content)/services",
+		url: "/(content)/services",
 		keywords: [
 			"services",
 			"certificates",
@@ -48,7 +48,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Certificates",
-		url: "/(app)/(content)/services/certificates",
+		url: "/(content)/services/certificates",
 		keywords: [
 			"services",
 			"certificates",
@@ -64,7 +64,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Birth Certificate",
-		url: "/(app)/(content)/services/certificates/birth-certificate",
+		url: "/(content)/services/certificates/birth-certificate",
 		keywords: [
 			"birth certificate",
 			"services",
@@ -84,7 +84,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Marriage Certificate",
-		url: "/(app)/(content)/services/certificates/marriage-certificate",
+		url: "/(content)/services/certificates/marriage-certificate",
 		keywords: [
 			"marriage certificate",
 			"certificate of marriage",
@@ -100,7 +100,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Death Certificate",
-		url: "/(app)/(content)/services/certificates/death-certificate",
+		url: "/(content)/services/certificates/death-certificate",
 		keywords: [
 			"death certificate",
 			"certificate of death",
@@ -117,7 +117,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Barangay Clearance",
-		url: "/(app)/(content)/services/certificates/barangay-clearance",
+		url: "/(content)/services/certificates/barangay-clearance",
 		keywords: [
 			"barangay clearance",
 			"clearance",
@@ -131,7 +131,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Barangay ID",
-		url: "/(app)/(content)/services/certificates/barangay-id",
+		url: "/(content)/services/certificates/barangay-id",
 		keywords: [
 			"barangay id",
 			"barangay identification card",
@@ -146,7 +146,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Police Clearance",
-		url: "/(app)/(content)/services/certificates/police-clearance",
+		url: "/(content)/services/certificates/police-clearance",
 		keywords: [
 			"police clearance",
 			"pnp clearance",
@@ -161,7 +161,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Driver's License",
-		url: "/(app)/(content)/services/certificates/drivers-license",
+		url: "/(content)/services/certificates/drivers-license",
 		keywords: [
 			"driver's license",
 			"drivers license",
@@ -178,7 +178,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Business",
-		url: "/(app)/(content)/services/business",
+		url: "/(content)/services/business",
 		keywords: [
 			"business",
 			"services",
@@ -193,7 +193,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Business Permit",
-		url: "/(app)/(content)/services/business/business-permit",
+		url: "/(content)/services/business/business-permit",
 		keywords: [
 			"business permit",
 			"business license",
@@ -208,7 +208,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Business Status Certificate",
-		url: "/(app)/(content)/services/business/business-status-certificate",
+		url: "/(content)/services/business/business-status-certificate",
 		keywords: [
 			"business status certificate",
 			"business certification",
@@ -222,7 +222,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Certified True Copy of Business License and Mayor's Permit",
-		url: "/(app)/(content)/services/business/ctc-business-license",
+		url: "/(content)/services/business/ctc-business-license",
 		keywords: [
 			"certified true copy",
 			"ctc business license",
@@ -236,7 +236,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Occupational Permit",
-		url: "/(app)/(content)/services/business/occupational-permit",
+		url: "/(content)/services/business/occupational-permit",
 		keywords: [
 			"occupational permit",
 			"occupational mayor's permit",
@@ -251,7 +251,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Safety Seal Certificate",
-		url: "/(app)/(content)/services/business/safety-seal-certificate",
+		url: "/(content)/services/business/safety-seal-certificate",
 		keywords: [
 			"safety seal certificate",
 			"safety seal certification",
@@ -266,7 +266,7 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Special Permit",
-		url: "/(app)/(content)/services/business/special-permit",
+		url: "/(content)/services/business/special-permit",
 		keywords: [
 			"special permit",
 			"business establishment permit",
@@ -281,32 +281,32 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 	},
 	{
 		title: "Statistics",
-		url: "/(app)/(content)/statistics",
+		url: "/(content)/statistics",
 		keywords: ["statistics"]
 	},
 	{
 		title: "Contact",
-		url: "/(app)/(content)/contact",
+		url: "/(content)/contact",
 		keywords: ["contact"]
 	},
 	{
 		title: "Terms of Use",
-		url: "/(app)/(content)/terms-of-use",
+		url: "/(content)/terms-of-use",
 		keywords: ["terms of use, conditions"]
 	},
 	{
 		title: "Privacy Policy",
-		url: "/(app)/(content)/privacy-policy",
+		url: "/(content)/privacy-policy",
 		keywords: ["privacy policy"]
 	},
 	{
 		title: "Accessibility",
-		url: "/(app)/(content)/accessibility",
+		url: "/(content)/accessibility",
 		keywords: ["accessibility"]
 	},
 	{
 		title: "Sitemap",
-		url: "/(app)/(content)/sitemap",
+		url: "/(content)/sitemap",
 		keywords: ["sitemap"]
 	}
 ];

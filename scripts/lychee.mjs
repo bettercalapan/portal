@@ -5,6 +5,13 @@ import { writeLycheeSummary } from "./lychee-summary.mjs";
 
 const PREVIEW_URL = "http://localhost:4173";
 const PREVIEW_START_TIMEOUT = 60_000;
+const XML_ENTITIES = {
+	"&amp;": "&",
+	"&lt;": "<",
+	"&gt;": ">",
+	"&quot;": '"',
+	"&apos;": "'"
+};
 
 export function extractSitemapUrls(xml, sitemapUrl) {
 	const sitemapOrigin = new URL(sitemapUrl).origin;
@@ -22,12 +29,7 @@ export function extractSitemapUrls(xml, sitemapUrl) {
 }
 
 function decodeXml(value) {
-	return value
-		.replaceAll("&amp;", "&")
-		.replaceAll("&lt;", "<")
-		.replaceAll("&gt;", ">")
-		.replaceAll("&quot;", '"')
-		.replaceAll("&apos;", "'");
+	return value.replaceAll(/&(?:amp|lt|gt|quot|apos);/g, (entity) => XML_ENTITIES[entity]);
 }
 
 function run(command, args, options = {}) {

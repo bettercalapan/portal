@@ -1,0 +1,86 @@
+---
+layout: content
+title: Accessibility
+onThisPage:
+  - name: Accessibility
+    id: title
+  - name: Our commitment
+    id: our-commitment
+  - name: Using this website
+    id: using-this-website
+  - name: Accessibility features
+    id: accessibility-features
+  - name: Known limitations
+    id: known-limitations
+  - name: Report an accessibility problem
+    id: report-an-accessibility-problem
+  - name: Scope and review
+    id: scope-and-review
+relatedContent:
+  - name: Terms of Use
+    url: /(content)/terms-of-use
+  - name: Privacy Policy
+    url: /(content)/privacy-policy
+---
+
+<script>
+	import Info from "$lib/components/macro/info.svelte";
+</script>
+
+# {title}
+
+This statement explains how BetterCalapan works to make bettercalapan.org usable by as many people as possible.
+
+## Our commitment
+
+BetterCalapan is an independent, open-source initiative that helps people find and understand information about Calapan services, government, legislation, and public data. We want that information to be accessible to people with disabilities and to people using different devices, browsers, and assistive technologies.
+
+<!-- NOTE: update conformity if accessibility has been reliably assessed -->
+
+We aim to make the website clear, usable, and inclusive as it changes. We use the Web Content Accessibility Guidelines (WCAG) 2.2 AA as our target, but BetterCalapan has not been independently assessed or certified as conformant.
+
+## Using this website
+
+We aim for you to be able to:
+
+- change text size, colours, contrast, and fonts through browser or device settings
+- zoom in up to 400% without the text spilling off the screen
+- navigate the website with a keyboard
+- use the website with screen readers and other assistive technology
+- use the website on a phone, tablet, or desktop screen
+- reduce interface motion through your device's reduced-motion setting
+
+We also try to write in plain language and use headings, labels, and links that make content easier to understand and navigate.
+
+## Accessibility features
+
+BetterCalapan currently includes:
+
+- semantic header, main-content, and footer regions
+- labels for navigation menus, search controls, and social-media links
+- text alternatives for the BetterCalapan logo
+- responsive layouts for smaller screens
+- reduced-motion support for navigation and search animations
+- text summaries for the statistics charts
+
+## Known limitations
+
+Some parts of BetterCalapan may not yet be fully accessible. In particular:
+
+- statistics charts provide concise text summaries, but do not yet provide every data point in an accessible table
+- external government websites, services, and resources linked from BetterCalapan are managed by other organisations and may have their own accessibility limitations
+- we have not yet completed a formal, independent accessibility assessment of the website
+
+## Report an accessibility problem
+
+Please email [contact@bettercalapan.org](mailto:contact@bettercalapan.org) if you find a problem not listed on this page or have trouble using any part of the website. Include the page address, what you were trying to do, and any assistive technology or browser details that may help us investigate.
+
+You can also report a public technical issue by <a href="https://github.com/BetterCalapan/bettercalapan/issues" target="_blank" rel="external noopener noreferrer">opening an issue on GitHub</a>. Do not include personal, financial, health, or other sensitive information in a public issue.
+
+## Scope and review
+
+This statement applies to bettercalapan.org. BetterCalapan is not operated by, affiliated with, or endorsed by the City Government of Calapan or another government agency. Official government services and external websites linked from BetterCalapan have their own accessibility arrangements.
+
+We will review this statement when the website changes significantly, when we complete an accessibility assessment, or when feedback identifies a need to update it.
+
+<Info text="Last updated August 5, 2026" />

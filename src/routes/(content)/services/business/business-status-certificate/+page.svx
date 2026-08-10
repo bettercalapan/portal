@@ -1,0 +1,94 @@
+---
+layout: content
+title: Business Status Certificate
+breadcrumbs:
+  - name: Services
+    url: /(content)/services
+  - name: Business
+    url: /(content)/services/business
+onThisPage:
+  - name: Business Status Certificate
+    id: title
+  - name: Requirements
+    id: requirements
+  - name: Step-by-step process
+    id: step-by-step-process
+  - name: Office info
+    id: office-info
+  - name: Frequently asked questions
+    id: frequently-asked-questions
+relatedContent:
+  - name: Business Permit
+    url: /(content)/services/business/business-permit
+  - name: Special Permit
+    url: /(content)/services/business/special-permit
+  - name: Certified True Copy of Business License & Mayor's Permit
+    url: /(content)/services/business/ctc-business-license
+---
+
+<script>
+	import Accordion from "$lib/components/macro/accordion.svelte";
+	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+	import { resolveRoute } from "$lib/utils/paths";
+
+	const faq = [
+		{
+			question: "What is the purpose of this certification?",
+			answer: "This certification is used to verify the legal status of a business entity registered in Calapan. It is accepted for legal, government, and private transactions."
+		},
+		{
+			question: "Why is access to business records limited?",
+			answer: "Pursuant to the Data Privacy Act of 2012 (RA 10173), the BPLO limits the data that can be accessed to protect the integrity and privacy of the information in its records."
+		}
+	];
+</script>
+
+# {title}
+
+Issued to all who want to verify the status of a business entity registered with the Business Permit and Licensing Office (BPLO). Information access is limited pursuant to the Data Privacy Act of 2012 to maintain record integrity.
+
+## Requirements
+
+There are additional documents if applied through a representative.
+
+### Documents
+
+- Request Letter indicating the name of requestor and purpose of certification
+- Identification Card
+- Barangay Clearance
+- Assessor's Certificate
+- Referral letter from Hospital/DSWD/PAO or other government agencies (if applicable)
+
+### If done through a representative
+
+- Letter of Authority / Special Power of Attorney / Secretary Certificate
+- Valid ID of both the owner and representative
+
+## Step-by-step process
+
+Follow these steps to claim your certificate.
+
+1. ### Submit application & requirements
+
+    Fill out the application form and submit the request letter together with other required documents to the BPLO frontliners for review and validation. The BPLO will verify records and issue an Order of Payment.
+
+2. ### Pay the fee
+
+    Proceed to the Office of the City Treasurer's - Miscellaneous Division and pay ₱75, plus ₱15 per additional page. An Official Receipt will be issued.
+
+3. ### Claim the certification
+
+    Return to the BPLO for the processing and printing of the Certification, signing by the Chief of BPLO, and release to the applicant.
+
+## Office info
+
+<OfficeInfo
+	landmark="Calapan City Hall"
+	location="95HM+H9J Calapan City Hall, Roxas Dr, Calapan City, 5200 Oriental Mindoro"
+	phone="+63432882496"
+	time="Mon-Fri: 8AM - 5PM"
+/>
+
+## Frequently asked questions
+
+<Accordion {faq} />

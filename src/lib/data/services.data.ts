@@ -1,6 +1,6 @@
 import type { Link } from "$lib/types/link.types";
 
-const servicePrefix = "/(app)/(content)/services";
+const servicePrefix = "/(content)/services";
 export const services: {
 	heading: string;
 	description: string;

@@ -1,0 +1,95 @@
+---
+layout: content
+title: Special Permit
+breadcrumbs:
+  - name: Services
+    url: /(content)/services
+  - name: Business
+    url: /(content)/services/business
+onThisPage:
+  - name: Special Permit
+    id: title
+  - name: Requirements
+    id: requirements
+  - name: Step-by-step process
+    id: step-by-step-process
+  - name: Office info
+    id: office-info
+  - name: Frequently asked questions
+    id: frequently-asked-questions
+relatedContent:
+  - name: Business Permit
+    url: /(content)/services/business/business-permit
+  - name: Business Status Certificate
+    url: /(content)/services/business/business-status-certificate
+  - name: Certified True Copy of Business License & Mayor's Permit
+    url: /(content)/services/business/ctc-business-license
+---
+
+<script>
+	import Accordion from "$lib/components/macro/accordion.svelte";
+	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+	import { resolveRoute } from "$lib/utils/paths";
+
+	const faq = [
+		{
+			question: "How long does the processing take?",
+			answer: "According to the Citizen's Charter, the total processing time for a Special Permit is approximately 2 hours and 10 minutes."
+		},
+		{
+			question: "What if that location had a previous tenant?",
+			answer: "The previous tenant must have filed a formal Closure/Retirement of business to the City Treasurer's Office. Otherwise, the building owner must submit a Termination of Lease Contract and an Affidavit of No Relation so the new applicant can secure an account number."
+		}
+	];
+</script>
+
+# {title}
+
+Issued by the City Government to all business establishments that operate within its territorial jurisdiction.
+
+## Requirements
+
+There is an additional document if applied through a representative.
+
+### Documents
+
+- Unified Application Form
+- Business Name Registration (1 Copy: DTI Registration or SEC Registration & Articles of Incorporation)
+- Proof of Legal Ownership: Tax Declaration/TCT, Notarized Contract of Lease, or Letter of Authority to use property
+- Picture of Business Establishment
+- Picture of Owner / President or Treasurer
+- Homeowners / Subdivision / Villages Clearance or Condominium Approval to conduct business
+- Undertaking (BPLO)
+
+### If done through a representative
+
+- Letter of Authority / Special Power of Attorney / Secretary Certificate
+
+## Step-by-step process
+
+Follow these steps to claim your permit.
+
+1. ### Submit application & verification
+
+    Submit accomplished application form and complete requirements to the BPLO front liners for receiving, reviewing, and validating. Evaluated by Planning Department for Zoning Fees. Passed for approval of the Chief of BPLO, who issues a Tax Order Payment (TOP) routing you to the City Treasurer's.
+
+2. ### Pay taxes and fees
+
+    Present the TOP to the Business License Tax Miscellaneous Division. Taxes are calculated based on the Revenue Code. Payment is accepted and Official Receipt is printed/issued.
+
+3. ### Claim special permit
+
+    Return to Business Permit & Licensing Office (BPLO) for the processing, printing, signing, and releasing of the Special Permit.
+
+## Office info
+
+<OfficeInfo
+	landmark="Calapan City Hall"
+	location="95HM+H9J Calapan City Hall, Roxas Dr, Calapan City, 5200 Oriental Mindoro"
+	phone="+63432882496"
+	time="Mon-Fri: 8AM - 5PM"
+/>
+
+## Frequently asked questions
+
+<Accordion {faq} />

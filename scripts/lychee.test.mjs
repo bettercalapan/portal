@@ -15,6 +15,15 @@ describe("extractSitemapUrls", () => {
 		]);
 	});
 
+	it("decodes XML entities only once", () => {
+		const xml =
+			"<urlset><url><loc>http://localhost:4173/&amp;lt;script&amp;gt;</loc></url></urlset>";
+
+		expect(extractSitemapUrls(xml, "http://localhost:4173/sitemap.xml")).toEqual([
+			"http://localhost:4173/&lt;script&gt;"
+		]);
+	});
+
 	it("rejects page URLs outside the preview origin", () => {
 		const xml = "<urlset><url><loc>https://bettercalapan.org/</loc></url></urlset>";
 

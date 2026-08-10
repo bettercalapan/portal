@@ -1,0 +1,105 @@
+---
+layout: content
+title: Driver's License
+breadcrumbs:
+  - name: Services
+    url: /(content)/services
+  - name: Certificates
+    url: /(content)/services/certificates
+onThisPage:
+  - name: Driver's License
+    id: title
+  - name: Requirements
+    id: requirements
+  - name: Step-by-step process
+    id: step-by-step-process
+  - name: Office info
+    id: office-info
+  - name: Frequently asked questions
+    id: frequently-asked-questions
+relatedContent:
+  - name: Police Clearance
+    url: /(content)/services/certificates/police-clearance
+  - name: Barangay ID
+    url: /(content)/services/certificates/barangay-id
+  - name: Barangay Clearance
+    url: /(content)/services/certificates/barangay-clearance
+---
+
+<script>
+	import Accordion from "$lib/components/macro/accordion.svelte";
+	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+
+	const faq = [
+		{
+			question: "Can I renew my license online?",
+			answer: "Eligibility for online renewal depends on your license record. Check the Land Transportation Office online portal for current options."
+		},
+		{
+			question: "Do I need a medical certificate?",
+			answer: "A medical certificate from an LTO-accredited medical clinic may be required. Confirm current LTO requirements before your appointment."
+		},
+		{
+			question: "Can I apply for a new license at the same office?",
+			answer: "New applications, renewals, and upgrades have different requirements. Confirm that your chosen LTO office handles your transaction."
+		}
+	];
+</script>
+
+# {title}
+
+Apply for, renew, or update a driver's license through the Land Transportation Office.
+
+## Requirements
+
+Requirements depend on whether you are applying for a new license, renewing, or updating an existing license.
+
+### For license renewal
+
+- Existing driver's license
+- Medical certificate from an LTO-accredited clinic, if required
+- LTO online account or appointment confirmation, if required
+- Payment for applicable LTO fees
+
+### For new applications
+
+- Valid student permit held for the required period
+- Completed driver's education requirements, where applicable
+- Medical certificate from an LTO-accredited clinic, if required
+- Proof of identity, age, and residency as required by LTO
+
+## Step-by-step process
+
+Follow these general steps for an LTO license transaction.
+
+1. ### Check your transaction requirements
+
+    Identify whether you need a new application, renewal, replacement, or license upgrade.
+
+2. ### Complete required training and medical exam
+
+    For new applications, complete the required education and obtain a medical certificate when needed.
+
+3. ### Set an appointment or visit an LTO office
+
+    Use the LTO online services portal if an appointment is required for your transaction.
+
+4. ### Submit documents and take assessments
+
+    Present your documents. New applicants may need to take written and practical driving examinations.
+
+5. ### Pay fees and receive your license
+
+    Pay the assessed fees and follow the LTO office's release instructions.
+
+## Office info
+
+<OfficeInfo
+	landmark="Land Transportation Office"
+	location="95Q9+QWC Land Transportation Office, Calapan City, Oriental Mindoro"
+	time="Mon-Fri: 8AM - 5PM"
+/>
+
+## Frequently asked questions
+
+<Accordion {faq} />

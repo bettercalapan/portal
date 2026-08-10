@@ -1,26 +1,22 @@
 <script>
-	import "../global.css";
-	import favicon from "$lib/assets/logo.png";
 	import { resolve } from "$app/paths";
 </script>
 
-<svelte:head>
-	<!-- FIX: replace with custom favicon eventually -->
-	<link rel="icon" href={favicon} />
-</svelte:head>
-
-<main class="wrapper">
+<div class="wrapper">
 	<div class="content">
 		<p class="status-code">404</p>
 		<h1 class="status-msg">Page not found</h1>
 		<p class="description">The page doesn't exist or it might have been moved.</p>
-		<a class="go-back" href={resolve("/")}>Back to home</a>
+		<div class="actions">
+			<button class="back-btn" type="button" onclick={() => history.back()}>Go back</button>
+			<a class="home-btn" href={resolve("/")}>Return to home</a>
+		</div>
 	</div>
-</main>
+</div>
 
 <style>
 	.wrapper {
-		min-height: 100dvh;
+		flex: 1;
 		display: grid;
 		place-items: center;
 		padding: 1rem;
@@ -32,22 +28,35 @@
 		}
 		.status-msg {
 			margin: 0.5rem 0;
-			font-size: 3.75rem;
 			font-size: 2.5rem;
 			line-height: 1.25;
 		}
-		a {
-			display: inline-block;
+		.actions {
 			margin-top: 2rem;
-			padding: 0.75rem 2rem;
-			background-color: var(--accent);
-			color: var(--fg);
-			font-weight: 600;
-			border-radius: 2rem;
-			transition: opacity 0.3s ease;
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 0.75rem;
 
-			&:hover {
-				opacity: 0.8;
+			:where(a, button) {
+				display: inline-block;
+				padding: 0.75rem 2rem;
+				border: 0;
+				color: var(--fg);
+				font-weight: 600;
+				border-radius: 2rem;
+				transition: opacity 0.3s ease;
+
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+			.home-btn {
+				background-color: var(--accent);
+			}
+			.back-btn {
+				background-color: var(--fg);
+				color: var(--bg);
 			}
 		}
 	}

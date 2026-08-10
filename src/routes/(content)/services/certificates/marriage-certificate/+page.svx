@@ -1,0 +1,114 @@
+---
+layout: content
+title: Marriage Certificate
+breadcrumbs:
+  - name: Services
+    url: /(content)/services
+  - name: Certificates
+    url: /(content)/services/certificates
+onThisPage:
+  - name: Marriage Certificate
+    id: title
+  - name: Requirements
+    id: requirements
+  - name: Step-by-step process
+    id: step-by-step-process
+  - name: Office info
+    id: office-info
+  - name: Frequently asked questions
+    id: frequently-asked-questions
+relatedContent:
+  - name: Birth Certificate
+    url: /(content)/services/certificates/birth-certificate
+  - name: Death Certificate
+    url: /(content)/services/certificates/death-certificate
+  - name: Barangay Clearance
+    url: /(content)/services/certificates/barangay-clearance
+---
+
+<script>
+	import Accordion from "$lib/components/macro/accordion.svelte";
+	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+
+	const faq = [
+		{
+			question: "How soon after the wedding should I register?",
+			answer: "Within 30 days of the marriage ceremony. Late registration may require additional documents."
+		},
+		{
+			question: "Can I get a copy if I was married elsewhere?",
+			answer: "Only marriages registered in this city are available. Request from the city where you were married or from PSA."
+		}
+	];
+</script>
+
+# {title}
+
+Registration of Certificate of Marriage at the City Civil Registry.
+
+## Requirements
+
+The Certificate of Marriage (COM) of a Civil or Church wedding with Marriage License must be registered within fifteen (15) days after the solemnization of marriage. COM of a Civil or Church Wedding under Art. 34 or PD 1083 must be registered within thirty (30) days after the solemnization of marriage.
+
+Registration of marriage certificate is free of charge, pursuant to Section 6 of P.D. No. 651.
+
+### For timely registration (within 15/30 days)
+
+- Duly accomplished Certificate of Marriage - 4 copies
+- Marriage solemnized outside Churches or Municipal Court must submit a Request address to solemnizing officer for celebration of Marriage in a place other than those authorized by law
+- Valid IDs of both spouses
+- Marriage license (if applicable)
+
+### For late registration
+
+- Duly accomplished Certificate of Marriage - 4 copies
+- Certificate of Marriage of contracting parties
+- Valid IDs of both spouses
+- Marriage license (if applicable)
+
+### For copy request
+
+- Valid ID of spouse or authorized representative
+- Authorization letter (if representative)
+- ₱75 per copy
+
+## Step-by-step process
+
+Follow these steps to register your marriage certificate.
+
+1. ### Gather documents
+
+    Prepare marriage certificate from solemnizing officer and valid IDs.
+
+2. ### Visit Civil Registry
+
+    Go to the Civil Registry Department in the Calapan City Hall. Office hours: Mon-Fri, 8 AM - 5 PM.
+
+3. ### Submit documents & verification
+
+    Submit marriage certificate and supporting documents for registration. Staff verifies document authenticity and completeness.
+
+4. ### Payment
+
+    Pay the Solemnization Fee of ₱150 in the Civil Registry Department.
+
+5. ### Registration
+
+    Marriage is officially registered in the Civil Registry.
+
+6. ### Claim certificate
+
+    Receive certified copy of registered marriage certificate.
+
+## Office info
+
+<OfficeInfo
+	landmark="Calapan City Hall"
+	location="95HM+H9J Calapan City Hall, Roxas Dr, Calapan City, 5200 Oriental Mindoro"
+	phone="(043) 288-2412"
+	time="Mon-Fri: 8AM - 5PM"
+/>
+
+## Frequently asked questions
+
+<Accordion {faq} />

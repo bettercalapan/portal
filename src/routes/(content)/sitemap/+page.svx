@@ -1,0 +1,122 @@
+---
+layout: content
+title: Sitemap
+---
+
+<script lang="ts">
+	import type { ExternalLink, Link } from "$lib/types/link.types";
+	import { listItem } from "$lib/snippets/list-item.snippet.svelte";
+
+	const mainNavigation: Link[] = [
+		{ name: "Home", url: "/" },
+		{ name: "Services", url: "/(content)/services" },
+		{ name: "Government", url: "/(content)/government" },
+		{ name: "Statistics", url: "/(content)/statistics" },
+		{ name: "Contact", url: "/(content)/contact" }
+	];
+
+	const services: Link[] = [
+		{ name: "Certificates", url: "/(content)/services/certificates" },
+		{ name: "Business", url: "/(content)/services/business" }
+	];
+
+	const government: Link[] = [
+		{ name: "Officials", url: "/(content)/government/officials" },
+		{ name: "Departments", url: "/(content)/government/departments" },
+		{ name: "Barangays", url: "/(content)/government/barangays" }
+	];
+
+	const externalResources: ExternalLink[] = [
+		{ name: "Official Calapan Website", url: "https://cityofcalapan.gov.ph" },
+		{ name: "Official Oriental Mindoro Website", url: "https://ormindoro.gov.ph" },
+		{ name: "Philippine Statistics Authority", url: "https://psa.gov.ph" },
+		{ name: "Freedom of Information", url: "https://foi.gov.ph" }
+	];
+
+	const others: Link[] = [
+		{ name: "Terms of Use", url: "/(content)/terms-of-use" },
+		{ name: "Privacy Policy", url: "/(content)/privacy-policy" },
+		{ name: "Accessibility", url: "/(content)/accessibility" }
+	];
+</script>
+
+# {title}
+
+Navigate all pages and services of BetterCalapan.
+
+<div class="sitemap-sections">
+	<section>
+		<h2>Main Navigation</h2>
+		<ul>
+			{#each mainNavigation as item (item.name)}
+				{@render listItem(item.name, item.url)}
+			{/each}
+		</ul>
+	</section>
+	<section>
+		<h2>Services</h2>
+		<ul>
+			{#each services as item (item.name)}
+				{@render listItem(item.name, item.url)}
+			{/each}
+		</ul>
+	</section>
+	<section>
+		<h2>Government</h2>
+		<ul>
+			{#each government as item (item.name)}
+				{@render listItem(item.name, item.url)}
+			{/each}
+		</ul>
+	</section>
+	<section>
+		<h2>External Resources</h2>
+		<ul>
+			{#each externalResources as item (item.name)}
+				{@render listItem(item.name, item.url)}
+			{/each}
+		</ul>
+	</section>
+	<section>
+		<h2>Others</h2>
+		<ul>
+			{#each others as item (item.name)}
+				{@render listItem(item.name, item.url)}
+			{/each}
+		</ul>
+	</section>
+</div>
+
+<style>
+	.sitemap-sections {
+		margin-top: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.sitemap-sections section {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.sitemap-sections h2 {
+		margin-top: 0;
+	}
+
+	.sitemap-sections ul {
+		margin: 0;
+		padding: 0;
+		gap: 0.5rem;
+		list-style: none;
+	}
+
+	@media (min-width: 900px) {
+		.sitemap-sections {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 2rem 6rem;
+		}
+	}
+</style>

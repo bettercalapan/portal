@@ -1,0 +1,118 @@
+---
+layout: content
+title: Birth Certificate 
+breadcrumbs:
+  - name: Services
+    url: /(content)/services
+  - name: Certificates
+    url: /(content)/services/certificates
+onThisPage:
+  - name: Birth Certificate 
+    id: title
+  - name: Requirements 
+    id: requirements 
+  - name: If you are the owner
+    id: if-you-are-the-owner
+  - name: If you are a representative
+    id: if-you-are-a-representative
+  - name: Office info 
+    id: office-info 
+  - name: Frequently asked questions
+    id: frequently-asked-questions
+relatedContent:
+  - name: Marriage Certificate 
+    url: /(content)/services/certificates/marriage-certificate
+  - name: Death Certificate 
+    url: /(content)/services/certificates/death-certificate
+  - name: Barangay Clearance 
+    url: /(content)/services/certificates/barangay-clearance
+---
+
+<script>
+	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+    import Accordion from '$lib/components/macro/accordion.svelte' ;
+
+    const faq = [
+        {
+            question: "Can I get a birth certificate registered in another municipality?",
+            answer:
+                "No. The Calapan Civil Registrar only has records for births registered in Calapan. For other municipalities, request from that municipality's Civil Registrar or from PSA."
+        },
+        {
+            question: "What if I don't know the exact date of birth?",
+            answer:
+                "Provide an approximate year and month. The staff will help search the records, but this may take longer."
+        },
+        {
+            question: "Can I request through email or online?",
+            answer:
+                "Currently, requests must be made in person. Online services are being planned for the future."
+        },
+        {
+            question: "What's the difference between local copy and PSA copy?",
+            answer:
+                "Both are certified true copies. PSA copies are nationally recognized and required for passport/visa applications. Local copies are accepted for most local transactions and school enrollment."
+        }
+    ];
+</script>
+
+# {title}
+
+Official certified copy of birth certificate registered in Calapan.
+
+## Requirements
+
+The documents for your application will depend on whether you are an owner or a representative.
+
+## If you are the owner 
+
+- Valid government-issued ID (original + photocopy)
+- ₱150 cash per copy
+
+## If you are a representative 
+
+- Authorization letter signed by the owner
+- Valid ID of the owner (photocopy)
+- Valid ID of the representative (original + photocopy)
+- ₱150 cash per copy
+
+## Step-by-step process
+
+Follow these steps to request your birth certificate.
+
+1. ### Check eligibility
+
+    You can request if you are the owner, parent/guardian, or authorized representative with proper authorization letter.
+
+2. ### Prepare documents 
+
+    Bring valid government-issued ID. If representative: authorization letter and IDs of both owner and representative.
+
+3. ### Visit Civil Registrar 
+
+    Go to the Civil Registry Department in the Calapan City Hall. Office hours: Mon-Fri, 8 AM - 5 PM.
+
+4. ### Fill out request form
+
+    Complete the request form with full name, date of birth, place of birth, parents' names, and purpose.
+
+5. ### Pay the fee
+
+    Pay ₱150 per certified copy at the Municipal Treasurer's Office (same building).
+
+6. ### Claim certificate
+
+    Return to Civil Registrar with official receipt. Certificate released within 15-30 minutes if record is available.
+
+## Office info
+
+<OfficeInfo 
+    landmark="Calapan City Hall"
+    location="95HM+H9J Calapan City Hall, Roxas Dr, Calapan City, 5200 Oriental Mindoro"
+    phone="(043) 288-2412"
+    time="Mon-Fri: 8AM - 5PM"
+/>
+
+## Frequently asked questions 
+
+<Accordion {faq}/>

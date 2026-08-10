@@ -5,7 +5,7 @@
 	import Facebook from "$lib/icons/facebook.svelte";
 	import GitHub from "$lib/icons/github.svelte";
 
-	const prefix = "/(app)/(content)";
+	const prefix = "/(content)";
 	const others = [
 		{
 			name: "Terms of Use",
