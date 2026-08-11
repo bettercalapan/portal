@@ -108,31 +108,56 @@
 
 <style>
 	.search-input {
+		padding: 0 0.875rem 0 0;
+		height: 52px;
 		display: grid;
-		grid-template-columns: 1fr 3.25rem;
+		grid-template-columns: 1fr 32px;
+		gap: 0.25rem;
+		align-items: center;
+		background-color: var(--neutral-light);
+		border-radius: 2rem;
+
+		&:focus-within {
+			outline: 2px solid var(--fg);
+		}
 
 		input {
 			padding: 0 1.25rem;
-			background-color: var(--neutral-3);
+			height: 100%;
+			min-width: 0;
+			background: none;
 			border: none;
 			border-radius: 2rem 0 0 2rem;
 			font-size: 1.125rem;
+
+			&:focus {
+				outline: none;
+			}
 		}
 		input::placeholder {
 			color: var(--fg);
-			opacity: 0.25;
+			opacity: 0.4;
 		}
 		.search-button {
+			padding: 0;
 			display: grid;
 			place-items: center;
+			width: 32px;
 			aspect-ratio: 1 / 1;
-			background-color: var(--neutral-1);
+			background: none;
+			color: var(--fg);
 			border: none;
-			border-radius: 0 2rem 2rem 0;
-			transition: background-color 0.3s ease;
+			border-radius: 50%;
 
 			&:hover {
-				background-color: var(--neutral-2);
+				background-color: var(--neutral-hover);
+			}
+			&:focus {
+				outline: none;
+			}
+			&:focus-visible {
+				background-color: var(--fg);
+				color: var(--neutral-lightest);
 			}
 
 			.icon {

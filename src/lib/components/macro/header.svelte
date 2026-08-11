@@ -67,6 +67,7 @@
 						type="text"
 						name="term"
 						aria-label="Search BetterCalapan.org"
+						autocomplete="off"
 						bind:value={inputValue}
 						required
 					/>
@@ -136,7 +137,7 @@
 					transition: background-color 0.3s ease;
 
 					&:hover {
-						background-color: var(--neutral-3);
+						background-color: var(--neutral-light);
 					}
 
 					:global(svg) {
@@ -146,16 +147,16 @@
 				}
 
 				.search-input-wrapper {
-					padding: 0 1.25rem;
+					padding: 0 0.875rem 0 1.25rem;
 					height: 52px;
 					position: absolute;
 					top: 2.5rem;
 					right: 0;
 					display: grid;
-					grid-template-columns: 1fr 20px;
+					grid-template-columns: 1fr 32px;
 					gap: 0.25rem;
 					align-items: center;
-					background-color: var(--neutral-3);
+					background-color: var(--neutral-light);
 					border: none;
 					border-radius: 2rem;
 					font-size: 1.125rem;
@@ -179,23 +180,44 @@
 							transform 160ms ease-out,
 							visibility 0s;
 					}
+					&:focus-within {
+						outline: 2px solid var(--fg);
+					}
 
 					.search-input {
 						background: none;
 						border: none;
 						display: flex;
+
+						&:focus {
+							outline: none;
+						}
 					}
 
 					.search-input-button {
 						padding: 0;
 						display: grid;
 						place-items: center;
-						width: 20px;
+						width: 32px;
+						aspect-ratio: 1 / 1;
+						background: none;
 						border: none;
+						border-radius: 50%;
+
+						&:hover {
+							background-color: var(--neutral-hover);
+						}
+						&:focus {
+							outline: none;
+						}
+						&:focus-visible {
+							background-color: var(--fg);
+							color: var(--neutral-lightest);
+						}
 
 						:global(svg) {
-							width: 20px;
-							height: 20px;
+							width: 18px;
+							height: 18px;
 						}
 					}
 				}

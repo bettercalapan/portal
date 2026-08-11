@@ -23,7 +23,7 @@
 		text-align: center;
 
 		.status-code {
-			color: var(--accent-alt);
+			color: var(--accent-dark);
 			font-weight: 600;
 		}
 		.status-msg {

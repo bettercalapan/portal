@@ -102,7 +102,7 @@
 		place-items: center;
 		gap: 3rem;
 		background: var(--fg);
-		color: var(--neutral-4);
+		color: var(--neutral-dark);
 
 		.wrapper {
 			width: 100%;
@@ -129,7 +129,7 @@
 						width: 20px;
 						height: 20px;
 						align-self: end;
-						color: var(--neutral-4);
+						color: var(--neutral-dark);
 					}
 				}
 			}
@@ -152,7 +152,7 @@
 
 						li {
 							.link {
-								color: var(--neutral-4);
+								color: var(--neutral-dark);
 
 								&:hover {
 									text-decoration: underline;

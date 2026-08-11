@@ -25,13 +25,13 @@
 	const formatPopulationTick = (value: number) => `${value / 1_000}k`;
 	const populationTicks = [140_000, 145_000, 150_000, 155_000, 160_000];
 	const gridLineStyle = {
-		stroke: "var(--fg-alt)",
+		stroke: "var(--fg-secondary)",
 		strokeWidth: 1.5,
 		dashArray: [2, 6],
 		opacity: 0.9
 	};
 	const axisRuleStyle = {
-		stroke: "var(--fg-alt)",
+		stroke: "var(--fg-secondary)",
 		strokeWidth: 2,
 		opacity: 0.65
 	};
@@ -80,7 +80,7 @@
 			data: compactChart ? compactPopulationGrowth : populationGrowth,
 			r: compactChart ? 4 : 6,
 			strokeWidth: compactChart ? 2 : 3,
-			stroke: "var(--neutral-1)"
+			stroke: "var(--neutral-lightest)"
 		}}
 		padding={defaultChartPadding({ top: 16, right: 16, bottom: 36, left: 40 })}
 		height={320}
@@ -131,12 +131,12 @@
 	.chart-card {
 		margin-top: 0.5rem;
 		padding: 1.25rem 1rem 1rem;
-		background-color: var(--neutral-1);
+		background-color: var(--neutral-light);
 		border-radius: 2rem;
 		overflow: hidden;
 
 		:global(.growth-axis-label) {
-			fill: var(--fg-alt);
+			fill: var(--fg-secondary);
 			font-family: inherit;
 			font-size: 0.75rem;
 			font-weight: 500;
@@ -168,7 +168,7 @@
 	}
 
 	:global(.growth-tooltip-label) {
-		color: var(--fg-alt);
+		color: var(--fg-secondary);
 	}
 
 	:global(.growth-tooltip-value) {

@@ -104,7 +104,7 @@
 			position: absolute;
 			top: calc(100% + 8px);
 			left: 0;
-			background-color: var(--neutral-3);
+			background-color: var(--neutral-light);
 			border-radius: 2rem;
 			transform-origin: top left;
 			animation-duration: 160ms;

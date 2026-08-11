@@ -39,7 +39,7 @@ breadcrumbs:
 
 	.barangays > li {
 		padding: 1.5rem 1.75rem;
-		background-color: var(--neutral-1);
+		background-color: var(--neutral-lightest);
 		border-radius: 2rem;
 	}
 

@@ -37,7 +37,8 @@
 
 		.results {
 			padding: 1rem 1.25rem;
-			background-color: var(--neutral-3);
+			background-color: var(--fg);
+			color: var(--neutral-lightest);
 			display: flex;
 			flex-direction: column;
 			gap: 0.5rem;
@@ -50,10 +51,11 @@
 				display: grid;
 				grid-template-columns: 20px 1fr;
 				gap: 0.5rem;
-				border-bottom: 1px solid var(--neutral-3);
+				border-bottom: 1px solid var(--fg);
+				color: var(--neutral-lightest);
 
 				&:hover {
-					border-bottom: 1px solid var(--fg);
+					text-decoration: underline;
 				}
 
 				.icon {

@@ -82,7 +82,7 @@
 	const formatBarangay = (value: string) => value;
 	const formatPopulation = (value: number) => value.toLocaleString("en-US");
 	const gridLineStyle = {
-		stroke: "var(--fg-alt)",
+		stroke: "var(--fg-secondary)",
 		strokeWidth: 1.5,
 		dashArray: [2, 6],
 		opacity: 0.35
@@ -180,11 +180,11 @@
 		margin-top: 0.5rem;
 		max-height: 400px;
 		padding: 1.25rem 1rem 1rem;
-		background-color: var(--neutral-1);
+		background-color: var(--neutral-light);
 		border-radius: 2rem;
 		overflow: hidden;
 		overflow-y: scroll;
-		scrollbar-color: var(--gray) var(--neutral-1);
+		scrollbar-color: var(--gray) var(--neutral-light);
 
 		:global(.distribution-barangay-label),
 		:global(.distribution-value-label) {
@@ -224,7 +224,7 @@
 	}
 
 	:global(.distribution-tooltip-label) {
-		color: var(--fg-alt);
+		color: var(--fg-secondary);
 	}
 
 	:global(.distribution-tooltip-value) {

@@ -177,12 +177,12 @@
 				display: flex;
 				align-items: center;
 				gap: 0.5rem;
-				background-color: var(--neutral-3);
+				background-color: var(--neutral-light);
 				border-radius: 2rem;
 				transition: background-color 0.3s ease;
 
 				&:hover {
-					background-color: var(--neutral-1);
+					background-color: var(--neutral-hover);
 				}
 
 				.icon {

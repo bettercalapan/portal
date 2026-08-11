@@ -116,13 +116,13 @@
 	const yearTicks = competitiveness.map(({ year }) => year);
 	const scoreTicks = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5];
 	const gridLineStyle = {
-		stroke: "var(--fg-alt)",
+		stroke: "var(--fg-secondary)",
 		strokeWidth: 1.5,
 		dashArray: [2, 6],
 		opacity: 0.35
 	};
 	const axisRuleStyle = {
-		stroke: "var(--fg-alt)",
+		stroke: "var(--fg-secondary)",
 		strokeWidth: 2,
 		opacity: 0.65
 	};
@@ -192,7 +192,7 @@
 				key: "education",
 				label: "Education",
 				value: "education",
-				color: "var(--chart-yellow)"
+				color: "var(--chart-magenta)"
 			},
 			{
 				key: "health",
@@ -215,13 +215,13 @@
 			? {
 					axis: "x",
 					lines: {
-						stroke: "var(--fg-alt)",
+						stroke: "var(--fg-secondary)",
 						strokeWidth: 1.5,
 						dashArray: [2, 6]
 					},
 					points: {
 						class: "competitiveness-highlight-point",
-						stroke: "var(--neutral-1)",
+						stroke: "var(--neutral-lightest)",
 						strokeWidth: compactChart ? 3 : 4
 					}
 				}
@@ -293,12 +293,12 @@
 	.chart-card {
 		margin-top: 0.5rem;
 		padding: 1.25rem 1rem 1rem;
-		background-color: var(--neutral-1);
+		background-color: var(--neutral-light);
 		border-radius: 2rem;
 		overflow: hidden;
 
 		:global(.competitiveness-axis-label) {
-			fill: var(--fg-alt);
+			fill: var(--fg-secondary);
 			font-family: inherit;
 			font-size: 0.75rem;
 			font-weight: 500;
@@ -337,7 +337,7 @@
 
 	:global(.competitiveness-legend-item:focus-visible) {
 		border-radius: 0.25rem;
-		outline: 2px solid var(--fg-alt);
+		outline: 2px solid var(--fg-secondary);
 		outline-offset: 3px;
 	}
 
@@ -369,7 +369,7 @@
 	}
 
 	:global(.competitiveness-tooltip-label) {
-		color: var(--fg-alt);
+		color: var(--fg-secondary);
 	}
 
 	:global(.competitiveness-tooltip-value) {

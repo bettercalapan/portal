@@ -28,7 +28,7 @@
 		margin-top: -0.25rem;
 
 		:global(.accordion-item) {
-			border-bottom: 1px solid var(--fg-alt);
+			border-bottom: 1px solid var(--fg-secondary);
 			font-size: 1.125rem;
 		}
 

@@ -59,7 +59,7 @@
 		top: calc(100% + 0.5rem);
 		left: auto;
 		right: 0;
-		background-color: var(--neutral-3);
+		background-color: var(--neutral-light);
 		border-radius: 2rem;
 		box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
 		transform-origin: top left;

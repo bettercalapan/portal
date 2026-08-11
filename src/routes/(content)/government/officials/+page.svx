@@ -28,8 +28,6 @@ breadcrumbs:
 			<h3>{official.title}</h3>
 			<p><User /> {official.name}</p>
 			<p><Email /> {official.email}</p>
-			<p><Phone /> {official.phoneNumber}</p>
-			<p><Clock /> {official.workingHours}</p>
 		</section>
 	{/each}
 </div>
@@ -50,6 +48,7 @@ breadcrumbs:
 
 <style>
 	.officials {
+    margin-top: 0.75rem;
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 		gap: 1rem;
@@ -60,7 +59,7 @@ breadcrumbs:
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
-		background-color: var(--neutral-1);
+		background-color: var(--neutral-light);
 		border-radius: 2rem;
 	}
 

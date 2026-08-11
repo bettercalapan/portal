@@ -109,9 +109,9 @@
 		margin-top: 0.5rem;
 		display: grid;
 		place-items: center;
-		background-color: var(--neutral-1);
+		background-color: var(--neutral-lightest);
 		border-radius: 2rem;
-		color: var(--fg-alt);
+		color: var(--fg-secondary);
 	}
 
 	.placeholder p {

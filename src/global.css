@@ -59,21 +59,20 @@ h6 {
 /* Variables */
 html {
 	--fg: oklch(0.24 0 0);
-	--fg-alt: oklch(0.3 0 0);
-	--bg: oklch(0.99 0.01 95);
+	--fg-secondary: oklch(0.3 0 0);
+	--bg: oklch(1 0 0);
 	--accent: oklch(0.68 0.22 39);
-	--accent-alt: oklch(0.55 0.22 39);
-	--accent-light: oklch(0.8 0.22 39);
-	--green: oklch(0.5 0.22 145);
-	--chart-blue: #72a5f2;
-	--chart-purple: #c19bff;
-	--chart-yellow: #ffd96e;
-	--chart-green: #79ae6f;
+	--accent-dark: oklch(0.55 0.22 39);
+	--accent-light: oklch(0.87 0.07 52);
 	--gray: oklch(0.83 0.01 54.5);
-	--neutral-1: oklch(0.91 0.02 75);
-	--neutral-2: oklch(0.87 0.01 54.5);
-	--neutral-3: oklch(0.94 0.003 48.7);
-	--neutral-4: oklch(0.65 0.0105 93.6);
+	--neutral-lightest: oklch(0.99 0.003 84.56);
+	--neutral-light: oklch(0.96 0.007 97.35);
+	--neutral-dark: oklch(0.65 0.0105 93.6);
+	--neutral-hover: oklch(0.92 0.0094 78.28);
+	--chart-blue: oklch(0.55 0.24 268);
+	--chart-purple: oklch(0.68 0.18 295.01);
+	--chart-magenta: oklch(0.57 0.24 341.94);
+	--chart-green: oklch(0.58 0.127 109.77);
 }
 
 /* Fonts */
@@ -86,12 +85,8 @@ html {
 }
 
 /* General */
-::selection {
-	background-color: var(--neutral-2);
-	color: var(--fg);
-}
 html {
-	scrollbar-color: var(--neutral-2) var(--bg);
+	scrollbar-color: var(--gray) var(--bg);
 	scroll-behavior: smooth;
 }
 body {
