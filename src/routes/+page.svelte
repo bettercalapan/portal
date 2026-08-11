@@ -131,7 +131,7 @@
 	}
 
 	.hero {
-		padding: 0rem 0 3rem;
+		padding: 0rem 0 2.5rem;
 		display: grid;
 		place-items: center;
 		background-color: var(--bg);

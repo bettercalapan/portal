@@ -67,6 +67,19 @@ pnpm lychee
 
 **Don't have pnpm?** See the [installation](https://pnpm.io/installation).
 
+## Report Form Configuration
+
+The `/report` form uses Cloudflare Turnstile and the Email Sending binding configured in `wrangler.jsonc`. Before enabling it in production:
+
+1. Enable Email Sending for `bettercalapan.org`, route `reports@bettercalapan.org` to the maintainers, and allow `website@bettercalapan.org` as a sender.
+2. Create a managed Turnstile widget for `bettercalapan.org`. Local development widgets should also allow `localhost` and `127.0.0.1`.
+3. Set `TURNSTILE_SITE_KEY` as a Worker variable and `TURNSTILE_SECRET` as a Worker secret.
+4. Set `TURNSTILE_HOSTNAMES` to a comma-separated allowlist. Production must contain only production frontend hostnames, not local development names.
+
+For local development, copy `.env.example` to `.env` and provide development or Cloudflare test credentials. Never commit real Turnstile secrets. The server validates every token's success status, `report` action, and hostname before sending email.
+
+For a manual production deployment, run `pnpm deploy`. This rebuilds the generated Worker before deploying it. Wrangler preserves the Turnstile variables configured in the Cloudflare dashboard because `keep_vars` is enabled in `wrangler.jsonc`.
+
 ## Performance Checks
 
 `pnpm benchmark` builds the site, serves it locally, and opens the interactive mobile Unlighthouse dashboard at `http://localhost:5678`. Use `pnpm benchmark:desktop` for the desktop dashboard.

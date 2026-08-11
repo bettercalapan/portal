@@ -290,6 +290,11 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 		keywords: ["contact"]
 	},
 	{
+		title: "Report a website issue",
+		url: "/(content)/report",
+		keywords: ["report", "website issue", "incorrect content", "broken link", "accessibility"]
+	},
+	{
 		title: "Terms of Use",
 		url: "/(content)/terms-of-use",
 		keywords: ["terms of use, conditions"]

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Breadcrumb from "$lib/components/macro/breadcrumb.svelte";
+	import IssueReportPrompt from "$lib/components/macro/issue-report-prompt.svelte";
 	import OnThisPage from "$lib/components/macro/on-this-page.svelte";
 	import RelatedContent from "$lib/components/macro/related-content.svelte";
 	import type { Snippet } from "svelte";
@@ -18,12 +19,14 @@
 		children,
 		onThisPage = [],
 		relatedContent = [],
+		showIssueReportPrompt = true,
 		title
 	}: {
 		breadcrumbs?: LinkItem[];
 		children: Snippet;
 		onThisPage?: PageSection[];
 		relatedContent?: LinkItem[];
+		showIssueReportPrompt?: boolean;
 		title: string;
 	} = $props();
 </script>
@@ -33,6 +36,9 @@
 <div class="content-layout" class:has-sidebar={onThisPage.length > 0 || relatedContent.length > 0}>
 	<article class="article-content">
 		{@render children()}
+		{#if showIssueReportPrompt}
+			<IssueReportPrompt />
+		{/if}
 		{#if onThisPage.length > 0}
 			<span class="article-end" data-content-end aria-hidden="true"></span>
 		{/if}
@@ -60,6 +66,10 @@
 		display: block;
 		width: 1px;
 		height: 1px;
+	}
+
+	:global(p) {
+		max-width: 50rem;
 	}
 
 	@media (min-width: 900px) {

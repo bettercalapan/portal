@@ -1,6 +1,7 @@
 {
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"name": "bettercalapan",
+	"keep_vars": true,
 	"compatibility_date": "2026-07-27",
 	"compatibility_flags": ["nodejs_als"],
 	"main": ".svelte-kit/cloudflare/_worker.js",
@@ -8,6 +9,13 @@
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
+	"send_email": [
+		{
+			"name": "EMAIL",
+			"destination_address": "reports@bettercalapan.org",
+			"allowed_sender_addresses": ["website@bettercalapan.org"]
+		}
+	],
 	"workers_dev": true,
 	"preview_urls": true
 }

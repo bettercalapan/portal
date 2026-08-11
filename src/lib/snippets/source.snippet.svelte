@@ -19,8 +19,6 @@
 {/snippet}
 
 <style>
-	/* NOTE: styles of exported snippets are stripped in build, a workaround is doing :global() */
-	/* REF: https://github.com/sveltejs/svelte/issues/16404 */
 	:global(.source) {
 		margin-top: 2rem;
 		display: grid;

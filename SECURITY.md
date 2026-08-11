@@ -27,12 +27,13 @@ Please include as much of the following as possible:
 
 ## Security Considerations
 
-BetterCalapan is a static, open-source informational platform hosted on Cloudflare Workers. It has no backend, no user authentication, and does not collect personal data. Security responsibilities include:
+BetterCalapan is an open-source informational platform hosted on Cloudflare Workers. It has no user accounts or authentication. Its limited server-side functionality validates and emails website reports, which may include an optional reporter email address. Security responsibilities include:
 
 - **No secrets in the repository:** API keys, tokens, and credentials must never be committed. Use environment variables or platform secrets (e.g., Cloudflare Secrets) instead.
 - **Dependency hygiene:** Keep dependencies up to date and review dependabot/security alerts promptly.
 - **Quality gates:** Run `pnpm lint` and `pnpm check` before merging changes.
 - **Data integrity:** The data shown on the platform comes from public government sources. Reporters should flag any data that appears incorrect or misleading.
+- **Limited personal information:** Website reports should contain only the information needed to investigate an issue. Reporters must not submit passwords, identification numbers, financial details, medical records, or other sensitive information.
 
 ## Licensing
 

@@ -49,6 +49,7 @@ relatedContent:
 	import Info from "$lib/components/macro/info.svelte";
 	import { resolveRoute } from "$lib/utils/paths";
 
+	const reportUrl = resolveRoute("/(content)/report");
 	const termsOfUseUrl = resolveRoute("/(content)/terms-of-use");
 </script>
 
@@ -69,6 +70,7 @@ Depending on how you use BetterCalapan, the information handled may include:
 - technical request information, such as your IP address, requested page, date and time, browser details, referring page, and security or network information
 - words or phrases you enter into the website search
 - your selected series on the competitiveness chart
+- the category, affected page, report details, and optional email address you submit through our website report form
 - your email address, message, and any other information you choose to send to us by email
 
 BetterCalapan does not provide user accounts, accept payments, process municipal applications, or allow document uploads. Do not send us identification numbers, financial information, medical records, or other sensitive personal information unless it is necessary for a privacy request.
@@ -99,7 +101,9 @@ If we introduce analytics that changes how information is handled, we will updat
 
 ## Messages you send us
 
-If you email [contact@bettercalapan.org](mailto:contact@bettercalapan.org), we and our email provider process your address, message, and related delivery information so we can respond and keep an appropriate record of your request.
+If you use our <a href={reportUrl}>website report form</a>, Cloudflare checks the submission for automated abuse and sends the report to the BetterCalapan maintainers. We process the report category, affected page, report details, and any email address you optionally provide so we can investigate and respond. The form includes a hidden anti-spam field and Cloudflare Turnstile. Turnstile may process technical information about your browser and request to determine whether you are a person.
+
+If you email [contact@bettercalapan.org](mailto:contact@bettercalapan.org) or [reports@bettercalapan.org](mailto:reports@bettercalapan.org) directly, we and the services used to receive email process your address, message, and related delivery information so we can respond and keep an appropriate record of your request.
 
 Messages sent through GitHub, Facebook, or another external service are also handled under that service's privacy policy. GitHub issues are public, so you should never post personal or sensitive information in an issue.
 
@@ -127,7 +131,8 @@ Under the Philippine Data Privacy Act of 2012, we rely on our legitimate interes
 Information may be processed or shared with:
 
 - Cloudflare, which hosts, delivers, and protects the website
-- our email provider when you contact us
+- Cloudflare Turnstile and Email Sending when you use the report form
+- the services used to receive email when you contact us directly
 - maintainers who need the information to respond to your request
 - authorities or other parties when disclosure is required by law
 
@@ -137,11 +142,11 @@ We do not sell or rent personal information, and we do not share it with third p
 
 We keep personal information only for as long as it is needed for the purpose described in this policy or as required by law. Technical records follow the retention settings and schedules of the hosting and security services we use.
 
-Correspondence is removed when it is no longer reasonably needed to answer the request, maintain an appropriate record, or meet a legal obligation. Public civic information remains available until it is outdated, corrected, removed, or no longer relevant. Browser storage remains on your device until you clear it.
+Reports and correspondence are removed when they are no longer reasonably needed to investigate or answer the request, maintain an appropriate record, or meet a legal obligation. Public civic information remains available until it is outdated, corrected, removed, or no longer relevant. Browser storage remains on your device until you clear it.
 
 ## Where information may be processed
 
-Cloudflare operates a global network, and our hosting and email providers may process information outside the Philippines. When this happens, the provider's safeguards and privacy terms apply alongside applicable Philippine law.
+Cloudflare operates a global network and may process hosting, Turnstile, and email information outside the Philippines. When this happens, Cloudflare's safeguards and privacy terms apply alongside applicable Philippine law.
 
 ## How we protect information
 
@@ -171,4 +176,4 @@ We may update this policy when BetterCalapan or the services supporting it chang
 
 Read our <a href={termsOfUseUrl}>Terms of Use</a> for the rules that apply when using BetterCalapan.
 
-<Info text="Last updated August 5, 2026" />
+<Info text="Last updated August 11, 2026" />

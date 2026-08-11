@@ -25,6 +25,9 @@ relatedContent:
 
 <script>
 	import Info from "$lib/components/macro/info.svelte";
+	import { resolveRoute } from "$lib/utils/paths";
+
+	const reportUrl = resolveRoute("/(content)/report");
 </script>
 
 # {title}
@@ -73,9 +76,9 @@ Some parts of BetterCalapan may not yet be fully accessible. In particular:
 
 ## Report an accessibility problem
 
-Please email [contact@bettercalapan.org](mailto:contact@bettercalapan.org) if you find a problem not listed on this page or have trouble using any part of the website. Include the page address, what you were trying to do, and any assistive technology or browser details that may help us investigate.
+Please use our <a href={reportUrl}>website report form</a> if you find a problem not listed on this page or have trouble using any part of the website. Include the page address, what you were trying to do, and any assistive technology or browser details that may help us investigate. You may submit a report without providing an email address.
 
-You can also report a public technical issue by <a href="https://github.com/BetterCalapan/bettercalapan/issues" target="_blank" rel="external noopener noreferrer">opening an issue on GitHub</a>. Do not include personal, financial, health, or other sensitive information in a public issue.
+You can also report a public technical issue by <a href="https://github.com/bettercalapan/portal/issues" target="_blank" rel="external noopener noreferrer">opening an issue on GitHub</a>. Do not include personal, financial, health, or other sensitive information in a public issue.
 
 ## Scope and review
 
@@ -83,4 +86,4 @@ This statement applies to bettercalapan.org. BetterCalapan is not operated by, a
 
 We will review this statement when the website changes significantly, when we complete an accessibility assessment, or when feedback identifies a need to update it.
 
-<Info text="Last updated August 5, 2026" />
+<Info text="Last updated August 11, 2026" />

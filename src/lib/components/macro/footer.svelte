@@ -20,6 +20,10 @@
 			url: `${prefix}/accessibility`
 		},
 		{
+			name: "Report",
+			url: `${prefix}/report`
+		},
+		{
 			name: "Sitemap",
 			url: `${prefix}/sitemap`
 		}
