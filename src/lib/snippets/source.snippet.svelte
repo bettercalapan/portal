@@ -20,7 +20,7 @@
 
 <style>
 	:global(.source) {
-		margin-top: 2rem;
+		margin-top: 1rem;
 		display: grid;
 		grid-template-columns: 18px 1fr;
 		align-items: start;

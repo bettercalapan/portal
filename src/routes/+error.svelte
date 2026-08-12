@@ -40,7 +40,7 @@
 
 			:where(a, button) {
 				display: inline-block;
-				padding: 0.75rem 2rem;
+				padding: 0.75rem 1.25rem;
 				border: 0;
 				color: var(--fg);
 				font-weight: 600;
@@ -66,6 +66,11 @@
 			.status-msg {
 				margin: 0;
 				font-size: 3.75rem;
+			}
+			.actions {
+				:where(a, button) {
+					padding: 0.75rem 2rem;
+				}
 			}
 		}
 	}

@@ -1,16 +1,19 @@
 <script lang="ts">
 	import Loader from "@lucide/svelte/icons/loader";
 	import { onMount, type Component } from "svelte";
+	import type { ChartLoadQueue } from "./chart-load-queue";
 
 	type ChartComponent = Component<{ interactive?: boolean }>;
 
 	let {
 		load,
+		queue,
 		mobileHeight,
 		desktopHeight = mobileHeight,
 		label
 	}: {
 		load: () => Promise<{ default: ChartComponent }>;
+		queue: ChartLoadQueue;
 		mobileHeight: number;
 		desktopHeight?: number;
 		label: string;
@@ -24,27 +27,21 @@
 	onMount(() => {
 		const mobileViewport = window.matchMedia("(max-width: 519px)");
 		let observer: IntersectionObserver | undefined;
-		let pendingLoad: Promise<void> | undefined;
-
-		function loadChart() {
-			if (!pendingLoad) {
-				pendingLoad = load()
-					.then((module) => {
-						Chart = module.default;
-					})
-					.catch(() => {
-						loadFailed = true;
-					});
+		const registration = queue.register(
+			load,
+			(module) => {
+				Chart = module.default;
+			},
+			() => {
+				loadFailed = true;
 			}
-
-			return pendingLoad;
-		}
+		);
 
 		function observeChart() {
-			if (Chart || pendingLoad || !container) return;
+			if (Chart || !container) return;
 
 			if (!("IntersectionObserver" in window)) {
-				void loadChart();
+				registration.prioritize();
 				return;
 			}
 
@@ -54,9 +51,9 @@
 
 					observer?.disconnect();
 					observer = undefined;
-					void loadChart();
+					registration.prioritize();
 				},
-				{ rootMargin: "100px 0px" }
+				{ rootMargin: "150px 0px" }
 			);
 			observer.observe(container);
 		}
@@ -71,6 +68,7 @@
 
 		return () => {
 			observer?.disconnect();
+			registration.cancel();
 			mobileViewport.removeEventListener("change", updateViewportMode);
 		};
 	});

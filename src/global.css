@@ -78,8 +78,6 @@ html {
 /* Fonts */
 @font-face {
 	font-family: "figtree";
-	font-style: normal;
-	font-weight: 300 900;
 	font-display: swap;
 	src: url("$lib/assets/figtree-variable.woff2") format("woff2");
 }

@@ -134,6 +134,7 @@
 		height={chartHeight}
 		onResize={handleChartResize}
 		role="img"
+		tabindex={0}
 		aria-label={`Population distribution across ${populationDistribution.length} Calapan City barangays, totaling ${formatPopulation(barangayPopulationTotal)} of the city's ${formatPopulation(cityPopulation)} residents, ordered from highest to lowest`}
 		props={{
 			bars: {
@@ -197,6 +198,11 @@
 
 		:global(.distribution-value-label) {
 			font-variant-numeric: tabular-nums;
+		}
+
+		:global(.lc-root-container:focus-visible) {
+			outline: 2px solid var(--accent);
+			outline-offset: 2px;
 		}
 	}
 

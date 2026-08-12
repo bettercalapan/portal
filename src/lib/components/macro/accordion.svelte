@@ -26,6 +26,7 @@
 <style>
 	:global(.accordion-root) {
 		margin-top: -0.25rem;
+		margin-bottom: 2.25rem;
 
 		:global(.accordion-item) {
 			border-bottom: 1px solid var(--fg-secondary);

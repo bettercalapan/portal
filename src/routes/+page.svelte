@@ -26,10 +26,9 @@
 				</div>
 			</div>
 		</section>
-		<!-- TODO: make this dynamic -->
-		<section class="popular">
-			<h1 class="heading">Most searched</h1>
-			<div class="most-searched-resources">
+		<section class="quick-links">
+			<h1 class="heading">Quick links</h1>
+			<div class="resources">
 				<a class="resource" href={resolve("/(content)/services/certificates/birth-certificate")}>
 					<div class="icon">
 						<ArrowRight />
@@ -160,12 +159,12 @@
 		}
 	}
 
-	.popular {
+	.quick-links {
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
 
-		.most-searched-resources {
+		.resources {
 			display: flex;
 			flex-wrap: wrap;
 			gap: 1rem;
@@ -196,7 +195,7 @@
 	.general {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 3rem;
+		gap: 2rem;
 
 		.multi-wrapper {
 			display: flex;

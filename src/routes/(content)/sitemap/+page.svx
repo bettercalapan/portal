@@ -91,6 +91,7 @@ Navigate all pages and services of BetterCalapan.
 <style>
 	.sitemap-sections {
 		margin-top: 2rem;
+		margin-bottom: 2rem;
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;

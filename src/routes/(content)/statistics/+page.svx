@@ -5,11 +5,13 @@ title: Statistics
 
 <script lang="ts">
 	import { source } from "$lib/snippets/source.snippet.svelte";
+	import { createChartLoadQueue } from "./chart-load-queue";
 	import DeferredChart from "./deferred-chart.svelte";
 
 	const loadPopulationGrowthChart = () => import("./population-growth-chart.svelte");
 	const loadPopulationDistributionChart = () => import("./population-distribution-chart.svelte");
 	const loadCompetitivenessChart = () => import("./competitiveness-chart.svelte");
+	const chartLoadQueue = createChartLoadQueue();
 </script>
 
 # {title}
@@ -64,6 +66,7 @@ Data and statistics about Calapan City.
 		<h2>Growth</h2>
 		<DeferredChart
 			load={loadPopulationGrowthChart}
+			queue={chartLoadQueue}
 			mobileHeight={368}
 			label="Loading population growth chart"
 		/>
@@ -72,6 +75,7 @@ Data and statistics about Calapan City.
 		<h2>Distribution</h2>
 		<DeferredChart
 			load={loadPopulationDistributionChart}
+			queue={chartLoadQueue}
 			mobileHeight={408}
 			label="Loading population distribution chart"
 		/>
@@ -80,6 +84,7 @@ Data and statistics about Calapan City.
 		<h2>Competitiveness</h2>
 		<DeferredChart
 			load={loadCompetitivenessChart}
+			queue={chartLoadQueue}
 			mobileHeight={470}
 			desktopHeight={494}
 			label="Loading competitiveness chart"
@@ -89,6 +94,8 @@ Data and statistics about Calapan City.
 
 <style>
 	.primary-wrapper {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
@@ -103,7 +110,6 @@ Data and statistics about Calapan City.
 			}
 
 			.content {
-				margin-bottom: 1rem;
 				display: grid;
 				grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 				gap: 1rem;

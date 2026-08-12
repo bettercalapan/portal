@@ -105,7 +105,7 @@ We may report unlawful activity to the relevant authorities.
 
 ## Corrections and content removal
 
-You can report inaccurate content, copyright concerns, or material that should be removed by [opening an issue on GitHub](https://github.com/BetterCalapan/bettercalapan/issues). Do not include personal, financial, or other sensitive information in a public issue.
+You can report inaccurate content, copyright concerns, or material that should be removed by [opening an issue on GitHub](https://github.com/bettercalapan/portal/issues). Do not include personal, financial, or other sensitive information in a public issue.
 
 Questions about a municipal service should be directed to the government office responsible for that service.
 

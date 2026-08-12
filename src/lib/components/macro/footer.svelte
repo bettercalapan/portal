@@ -50,7 +50,7 @@
 				</a>
 				<a
 					class="social"
-					href="https://github.com/BetterCalapan/bettercalapan"
+					href="https://github.com/bettercalapan/portal"
 					target="_blank"
 					rel="external noopener noreferrer"
 					aria-label="Go to GitHub repository"

@@ -24,6 +24,12 @@
 	:global(.article-content :where(p, ul)) {
 		margin-bottom: 1rem;
 	}
+	:global(.article-content :where(p:last-of-type)) {
+		margin-bottom: 0;
+	}
+	:global(.article-content :where(ul:last-of-type)) {
+		margin-bottom: 2rem;
+	}
 
 	:global(.article-content :where(ul)) {
 		padding-left: 1.25rem;
