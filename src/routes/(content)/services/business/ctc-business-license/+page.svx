@@ -29,7 +29,8 @@ relatedContent:
 <script>
 	import Accordion from "$lib/components/macro/accordion.svelte";
 	import OfficeInfo from "$lib/components/macro/office-info.svelte";
-	import { resolveRoute } from "$lib/utils/paths";
+	import Source from "$lib/components/macro/source.svelte";
+	import { serviceSources } from "$lib/data/services.data";
 
 	const faq = [
 		{
@@ -84,3 +85,5 @@ Follow these steps to claim your certified true copy.
 ## Frequently asked questions
 
 <Accordion {faq} />
+
+<Source source={serviceSources.ctcBusinessLicense} />

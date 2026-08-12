@@ -29,6 +29,8 @@ relatedContent:
 <script>
 	import Accordion from "$lib/components/macro/accordion.svelte";
 	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+	import Source from "$lib/components/macro/source.svelte";
+	import { serviceSources } from "$lib/data/services.data";
 
 	const faq = [
 		{
@@ -112,3 +114,5 @@ Follow these steps to register your marriage certificate.
 ## Frequently asked questions
 
 <Accordion {faq} />
+
+<Source source={serviceSources.marriageCertificate} />

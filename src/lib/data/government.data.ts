@@ -1,4 +1,5 @@
 import type { Link } from "$lib/types/link.types";
+import type { DataSource } from "$lib/types/source.types";
 
 const governmentPrefix = "/(content)/government";
 export const government: {
@@ -30,10 +31,15 @@ export const officials = {
 	description:
 		"The elected officials of Calapan in the local executive branch and local legislative branch.",
 	source: {
-		description: "Source from",
-		linkLabel: "Rappler",
-		linkURL: "https://ph.rappler.com/elections/2025/local-race/oriental-mindoro/calapan-city"
-	}
+		sources: [
+			{
+				name: "Election results",
+				url: "https://ph.rappler.com/elections/2025/local-race/oriental-mindoro/calapan-city"
+			}
+		],
+		lastVerified: "2026-08-12",
+		asOf: "2025 local election"
+	} satisfies DataSource
 };
 
 export const executive = [
@@ -110,10 +116,14 @@ export const departments = {
 	heading: "Departments",
 	description: "Municipal offices providing services to citizens.",
 	source: {
-		description: "Source from the official",
-		linkLabel: "website",
-		linkURL: "https://cityofcalapan.gov.ph"
-	},
+		sources: [
+			{
+				name: "Official government website",
+				url: "https://cityofcalapan.gov.ph/"
+			}
+		],
+		lastVerified: "2026-08-12"
+	} satisfies DataSource,
 	data: [
 		"City Economic Enterprise Department (CEED)",
 		"City Public Library",
@@ -161,10 +171,15 @@ export const barangays = {
 	heading: "Barangays",
 	description: "The 62 barangays serving Calapeños.",
 	source: {
-		description: "Source from the official",
-		linkLabel: "website",
-		linkURL: "https://cityofcalapan.gov.ph/barangays/"
-	},
+		sources: [
+			{
+				name: "Official government website",
+				url: "https://cityofcalapan.gov.ph/barangays/"
+			}
+		],
+		lastVerified: "2026-08-12",
+		note: "PSGC uses Salong; the city directory uses the local name San Rafael for the same barangay."
+	} satisfies DataSource,
 	data: [
 		{
 			name: "Balingayan",
@@ -382,7 +397,9 @@ export const barangays = {
 			phoneNumber: "09956152471"
 		},
 		{
-			name: "San Rafael",
+			name: "Salong",
+			aliases: ["San Rafael", "San Rafael-Salong"],
+			psgc: "1705205048",
 			captain: "Danilo D. Espinosa",
 			phoneNumber: "09298198320"
 		},

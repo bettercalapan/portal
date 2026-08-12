@@ -6,110 +6,12 @@
 		type ChartResizeDetail,
 		type ChartState
 	} from "layerchart";
+	import { competitiveness, type CompetitivenessDatum } from "$lib/data/statistics.data";
 
 	let { interactive = true }: { interactive?: boolean } = $props();
 
-	type CompetitivenessDatum = {
-		year: number;
-		peaceAndOrder: number;
-		socialProtection: number | null;
-		education: number;
-		health: number;
-		lguInvestment: number;
-	};
-
 	const STORAGE_KEY = "bettercalapan:competitiveness:selected-series";
 	const seriesKeys = ["peaceAndOrder", "socialProtection", "education", "health", "lguInvestment"];
-	const competitiveness: CompetitivenessDatum[] = [
-		{
-			year: 2014,
-			peaceAndOrder: 0.4033,
-			socialProtection: null,
-			education: 0.2067,
-			health: 0.0457,
-			lguInvestment: 0.7377
-		},
-		{
-			year: 2015,
-			peaceAndOrder: 0.4069,
-			socialProtection: null,
-			education: 0.6905,
-			health: 0.3574,
-			lguInvestment: 3.3333
-		},
-		{
-			year: 2016,
-			peaceAndOrder: 0.6475,
-			socialProtection: 0.203,
-			education: 0.4699,
-			health: 0.1608,
-			lguInvestment: 0
-		},
-		{
-			year: 2017,
-			peaceAndOrder: 0.2938,
-			socialProtection: 0.5995,
-			education: 0.5063,
-			health: 1.3303,
-			lguInvestment: 0.4404
-		},
-		{
-			year: 2018,
-			peaceAndOrder: 0.0901,
-			socialProtection: 1.5266,
-			education: 0.5595,
-			health: 1.208,
-			lguInvestment: 0.4002
-		},
-		{
-			year: 2019,
-			peaceAndOrder: 0.0813,
-			socialProtection: 0.5655,
-			education: 0.6216,
-			health: 0.757,
-			lguInvestment: 0.2769
-		},
-		{
-			year: 2020,
-			peaceAndOrder: 0.1315,
-			socialProtection: 0.5084,
-			education: 0.4393,
-			health: 0.6768,
-			lguInvestment: 0.4039
-		},
-		{
-			year: 2021,
-			peaceAndOrder: 0.2676,
-			socialProtection: 0.5014,
-			education: 0.5528,
-			health: 0.7168,
-			lguInvestment: 0.1135
-		},
-		{
-			year: 2022,
-			peaceAndOrder: 1.3894,
-			socialProtection: 0.8597,
-			education: 0.5166,
-			health: 0.7745,
-			lguInvestment: 0.0038
-		},
-		{
-			year: 2023,
-			peaceAndOrder: 0.8482,
-			socialProtection: 0.4799,
-			education: 0.4301,
-			health: 0.7228,
-			lguInvestment: 0.6787
-		},
-		{
-			year: 2024,
-			peaceAndOrder: 0.5984,
-			socialProtection: 1.5508,
-			education: 0.5068,
-			health: 0.8354,
-			lguInvestment: 0.4042
-		}
-	];
 	const compactYearTicks = competitiveness
 		.filter((_, index) => index % 2 === 0)
 		.map(({ year }) => year);

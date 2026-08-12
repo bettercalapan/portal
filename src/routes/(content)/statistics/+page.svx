@@ -4,7 +4,13 @@ title: Statistics
 ---
 
 <script lang="ts">
-	import { source } from "$lib/snippets/source.snippet.svelte";
+	import Source from "$lib/components/macro/source.svelte";
+	import {
+		cityIncomeSource,
+		competitivenessSource,
+		currentPopulation,
+		populationSource
+	} from "$lib/data/statistics.data";
 	import { createChartLoadQueue } from "./chart-load-queue";
 	import DeferredChart from "./deferred-chart.svelte";
 
@@ -23,7 +29,7 @@ Data and statistics about Calapan City.
 		<h2>General</h2>
 		<div class="content">
 			<div class="population">
-				<p class="count">145,786</p>
+				<p class="count">{currentPopulation.toLocaleString("en-US")}</p>
 				<p class="label">Population</p>
 			</div>
 			<div class="barangays">
@@ -39,6 +45,7 @@ Data and statistics about Calapan City.
 				<p class="label">Income Class</p>
 			</div>
 		</div>
+		<Source source={populationSource} />
 	</div>
 	<div class="section city-income">
 		<h2>City Income</h2>
@@ -56,11 +63,7 @@ Data and statistics about Calapan City.
 				<p class="label">NTA Dependency</p>
 			</div>
 		</div>
-		{@render source(
-			"Source from",
-			"Bureau of Local Government Finance",
-			"https://blgf.gov.ph/lgu-fiscal-data/"
-		)}
+		<Source source={cityIncomeSource} />
 	</div>
 	<div class="section growth">
 		<h2>Growth</h2>
@@ -70,6 +73,7 @@ Data and statistics about Calapan City.
 			mobileHeight={368}
 			label="Loading population growth chart"
 		/>
+		<Source source={populationSource} />
 	</div>
 	<div class="section distribution">
 		<h2>Distribution</h2>
@@ -79,6 +83,7 @@ Data and statistics about Calapan City.
 			mobileHeight={408}
 			label="Loading population distribution chart"
 		/>
+		<Source source={populationSource} />
 	</div>
 	<div class="section competitiveness">
 		<h2>Competitiveness</h2>
@@ -89,6 +94,7 @@ Data and statistics about Calapan City.
 			desktopHeight={494}
 			label="Loading competitiveness chart"
 		/>
+		<Source source={competitivenessSource} />
 	</div>
 </div>
 

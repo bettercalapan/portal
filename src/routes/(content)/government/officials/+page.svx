@@ -8,7 +8,7 @@ breadcrumbs:
 
 <script>
 	import { executive, legislative, officials } from "$lib/data/government.data";
-	import { source } from "$lib/snippets/source.snippet.svelte";
+	import Source from "$lib/components/macro/source.svelte";
 	import Clock from "@lucide/svelte/icons/clock";
 	import Email from "@lucide/svelte/icons/mail";
 	import Phone from "@lucide/svelte/icons/phone";
@@ -44,7 +44,7 @@ breadcrumbs:
 	{/each}
 </div>
 
-{@render source(officials.source.description, officials.source.linkLabel, officials.source.linkURL)}
+<Source source={officials.source} />
 
 <style>
 	.officials {

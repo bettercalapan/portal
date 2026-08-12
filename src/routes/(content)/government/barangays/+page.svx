@@ -8,7 +8,7 @@ breadcrumbs:
 
 <script>
 	import { barangays } from "$lib/data/government.data";
-	import { source } from "$lib/snippets/source.snippet.svelte";
+	import Source from "$lib/components/macro/source.svelte";
 	import Phone from "@lucide/svelte/icons/phone";
 	import User from "@lucide/svelte/icons/user";
 </script>
@@ -21,13 +21,16 @@ breadcrumbs:
 	{#each barangays.data as barangay (barangay.name)}
 		<li>
 			<h2>{barangay.name}</h2>
+			{#if "aliases" in barangay}
+				<p class="alias">Also known locally as {barangay.aliases[0]}</p>
+			{/if}
 			<p><User /> {barangay.captain}</p>
 			<p><Phone /> {barangay.phoneNumber}</p>
 		</li>
 	{/each}
 </ul>
 
-{@render source(barangays.source.description, barangays.source.linkLabel, barangays.source.linkURL)}
+<Source source={barangays.source} />
 
 <style>
 	.barangays {
@@ -56,6 +59,13 @@ breadcrumbs:
 		grid-template-columns: 18px 1fr;
 		align-items: center;
 		gap: 0.75rem;
+	}
+
+	.barangays .alias {
+		display: block;
+		margin-bottom: 0.5rem;
+		color: var(--fg-secondary);
+		font-size: 0.875rem;
 	}
 
 	@media (min-width: 900px) {

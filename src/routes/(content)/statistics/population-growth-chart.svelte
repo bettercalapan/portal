@@ -1,29 +1,17 @@
 <script lang="ts">
 	import { AreaChart, defaultChartPadding, type ChartResizeDetail } from "layerchart";
+	import { populationGrowth } from "$lib/data/statistics.data";
 
 	let { interactive = true }: { interactive?: boolean } = $props();
 
-	const populationGrowth = [
-		{ year: 2020, population: 146_000 },
-		{ year: 2021, population: 147_100 },
-		{ year: 2022, population: 148_200 },
-		{ year: 2023, population: 149_400 },
-		{ year: 2024, population: 150_700 },
-		{ year: 2025, population: 151_900 },
-		{ year: 2026, population: 153_100 },
-		{ year: 2027, population: 154_300 },
-		{ year: 2028, population: 155_500 },
-		{ year: 2029, population: 156_700 },
-		{ year: 2030, population: 157_900 }
-	] as const;
-	const compactPopulationGrowth = populationGrowth.filter((_, index) => index % 2 === 0);
+	const compactPopulationGrowth = populationGrowth;
 
 	let compactChart = $state(false);
 
 	const formatYear = (value: number) => String(value);
 	const formatPopulation = (value: number) => value.toLocaleString("en-US");
 	const formatPopulationTick = (value: number) => `${value / 1_000}k`;
-	const populationTicks = [140_000, 145_000, 150_000, 155_000, 160_000];
+	const populationTicks = [144_000, 146_000, 148_000, 150_000];
 	const gridLineStyle = {
 		stroke: "var(--fg-secondary)",
 		strokeWidth: 1.5,
@@ -46,9 +34,9 @@
 		data={populationGrowth}
 		x="year"
 		y="population"
-		xDomain={[2020, 2030]}
-		yDomain={[140_000, 160_000]}
-		yBaseline={140_000}
+		xDomain={[2020, 2024]}
+		yDomain={[144_000, 150_000]}
+		yBaseline={144_000}
 		series={[
 			{
 				key: "population",
@@ -86,7 +74,7 @@
 		height={320}
 		onResize={handleChartResize}
 		role="img"
-		aria-label="Calapan City population growth from 146,000 people in 2020 to 157,900 people in 2030"
+		aria-label="Calapan City census population growth from 145,786 people in 2020 to 148,558 people in 2024"
 		props={{
 			area: { fillOpacity: 0.18 },
 			line: { strokeWidth: 3 },

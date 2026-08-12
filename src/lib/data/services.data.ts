@@ -1,4 +1,5 @@
 import type { Link } from "$lib/types/link.types";
+import type { DataSource } from "$lib/types/source.types";
 
 const servicePrefix = "/(content)/services";
 export const services: {
@@ -95,3 +96,74 @@ export const business: {
 		}
 	]
 };
+
+const civilRegistrySource = {
+	sources: [
+		{
+			name: "Official government website",
+			url: "https://cityofcalapan.gov.ph/downloadable-forms-2/"
+		}
+	],
+	lastVerified: "2026-08-12",
+	note: "Confirm current fees and processing times with the City Civil Registry before applying."
+} as const satisfies DataSource;
+
+const barangayServiceSource = {
+	sources: [
+		{
+			name: "Official government website",
+			url: "https://cityofcalapan.gov.ph/barangays/"
+		}
+	],
+	lastVerified: "2026-08-12",
+	note: "Requirements, fees, and processing times vary by barangay; confirm them with your barangay hall."
+} as const satisfies DataSource;
+
+const policeClearanceSource = {
+	sources: [
+		{
+			name: "PNP Clearance System",
+			url: "https://pnpclearance.ph/"
+		}
+	],
+	lastVerified: "2026-08-12",
+	note: "The national portal is authoritative for the application process; confirm local appointment availability in the portal."
+} as const satisfies DataSource;
+
+const driversLicenseSource = {
+	sources: [
+		{
+			name: "Land Transportation Office",
+			url: "https://lto.gov.ph/"
+		}
+	],
+	lastVerified: "2026-08-12",
+	note: "Confirm current requirements, fees, and appointment availability with LTO before visiting."
+} as const satisfies DataSource;
+
+const businessServiceSource = {
+	sources: [
+		{
+			name: "Official government website",
+			url: "https://cityofcalapan.gov.ph/business-permit-and-licensing-office/"
+		}
+	],
+	lastVerified: "2026-08-12",
+	note: "The official page confirms the responsible office and service scope. Confirm current documentary requirements, fees, and processing times with BPLO."
+} as const satisfies DataSource;
+
+export const serviceSources = {
+	birthCertificate: civilRegistrySource,
+	marriageCertificate: civilRegistrySource,
+	deathCertificate: civilRegistrySource,
+	barangayClearance: barangayServiceSource,
+	barangayId: barangayServiceSource,
+	policeClearance: policeClearanceSource,
+	driversLicense: driversLicenseSource,
+	businessPermit: businessServiceSource,
+	specialPermit: businessServiceSource,
+	businessStatusCertificate: businessServiceSource,
+	ctcBusinessLicense: businessServiceSource,
+	occupationalPermit: businessServiceSource,
+	safetySealCertificate: businessServiceSource
+} as const satisfies Record<string, DataSource>;

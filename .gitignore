@@ -33,3 +33,6 @@ worker-configuration.d.ts
 
 # Lychee
 .lychee
+
+# Local roadmap
+/TODO.md

@@ -8,7 +8,7 @@ breadcrumbs:
 
 <script>
 	import { departments } from "$lib/data/government.data";
-	import { source } from "$lib/snippets/source.snippet.svelte";
+	import Source from "$lib/components/macro/source.svelte";
 </script>
 
 # {title}
@@ -21,7 +21,7 @@ breadcrumbs:
 	{/each}
 </ul>
 
-{@render source(departments.source.description, departments.source.linkLabel, departments.source.linkURL)}
+<Source source={departments.source} />
 
 <style>
 	.departments {
