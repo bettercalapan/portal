@@ -23,7 +23,10 @@ const pages: SearchRecord[] = publishedPages
 		id: `page:${page.id}`,
 		title: page.title,
 		url: page.href,
-		keywords: page.keywords,
+		keywords: [
+			...page.keywords,
+			...(page.id === "contact" ? generalContacts.map((contact) => contact.value) : [])
+		],
 		type: "page"
 	}));
 
@@ -82,13 +85,6 @@ const barangayRecords: SearchRecord[] = barangays.data.map((barangay) => ({
 }));
 
 const contacts: SearchRecord[] = [
-	...generalContacts.map((contact) => ({
-		id: `contact:general:${contact.kind}`,
-		title: "BetterCalapan contact",
-		url: "/contact" as const,
-		keywords: ["contact", contact.value],
-		type: "contact" as const
-	})),
 	...contactSections.flatMap((section) =>
 		section.organizations.map((organization) => ({
 			id: `contact:${organization.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,

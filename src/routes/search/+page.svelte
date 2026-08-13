@@ -50,7 +50,7 @@
 			</li>
 		{:else}
 			{#each filteredResults as result (result.item.id)}
-				{@render listItem(`${result.item.title} (${result.item.type})`, result.item.url)}
+				{@render listItem(result.item.title, result.item.url)}
 			{/each}
 		{/if}
 	</ul>

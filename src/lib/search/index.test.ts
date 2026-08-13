@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { contactSections } from "$lib/data/contact.data";
+import { contactSections, generalContacts } from "$lib/data/contact.data";
 import { barangays, departments, executive, legislative } from "$lib/data/government.data";
 import { publishedPages } from "$lib/data/site.data";
 import { serviceRecords } from "$lib/data/services.data";
 import { index } from "./index";
+import { getResults } from "./search";
 
 describe("search index", () => {
 	it("has unique canonical record ids", () => {
@@ -35,5 +36,16 @@ describe("search index", () => {
 		expect(businessPermit?.keywords).toContain("Unified Application Form");
 		expect(businessPermit?.keywords).toContain("Business Permit and Licensing Office");
 		expect(businessPermit?.keywords.some((keyword) => keyword.includes("Taxes, fees"))).toBe(true);
+	});
+
+	it("indexes general contacts on the Contact page without duplicate results", () => {
+		expect(getResults("Better").map((result) => result.item.title)).not.toContain(
+			"BetterCalapan contact"
+		);
+		for (const contact of generalContacts) {
+			expect(getResults(contact.value).some((result) => result.item.id === "page:contact")).toBe(
+				true
+			);
+		}
 	});
 });
