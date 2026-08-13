@@ -31,7 +31,7 @@ BetterCalapan is an open-source informational platform hosted on Cloudflare Work
 
 - **No secrets in the repository:** API keys, tokens, and credentials must never be committed. Use environment variables or platform secrets (e.g., Cloudflare Secrets) instead.
 - **Dependency hygiene:** Keep dependencies up to date and review dependabot/security alerts promptly.
-- **Quality gates:** Run `pnpm lint` and `pnpm check` before merging changes.
+- **Quality gates:** Run `pnpm verify` before merging changes. It runs all local checks and starts a preview only when they pass.
 - **Data integrity:** The data shown on the platform comes from public government sources. Reporters should flag any data that appears incorrect or misleading.
 - **Limited personal information:** Website reports should contain only the information needed to investigate an issue. Reporters must not submit passwords, identification numbers, financial details, medical records, or other sensitive information.
 

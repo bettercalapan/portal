@@ -1,6 +1,8 @@
 import { spawn } from "node:child_process";
+import { once } from "node:events";
 import { mkdir, rm } from "node:fs/promises";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { getLycheeBinary } from "./lychee-binary.mjs";
 import { writeLycheeSummary } from "./lychee-summary.mjs";
 
 const PREVIEW_URL = "http://localhost:4173";
@@ -95,20 +97,28 @@ async function main() {
 	const buildStatus = await run("pnpm", ["build"]);
 	if (buildStatus !== 0) process.exit(buildStatus);
 
-	const preview = spawn("pnpm", ["preview"], { stdio: "inherit", detached: true });
+	const wrangler = fileURLToPath(
+		new URL("../node_modules/wrangler/bin/wrangler.js", import.meta.url)
+	);
+	const preview = spawn(
+		process.execPath,
+		[wrangler, "dev", ".svelte-kit/cloudflare/_worker.js", "--port", "4173"],
+		{ stdio: "inherit" }
+	);
 
-	function stopPreview() {
-		if (!preview.pid) return;
+	async function stopPreview() {
+		if (!preview.pid || preview.exitCode !== null || preview.signalCode !== null) return;
 		try {
-			process.kill(-preview.pid, "SIGTERM");
+			const exited = once(preview, "exit");
+			preview.kill("SIGTERM");
+			await exited;
 		} catch (error) {
 			if (error.code !== "ESRCH") console.error(`Failed to stop preview: ${error.message}`);
 		}
 	}
 
 	function handleSignal(exitCode) {
-		stopPreview();
-		process.exit(exitCode);
+		void stopPreview().finally(() => process.exit(exitCode));
 	}
 
 	const handleSigint = () => handleSignal(130);
@@ -121,6 +131,7 @@ async function main() {
 		await waitForPreview();
 		const urls = await getSitemapUrls();
 		console.log(`\nChecking external links across ${urls.length} sitemap pages...\n`);
+		const lychee = await getLycheeBinary();
 		const args = ["--config", "lychee.toml"];
 		const reportPath = ".lychee/results.json";
 		if (mode === "ci") {
@@ -128,7 +139,7 @@ async function main() {
 			await mkdir(".lychee");
 			args.push("-v", "--no-progress", "--format", "json", "--output", reportPath);
 		}
-		status = await run("lychee", [...args, ...urls], {
+		status = await run(lychee, [...args, ...urls], {
 			stderrFilter: mode === "ci" ? (line) => !line.includes("[EXCLUDED]") : undefined
 		});
 
@@ -146,7 +157,7 @@ async function main() {
 	} finally {
 		process.off("SIGINT", handleSigint);
 		process.off("SIGTERM", handleSigterm);
-		stopPreview();
+		await stopPreview();
 	}
 
 	process.exit(status);

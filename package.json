@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "wrangler types && vite build",
-		"deploy": "pnpm build && wrangler deploy",
+		"verify": "pnpm gen && pnpm lint && pnpm check && pnpm test && pnpm test:routes && pnpm benchmark && pnpm pa11y && pnpm lychee && pnpm preview",
+		"deploy": "wrangler deploy",
 		"preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "wrangler types && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -16,7 +17,7 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
 		"gen": "wrangler types",
-		"benchmark": "node scripts/benchmark.mjs mobile",
+		"benchmark": "node scripts/benchmark.mjs ci",
 		"benchmark:mobile": "node scripts/benchmark.mjs mobile",
 		"benchmark:desktop": "node scripts/benchmark.mjs desktop",
 		"benchmark:ci": "node scripts/benchmark.mjs ci",

@@ -1,5 +1,7 @@
 import { spawn } from "node:child_process";
+import { once } from "node:events";
 import { rm } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import { writePa11ySummary } from "./pa11y-summary.mjs";
 
 const PREVIEW_URL = "http://localhost:4173";
@@ -45,20 +47,28 @@ async function waitForPreview() {
 const buildStatus = await run("pnpm", ["build"]);
 if (buildStatus !== 0) process.exit(buildStatus);
 
-const preview = spawn("pnpm", ["preview"], { stdio: "inherit", detached: true });
+const wrangler = fileURLToPath(
+	new URL("../node_modules/wrangler/bin/wrangler.js", import.meta.url)
+);
+const preview = spawn(
+	process.execPath,
+	[wrangler, "dev", ".svelte-kit/cloudflare/_worker.js", "--port", "4173"],
+	{ stdio: "inherit" }
+);
 
-function stopPreview() {
-	if (!preview.pid) return;
+async function stopPreview() {
+	if (!preview.pid || preview.exitCode !== null || preview.signalCode !== null) return;
 	try {
-		process.kill(-preview.pid, "SIGTERM");
+		const exited = once(preview, "exit");
+		preview.kill("SIGTERM");
+		await exited;
 	} catch (error) {
 		if (error.code !== "ESRCH") console.error(`Failed to stop preview: ${error.message}`);
 	}
 }
 
 function handleSignal(exitCode) {
-	stopPreview();
-	process.exit(exitCode);
+	void stopPreview().finally(() => process.exit(exitCode));
 }
 
 const handleSigint = () => handleSignal(130);
@@ -123,7 +133,7 @@ try {
 } finally {
 	process.off("SIGINT", handleSigint);
 	process.off("SIGTERM", handleSigterm);
-	stopPreview();
+	await stopPreview();
 }
 
 process.exit(status);

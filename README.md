@@ -35,28 +35,11 @@ pnpm install
 # Start dev server
 pnpm dev
 
-# Build for production
-pnpm gen
-pnpm build
+# Run all quality checks, then preview the verified production build
+pnpm verify
 
-# Preview the build
-pnpm preview
-
-# Lint & format
-pnpm lint
-pnpm check
-
-# Run tests
-pnpm test
-
-# Open the mobile performance dashboard at http://localhost:5678
+# Run mobile and desktop performance budget checks
 pnpm benchmark
-
-# Open the desktop performance dashboard
-pnpm benchmark:desktop
-
-# Run mobile and desktop budget checks
-pnpm benchmark:ci
 
 # Run mobile and desktop accessibility checks
 pnpm pa11y
@@ -78,13 +61,13 @@ The `/report` form uses Cloudflare Turnstile and the Email Sending binding confi
 
 For local development, copy `.env.example` to `.env` and provide development or Cloudflare test credentials. Never commit real Turnstile secrets. The server validates every token's success status, `report` action, and hostname before sending email.
 
-For a manual production deployment, run `pnpm deploy`. This rebuilds the generated Worker before deploying it. Wrangler preserves the Turnstile variables configured in the Cloudflare dashboard because `keep_vars` is enabled in `wrangler.jsonc`.
+For a manual production deployment, first run `pnpm verify` and review the local preview. Stop the preview with `Ctrl+C`, then run `pnpm deploy`. Wrangler preserves the Turnstile variables configured in the Cloudflare dashboard because `keep_vars` is enabled in `wrangler.jsonc`.
 
 ## Performance Checks
 
-`pnpm benchmark` builds the site, serves it locally, and opens the interactive mobile Unlighthouse dashboard at `http://localhost:5678`. Use `pnpm benchmark:desktop` for the desktop dashboard.
+`pnpm benchmark` builds the site, serves it locally, and checks every sitemap route against the mobile and desktop Lighthouse budgets.
 
-`pnpm benchmark:ci` reads every route from the generated `/sitemap.xml`, runs both viewports, and fails if any page's category score drops below the budget:
+It reads every route from the generated `/sitemap.xml` and fails if any page's category score drops below the budget:
 
 - Mobile: 90
 - Desktop: 70
@@ -103,11 +86,9 @@ Each CI job publishes a compact Markdown summary with route and error totals plu
 
 ## External Link Checks
 
-`pnpm lychee` builds and serves the site locally, reads every route from `/sitemap.xml`, and uses [Lychee](https://lychee.cli.rs/) to check external HTTP and HTTPS links found in the rendered pages. New static pages are included automatically without maintaining a route list.
+`pnpm lychee` builds and serves the site locally, reads every route from `/sitemap.xml`, and uses [Lychee](https://lychee.cli.rs/) to check external HTTP and HTTPS links found in the rendered pages. The pinned Lychee 0.24.2 binary downloads and verifies automatically on first use. New static pages are included automatically without maintaining a route list.
 
-Install the Lychee CLI before running the local check. The project currently tests with Lychee 0.24.2; see the [official installation options](https://github.com/lycheeverse/lychee#installation). The similarly named `lychee` npm package is unrelated.
-
-The check fails on broken external links. BetterCalapan's local preview and canonical production origins are excluded as internal links, while email addresses are outside the HTTP link-checking scope. HTTP 403 responses are accepted because several government sites block automated clients while remaining publicly reachable. CI installs the pinned Lychee version and runs `pnpm lychee:ci` on every push.
+The check fails on broken external links. BetterCalapan's local preview and canonical production origins are excluded as internal links, while email addresses are outside the HTTP link-checking scope. HTTP 403 responses are accepted because several government sites block automated clients while remaining publicly reachable. CI runs `pnpm lychee:ci` on every push.
 
 CI publishes a Markdown job summary with one row per unique external URL, its result, and every sitemap page where it appears. Successful links, accepted 403 responses, redirects, failures, and timeouts are labeled separately. The temporary JSON report and `.lychee/summary.md` are ignored by Git and are not uploaded as artifacts.
 
