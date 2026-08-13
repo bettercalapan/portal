@@ -1,4 +1,4 @@
-![Banner](./static/og-image.png)
+![Banner](./static/banner.png)
 
 # Overview
 
