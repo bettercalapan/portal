@@ -1,6 +1,17 @@
+import { emergencyHotlines, medicalEmergencyHotlines } from "$lib/data/contact.data";
+import { barangays, departments, executive, legislative } from "$lib/data/government.data";
+import { business, certificates } from "$lib/data/services.data";
 import type { RouteId } from "$app/types";
 
-export const index: { title: string; url: RouteId; keywords: string[] }[] = [
+export type SearchRecord = {
+	id: string;
+	title: string;
+	url: RouteId | string;
+	keywords: string[];
+	type: "page" | "service" | "government" | "barangay" | "contact";
+};
+
+const pages: Omit<SearchRecord, "id" | "type">[] = [
 	{
 		title: "Government",
 		url: "/(content)/government",
@@ -314,4 +325,60 @@ export const index: { title: string; url: RouteId; keywords: string[] }[] = [
 		url: "/(content)/sitemap",
 		keywords: ["sitemap"]
 	}
+];
+
+const serviceRecords = [...certificates.data, ...business.data].map((service) => ({
+	id: `service:${service.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
+	title: service.name,
+	url: service.url,
+	keywords: [service.name, "service", "requirements", "fees"],
+	type: "service" as const
+}));
+
+const governmentRecords = [...executive, ...legislative].map((official) => ({
+	id: `official:${official.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
+	title: official.name,
+	url: "/(content)/government/officials" as RouteId,
+	keywords: [official.title, "official", "government"],
+	type: "government" as const
+}));
+
+governmentRecords.push(
+	...departments.data.map((department) => ({
+		id: `department:${department.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
+		title: department,
+		url: "/(content)/government/departments" as RouteId,
+		keywords: ["department", "government", "office"],
+		type: "government" as const
+	}))
+);
+
+const barangayRecords = barangays.data.map((barangay) => ({
+	id: `barangay:${barangay.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
+	title: barangay.name,
+	url: "/(content)/government/barangays" as RouteId,
+	keywords: ["barangay", barangay.captain, ...(barangay.aliases ?? [])],
+	type: "barangay" as const
+}));
+
+const contactRecords = [...emergencyHotlines, ...medicalEmergencyHotlines].map((organization) => ({
+	id: `contact:${organization.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
+	title: organization.name,
+	url: "/(content)/contact#emergency-hotlines",
+	keywords: ["emergency", "hotline", ...organization.contact.map((contact) => contact.name)],
+	type: "contact" as const
+}));
+
+export const index: SearchRecord[] = [
+	...pages
+		.filter((page) => !serviceRecords.some((service) => service.url === page.url))
+		.map((page) => ({
+			...page,
+			id: `page:${page.url}`,
+			type: "page" as const
+		})),
+	...serviceRecords,
+	...governmentRecords,
+	...barangayRecords,
+	...contactRecords
 ];

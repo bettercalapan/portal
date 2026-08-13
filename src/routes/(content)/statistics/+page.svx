@@ -7,8 +7,9 @@ title: Statistics
 	import Source from "$lib/components/macro/source.svelte";
 	import {
 		cityIncomeSource,
+		cityIncomeStatistics,
 		competitivenessSource,
-		currentPopulation,
+		generalStatistics,
 		populationSource
 	} from "$lib/data/statistics.data";
 	import { createChartLoadQueue } from "./chart-load-queue";
@@ -18,6 +19,23 @@ title: Statistics
 	const loadPopulationDistributionChart = () => import("./population-distribution-chart.svelte");
 	const loadCompetitivenessChart = () => import("./competitiveness-chart.svelte");
 	const chartLoadQueue = createChartLoadQueue();
+	const formatHeadlineStatistic = (
+		value: string | number,
+		format: (typeof generalStatistics | typeof cityIncomeStatistics)[number]["format"]
+	) => {
+		switch (format) {
+			case "number":
+				return Number(value).toLocaleString("en-US");
+			case "decimal":
+				return Number(value).toFixed(2);
+			case "currency-billions":
+				return `₱${(Number(value) / 1_000_000_000).toFixed(2)}B`;
+			case "percent":
+				return `${Number(value).toFixed(1)}%`;
+			default:
+				return value;
+		}
+	};
 </script>
 
 # {title}
@@ -28,40 +46,24 @@ Data and statistics about Calapan City.
 	<div class="section general">
 		<h2>General</h2>
 		<div class="content">
-			<div class="population">
-				<p class="count">{currentPopulation.toLocaleString("en-US")}</p>
-				<p class="label">Population</p>
-			</div>
-			<div class="barangays">
-				<p class="count">62</p>
-				<p class="label">Barangays</p>
-			</div>
-			<div class="land-area">
-				<p class="count">32.69</p>
-				<p class="label">Land Area (km<sup>2</sup>)</p>
-			</div>
-			<div class="income-class">
-				<p class="count">2nd class</p>
-				<p class="label">Income Class</p>
-			</div>
+			{#each generalStatistics as statistic (statistic.label)}
+				<div>
+					<p class="count">{formatHeadlineStatistic(statistic.value, statistic.format)}</p>
+					<p class="label">{statistic.label}</p>
+				</div>
+			{/each}
 		</div>
 		<Source source={populationSource} />
 	</div>
 	<div class="section city-income">
 		<h2>City Income</h2>
 		<div class="content">
-			<div class="annual-income">
-				<p class="count">₱1.47B</p>
-				<p class="label">Annual Income</p>
-			</div>
-			<div class="nta-share">
-				<p class="count">₱1.17B</p>
-				<p class="label">National Tax Allotment</p>
-			</div>
-			<div class="nta-dependency">
-				<p class="count">79.4%</p>
-				<p class="label">NTA Dependency</p>
-			</div>
+			{#each cityIncomeStatistics as statistic (statistic.label)}
+				<div>
+					<p class="count">{formatHeadlineStatistic(statistic.value, statistic.format)}</p>
+					<p class="label">{statistic.label}</p>
+				</div>
+			{/each}
 		</div>
 		<Source source={cityIncomeSource} />
 	</div>
@@ -100,8 +102,8 @@ Data and statistics about Calapan City.
 
 <style>
 	.primary-wrapper {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
@@ -120,7 +122,7 @@ Data and statistics about Calapan City.
 				grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 				gap: 1rem;
 
-				div {
+				> div {
 					background-color: var(--neutral-light);
 					padding: 1.5rem;
 					border-radius: 2rem;

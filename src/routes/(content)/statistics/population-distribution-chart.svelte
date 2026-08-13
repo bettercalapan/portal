@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { BarChart, type ChartResizeDetail } from "layerchart";
-	import { barangayPopulation, currentPopulation } from "$lib/data/statistics.data";
+	import { currentPopulation, populationDistribution } from "$lib/data/statistics.data";
 
 	let { interactive = true }: { interactive?: boolean } = $props();
 
 	const cityPopulation = currentPopulation;
 	const populationDomainMax = 7_000;
 	const populationTicks = [0, 2_000, 4_000, 6_000];
-	const barangays = barangayPopulation;
-	const populationDistribution = [...barangays].sort((a, b) => b.population - a.population);
-	const barangayPopulationTotal = barangays.reduce(
+	const barangayPopulationTotal = populationDistribution.reduce(
 		(total, barangay) => total + barangay.population,
 		0
 	);

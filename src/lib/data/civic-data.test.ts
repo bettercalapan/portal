@@ -1,16 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { emergencyHotlines, medicalEmergencyHotlines } from "./contact.data";
+import { emergencyHotlines, generalContacts, medicalEmergencyHotlines } from "./contact.data";
 import { barangays, departments, executive, legislative, officials } from "./government.data";
 import { business, certificates, serviceSources } from "./services.data";
 import {
 	barangayPopulation,
 	cityIncomeSource,
+	cityIncomeStatistics,
 	competitivenessSource,
 	currentPopulation,
+	generalStatistics,
+	populationDistribution,
 	populationGrowth,
 	populationSource
 } from "./statistics.data";
 import type { DataSource } from "$lib/types/source.types";
+import { formatPhoneNumber, splitPhoneNumbers } from "$lib/utils/contact";
 
 const verificationDate = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -72,6 +76,22 @@ describe("civic data integrity", () => {
 		for (const source of datasets) expectCompleteSource(source);
 	});
 
+	it("derives statistic headlines and distribution rows from canonical data", () => {
+		expect(generalStatistics.slice(0, 2)).toEqual([
+			{ value: currentPopulation, label: "Population", format: "number" },
+			{ value: barangayPopulation.length, label: "Barangays", format: "number" }
+		]);
+		expect(populationDistribution).toHaveLength(barangayPopulation.length);
+		expect(populationDistribution[0]?.population).toBe(
+			Math.max(...barangayPopulation.map(({ population }) => population))
+		);
+		expect(cityIncomeStatistics).toMatchObject([
+			{ value: 1_470_000_000, label: "Annual Income" },
+			{ value: 1_170_000_000, label: "National Tax Allotment" },
+			{ value: 79.4, label: "NTA Dependency" }
+		]);
+	});
+
 	it("keeps government directory records complete and unique", () => {
 		const officialNames = [...executive, ...legislative].map(({ name }) => name);
 		expect(new Set(officialNames).size).toBe(officialNames.length);
@@ -86,7 +106,9 @@ describe("civic data integrity", () => {
 		for (const barangay of barangays.data) {
 			expect(barangay.name.trim()).not.toBe("");
 			expect(barangay.captain.trim()).not.toBe("");
-			expect(barangay.phoneNumber.trim()).not.toBe("");
+			for (const phone of splitPhoneNumbers(barangay.phoneNumber)) {
+				expect(formatPhoneNumber(phone, "mobile")).toMatch(/^09\d{2} \d{3} \d{4}$/);
+			}
 		}
 	});
 
@@ -112,5 +134,10 @@ describe("civic data integrity", () => {
 			}
 			expectCompleteSource(organization.source);
 		}
+	});
+
+	it("publishes complete general contacts", () => {
+		expect(generalContacts.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+		expect(generalContacts.phone.name).not.toBe("");
 	});
 });

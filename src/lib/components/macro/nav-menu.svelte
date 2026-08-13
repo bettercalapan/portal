@@ -54,8 +54,9 @@
 		</NavigationMenu.Item>
 
 		<NavigationMenu.Item class="page-section-item">
-			<NavigationMenu.Link class="page-section-link" href={resolve("/(content)/contact")}
-				>Contact</NavigationMenu.Link
+			<NavigationMenu.Link
+				class="page-section-link"
+				href={resolve("/(content)/contact#emergency-hotlines")}>Contact</NavigationMenu.Link
 			>
 		</NavigationMenu.Item>
 	</NavigationMenu.List>

@@ -11,6 +11,11 @@ export type ContactOrganization = {
 	source: DataSource;
 };
 
+export const generalContacts = {
+	email: "mbscalapanofficial@gmail.com",
+	phone: { name: "043-288-7508", type: "landline" }
+} as const;
+
 const cityEmergencySource = {
 	sources: [
 		{
@@ -132,7 +137,7 @@ export const medicalEmergencyHotlines: readonly ContactOrganization[] = [
 		name: "Maria Estrella General Hospital",
 		contact: [
 			{ name: "0917-702-5210", type: "mobile" },
-			{ name: "(043) 286-7386 / 88", type: "landline" }
+			{ name: "(043) 286-7386", type: "landline" }
 		],
 		source: legacyDirectorySource
 	},
@@ -149,17 +154,5 @@ export const medicalEmergencyHotlines: readonly ContactOrganization[] = [
 		name: "Mindoro Medical Center",
 		contact: [{ name: "0917-567-8102", type: "mobile" }],
 		source: legacyDirectorySource
-	},
-	{
-		name: "Hospital of the Holy Cross",
-		contact: [
-			{ name: "(043) 288-4470", type: "landline" },
-			{ name: "(043) 288-5855", type: "landline" },
-			{ name: "(043) 288-5854", type: "landline" },
-			{ name: "(043) 441-6526", type: "landline" },
-			{ name: "0995-019-3317", type: "mobile" },
-			{ name: "0908-744-3313", type: "mobile" }
-		],
-		source: holyCrossSource
 	}
 ];

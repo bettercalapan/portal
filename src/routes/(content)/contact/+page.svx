@@ -4,21 +4,16 @@ title: Contact
 ---
 
 <script lang="ts">
-	import { emergencyHotlines, medicalEmergencyHotlines } from "$lib/data/contact.data";
+	import ContactAction from "$lib/components/macro/contact-action.svelte";
+	import LocationActions from "$lib/components/macro/location-actions.svelte";
+	import {
+		emergencyHotlines,
+		generalContacts,
+		medicalEmergencyHotlines
+	} from "$lib/data/contact.data";
 	import Email from "@lucide/svelte/icons/mail";
 	import Phone from "@lucide/svelte/icons/phone";
 	import Smartphone from "@lucide/svelte/icons/smartphone";
-
-	const general = [
-		{
-			name: "mbscalapanofficial@gmail.com",
-			type: "email"
-		},
-		{
-			name: "043-288-7508",
-			type: "landline"
-		}
-	];
 
 </script>
 
@@ -28,19 +23,11 @@ We're here to help. Reach out to us through any of these channels.
 
 <div class="contact-content">
 	<ul class="general">
-		{#each general as contact (contact.name)}
-			<li>
-				{#if contact.type == "email"}
-					<Email />
-				{:else if contact.type == "landline"}
-					<Phone />
-				{/if}
-				<p>{contact.name}</p>
-			</li>
-		{/each}
+		<li><Email /> <ContactAction email={generalContacts.email} /></li>
+		<li><Phone /> <ContactAction phone={generalContacts.phone.name} phoneType="landline" /></li>
 	</ul>
 	<div class="hotlines">
-		<div class="section hotline-section emergency-hotlines">
+		<div class="section hotline-section emergency-hotlines" id="emergency-hotlines">
 			<h2>Emergency Hotlines</h2>
 			<ul class="content">
 				{#each emergencyHotlines as eh, i (eh.name)}
@@ -55,7 +42,7 @@ We're here to help. Reach out to us through any of these channels.
 										{:else if contact.type == "mobile"}
 											<Smartphone />
 										{/if}
-										{contact.name}
+										<ContactAction phone={contact.name} phoneType={contact.type} />
 									</li>
 								{/each}
 							</ul>
@@ -64,7 +51,7 @@ We're here to help. Reach out to us through any of these channels.
 				{/each}
 			</ul>
 		</div>
-		<div class="section hotline-section medical-emergency-hotlines">
+		<div class="section hotline-section medical-emergency-hotlines" id="medical-emergency-hotlines">
 			<h2>Medical Emergency Hotlines</h2>
 			<ul class="content">
 				{#each medicalEmergencyHotlines as eh, i (eh.name)}
@@ -79,10 +66,13 @@ We're here to help. Reach out to us through any of these channels.
 										{:else if contact.type == "mobile"}
 											<Smartphone />
 										{/if}
-										{contact.name}
+										<ContactAction phone={contact.name} phoneType={contact.type} />
 									</li>
 								{/each}
 							</ul>
+							<div class="location-actions-wrapper">
+								<LocationActions destination={`${eh.name}, Calapan City, Oriental Mindoro`} />
+							</div>
 						</div>
 					</li>
 				{/each}
@@ -97,8 +87,7 @@ We're here to help. Reach out to us through any of these channels.
 		flex-direction: column;
 		gap: 2rem;
 
-		h2,
-		p {
+		h2 {
 			margin: 0;
 		}
 
@@ -125,6 +114,11 @@ We're here to help. Reach out to us through any of these channels.
 		}
 
 		.hotline-section {
+			.location-actions-wrapper {
+				margin-top: 0.5rem;
+        padding-left: 0.5rem;
+			}
+
 			.content {
 				padding-left: 1.25rem;
 				margin: 1rem 0;

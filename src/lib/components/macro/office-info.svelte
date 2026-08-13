@@ -3,6 +3,8 @@
 	import Landmark from "@lucide/svelte/icons/landmark";
 	import MapPin from "@lucide/svelte/icons/map-pin";
 	import Phone from "@lucide/svelte/icons/phone";
+	import ContactAction from "$lib/components/macro/contact-action.svelte";
+	import LocationActions from "$lib/components/macro/location-actions.svelte";
 
 	let { landmark, location, phone, time } = $props();
 </script>
@@ -18,14 +20,17 @@
 		<div class="icon">
 			<MapPin />
 		</div>
-		{location}
+		<div>
+			<div>{location}</div>
+			<LocationActions destination={`${landmark}, ${location}`} />
+		</div>
 	</li>
 	{#if phone}
 		<li>
 			<div class="icon">
 				<Phone />
 			</div>
-			{phone}
+			<ContactAction {phone} phoneType="landline" />
 		</li>
 	{/if}
 	<li>

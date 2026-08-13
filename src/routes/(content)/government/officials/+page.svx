@@ -9,6 +9,7 @@ breadcrumbs:
 <script>
 	import { executive, legislative, officials } from "$lib/data/government.data";
 	import Source from "$lib/components/macro/source.svelte";
+	import ContactAction from "$lib/components/macro/contact-action.svelte";
 	import Clock from "@lucide/svelte/icons/clock";
 	import Email from "@lucide/svelte/icons/mail";
 	import Phone from "@lucide/svelte/icons/phone";
@@ -27,7 +28,7 @@ breadcrumbs:
 		<section class="official">
 			<h3>{official.title}</h3>
 			<p><User /> {official.name}</p>
-			<p><Email /> {official.email}</p>
+			<p><Email /> <ContactAction email={official.email} /></p>
 		</section>
 	{/each}
 </div>

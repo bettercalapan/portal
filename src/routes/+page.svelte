@@ -29,6 +29,12 @@
 		<section class="quick-links">
 			<h1 class="heading">Quick links</h1>
 			<div class="resources">
+				<a class="resource emergency" href={resolve("/(content)/contact#emergency-hotlines")}>
+					<div class="icon">
+						<ArrowRight />
+					</div>
+					<p>Emergency hotlines</p>
+				</a>
 				<a class="resource" href={resolve("/(content)/services/certificates/birth-certificate")}>
 					<div class="icon">
 						<ArrowRight />
@@ -40,12 +46,6 @@
 						<ArrowRight />
 					</div>
 					<p>Business permit</p>
-				</a>
-				<a class="resource" href={resolve("/(content)/statistics")}>
-					<div class="icon">
-						<ArrowRight />
-					</div>
-					<p>Statistics</p>
 				</a>
 				<a class="resource" href={resolve("/(content)/services/certificates/barangay-clearance")}>
 					<div class="icon">

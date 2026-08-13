@@ -16,12 +16,12 @@
 		{#if results.length == 0}
 			<p>No result found. Check spelling or try different keywords.</p>
 		{:else}
-			{#each results.slice(0, 5) as result (result.item.url)}
+			{#each results.slice(0, 5) as result (result.item.id)}
 				<a class="result" href={resolveRoute(result.item.url)}>
 					<div class="icon">
 						<ArrowRight />
 					</div>
-					{result.item.title}</a
+					<span>{result.item.title}</span></a
 				>
 			{/each}
 		{/if}

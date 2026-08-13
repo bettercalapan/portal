@@ -10,12 +10,14 @@ describe("SearchInput", () => {
 		const input = screen.getByRole("textbox", { name: "Search BetterCalapan.org" });
 
 		await input.fill("business permit");
-		await expect.element(screen.getByRole("link", { name: "Business Permit" })).toBeVisible();
+		await expect
+			.element(screen.getByRole("link", { name: "Business Permit service", exact: true }))
+			.toBeVisible();
 
 		(screen.container.querySelector("input") as HTMLInputElement).blur();
 
 		await expect
-			.element(screen.getByRole("link", { name: "Business Permit" }))
+			.element(screen.getByRole("link", { name: "Business Permit service", exact: true }))
 			.not.toBeInTheDocument();
 	});
 
@@ -28,7 +30,7 @@ describe("SearchInput", () => {
 		await new Promise((resolve) => setTimeout(resolve, SEARCH_DURATION + 50));
 
 		await expect
-			.element(screen.getByRole("link", { name: "Business Permit" }))
+			.element(screen.getByRole("link", { name: "Business Permit service", exact: true }))
 			.not.toBeInTheDocument();
 	});
 
@@ -37,7 +39,7 @@ describe("SearchInput", () => {
 		const input = screen.getByRole("textbox", { name: "Search BetterCalapan.org" });
 
 		await input.fill("business permit");
-		const result = screen.getByRole("link", { name: "Business Permit" });
+		const result = screen.getByRole("link", { name: "Business Permit service", exact: true });
 		await expect.element(result).toBeVisible();
 
 		(screen.container.querySelector("a") as HTMLAnchorElement).focus();
@@ -51,7 +53,7 @@ describe("SearchInput", () => {
 		const inputElement = screen.container.querySelector("input") as HTMLInputElement;
 
 		await input.fill("business permit");
-		const result = screen.getByRole("link", { name: "Business Permit" });
+		const result = screen.getByRole("link", { name: "Business Permit service", exact: true });
 		await expect.element(result).toBeVisible();
 		inputElement.blur();
 		await expect.element(result).not.toBeInTheDocument();

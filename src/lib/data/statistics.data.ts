@@ -36,12 +36,12 @@ export const competitivenessSource = {
 	methodology: "Annual CMCI indicator scores as published in the DTI data portal."
 } as const satisfies DataSource;
 
-export const currentPopulation = 148_558;
-
 export const populationGrowth = [
 	{ year: 2020, population: 145_786 },
-	{ year: 2024, population: currentPopulation }
+	{ year: 2024, population: 148_558 }
 ] as const;
+
+export const currentPopulation = populationGrowth.at(-1)!.population;
 
 export const barangayPopulation = [
 	{ barangay: "Balingayan", population: 1_633 },
@@ -106,6 +106,33 @@ export const barangayPopulation = [
 	{ barangay: "Tibag", population: 2_441 },
 	{ barangay: "Wawa", population: 848 },
 	{ barangay: "Nag-Iba II", population: 1_828 }
+] as const;
+
+export const populationDistribution = [...barangayPopulation].sort(
+	(a, b) => b.population - a.population
+);
+
+export const generalStatistics = [
+	{ value: currentPopulation, label: "Population", format: "number" },
+	{ value: barangayPopulation.length, label: "Barangays", format: "number" },
+	{ value: 32.69, label: "Land Area (km²)", format: "decimal" },
+	{ value: "2nd class", label: "Income Class", format: "text" }
+] as const;
+
+export const cityIncome = {
+	annualIncome: 1_470_000_000,
+	nationalTaxAllotment: 1_170_000_000,
+	ntaDependencyPercent: 79.4
+} as const;
+
+export const cityIncomeStatistics = [
+	{ value: cityIncome.annualIncome, label: "Annual Income", format: "currency-billions" },
+	{
+		value: cityIncome.nationalTaxAllotment,
+		label: "National Tax Allotment",
+		format: "currency-billions"
+	},
+	{ value: cityIncome.ntaDependencyPercent, label: "NTA Dependency", format: "percent" }
 ] as const;
 
 export type CompetitivenessDatum = {

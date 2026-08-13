@@ -2,7 +2,7 @@ import type { RouteId } from "$app/types";
 
 type PageSection = {
 	name: string;
-	url: RouteId;
+	url: RouteId | `${RouteId}#${string}`;
 };
 
 const prefix = "/(content)";
@@ -21,6 +21,6 @@ export const pageSections: PageSection[] = [
 	},
 	{
 		name: "Contact",
-		url: `${prefix}/contact`
+		url: `${prefix}/contact#emergency-hotlines`
 	}
 ];
