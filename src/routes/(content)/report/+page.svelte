@@ -1,12 +1,13 @@
 <script lang="ts">
 	import ContentLayout from "$lib/components/macro/content-layout.svelte";
 	import ReportForm from "$lib/components/macro/report-form.svelte";
+	import type { InternalHref } from "$lib/types/civic.types";
 	import type { ActionData, PageData } from "./$types";
 
-	const relatedContent = [
-		{ name: "Accessibility", url: "/(content)/accessibility" },
-		{ name: "Privacy Policy", url: "/(content)/privacy-policy" },
-		{ name: "Contact", url: "/(content)/contact" }
+	const relatedContent: { name: string; url: InternalHref }[] = [
+		{ name: "Accessibility", url: "/accessibility" },
+		{ name: "Privacy Policy", url: "/privacy-policy" },
+		{ name: "Contact", url: "/contact" }
 	];
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();

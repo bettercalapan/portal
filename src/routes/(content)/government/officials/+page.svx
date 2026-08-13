@@ -3,7 +3,7 @@ layout: content
 title: Officials
 breadcrumbs:
   - name: Government
-    url: /(content)/government
+    url: /government
 ---
 
 <script>
@@ -28,7 +28,7 @@ breadcrumbs:
 		<section class="official">
 			<h3>{official.title}</h3>
 			<p><User /> {official.name}</p>
-			<p><Email /> <ContactAction email={official.email} /></p>
+			<p><Email /> <ContactAction method={{ kind: "email", value: official.email }} /></p>
 		</section>
 	{/each}
 </div>

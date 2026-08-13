@@ -1,26 +1,3 @@
-import type { RouteId } from "$app/types";
+import { mainNavigation } from "$lib/data/site.data";
 
-type PageSection = {
-	name: string;
-	url: RouteId | `${RouteId}#${string}`;
-};
-
-const prefix = "/(content)";
-export const pageSections: PageSection[] = [
-	{
-		name: "Services",
-		url: `${prefix}/services`
-	},
-	{
-		name: "Government",
-		url: `${prefix}/government`
-	},
-	{
-		name: "Statistics",
-		url: `${prefix}/statistics`
-	},
-	{
-		name: "Contact",
-		url: `${prefix}/contact#emergency-hotlines`
-	}
-];
+export const pageSections = mainNavigation.map(({ title, href }) => ({ name: title, url: href }));

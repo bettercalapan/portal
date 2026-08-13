@@ -17,7 +17,11 @@
 			<p>No result found. Check spelling or try different keywords.</p>
 		{:else}
 			{#each results.slice(0, 5) as result (result.item.id)}
-				<a class="result" href={resolveRoute(result.item.url)}>
+				<a
+					class="result"
+					href={resolveRoute(result.item.url)}
+					aria-label={`${result.item.title} ${result.item.type}`}
+				>
 					<div class="icon">
 						<ArrowRight />
 					</div>

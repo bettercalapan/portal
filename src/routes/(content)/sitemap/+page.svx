@@ -5,26 +5,18 @@ title: Sitemap
 
 <script lang="ts">
 	import type { ExternalLink, Link } from "$lib/types/link.types";
+	import { sitemapPages } from "$lib/data/site.data";
 	import { listItem } from "$lib/snippets/list-item.snippet.svelte";
 
-	const mainNavigation: Link[] = [
-		{ name: "Home", url: "/" },
-		{ name: "Services", url: "/(content)/services" },
-		{ name: "Government", url: "/(content)/government" },
-		{ name: "Statistics", url: "/(content)/statistics" },
-		{ name: "Contact", url: "/(content)/contact" }
-	];
-
-	const services: Link[] = [
-		{ name: "Certificates", url: "/(content)/services/certificates" },
-		{ name: "Business", url: "/(content)/services/business" }
-	];
-
-	const government: Link[] = [
-		{ name: "Officials", url: "/(content)/government/officials" },
-		{ name: "Departments", url: "/(content)/government/departments" },
-		{ name: "Barangays", url: "/(content)/government/barangays" }
-	];
+	const navigation: Link[] = sitemapPages
+		.filter((page) => page.section === "main")
+		.map(({ title, href }) => ({ name: title, url: href }));
+	const services: Link[] = sitemapPages
+		.filter((page) => page.section === "services")
+		.map(({ title, href }) => ({ name: title, url: href }));
+	const government: Link[] = sitemapPages
+		.filter((page) => page.section === "government")
+		.map(({ title, href }) => ({ name: title, url: href }));
 
 	const externalResources: ExternalLink[] = [
 		{ name: "Official Calapan Website", url: "https://cityofcalapan.gov.ph" },
@@ -33,12 +25,9 @@ title: Sitemap
 		{ name: "Freedom of Information", url: "https://foi.gov.ph" }
 	];
 
-	const others: Link[] = [
-		{ name: "Report", url: "/(content)/report" },
-		{ name: "Terms of Use", url: "/(content)/terms-of-use" },
-		{ name: "Privacy Policy", url: "/(content)/privacy-policy" },
-		{ name: "Accessibility", url: "/(content)/accessibility" }
-	];
+	const others: Link[] = sitemapPages
+		.filter((page) => page.section === "other")
+		.map(({ title, href }) => ({ name: title, url: href }));
 </script>
 
 # {title}
@@ -49,7 +38,7 @@ Navigate all pages and services of BetterCalapan.
 	<section>
 		<h2>Main Navigation</h2>
 		<ul>
-			{#each mainNavigation as item (item.name)}
+			{#each navigation as item (item.name)}
 				{@render listItem(item.name, item.url)}
 			{/each}
 		</ul>

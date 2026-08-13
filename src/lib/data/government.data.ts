@@ -1,7 +1,7 @@
 import type { Link } from "$lib/types/link.types";
 import type { DataSource } from "$lib/types/source.types";
 
-const governmentPrefix = "/(content)/government";
+const governmentPrefix = "/government";
 export const government: {
 	heading: string;
 	description: string;

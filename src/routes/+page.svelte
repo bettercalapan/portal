@@ -2,8 +2,8 @@
 	import { resolve } from "$app/paths";
 	import SearchInput from "$lib/components/macro/search-input.svelte";
 	import { government } from "$lib/data/government.data";
+	import { mainNavigation } from "$lib/data/site.data";
 	import { services } from "$lib/data/services.data";
-	import { pageSections } from "$lib/data/header.data";
 	import { listItem } from "$lib/snippets/list-item.snippet.svelte";
 	import ArrowRight from "@lucide/svelte/icons/arrow-right";
 </script>
@@ -29,37 +29,37 @@
 		<section class="quick-links">
 			<h1 class="heading">Quick links</h1>
 			<div class="resources">
-				<a class="resource emergency" href={resolve("/(content)/contact#emergency-hotlines")}>
+				<a class="resource emergency" href={resolve("/contact#emergency-hotlines")}>
 					<div class="icon">
 						<ArrowRight />
 					</div>
 					<p>Emergency hotlines</p>
 				</a>
-				<a class="resource" href={resolve("/(content)/services/certificates/birth-certificate")}>
+				<a class="resource" href={resolve("/services/certificates/birth-certificate")}>
 					<div class="icon">
 						<ArrowRight />
 					</div>
 					<p>Birth certificate</p>
 				</a>
-				<a class="resource" href={resolve("/(content)/services/business/business-permit")}>
+				<a class="resource" href={resolve("/services/business/business-permit")}>
 					<div class="icon">
 						<ArrowRight />
 					</div>
 					<p>Business permit</p>
 				</a>
-				<a class="resource" href={resolve("/(content)/services/certificates/barangay-clearance")}>
+				<a class="resource" href={resolve("/services/certificates/barangay-clearance")}>
 					<div class="icon">
 						<ArrowRight />
 					</div>
 					<p>Barangay clearance</p>
 				</a>
-				<a class="resource" href={resolve("/(content)/services/certificates/barangay-id")}>
+				<a class="resource" href={resolve("/services/certificates/barangay-id")}>
 					<div class="icon">
 						<ArrowRight />
 					</div>
 					<p>Barangay ID</p>
 				</a>
-				<a class="resource" href={resolve("/(content)/services/certificates/drivers-license")}>
+				<a class="resource" href={resolve("/services/certificates/drivers-license")}>
 					<div class="icon">
 						<ArrowRight />
 					</div>
@@ -91,8 +91,8 @@
 			<div class="others">
 				<h1 class="heading">Others</h1>
 				<ul class="others-list">
-					{#each pageSections.slice(2) as other (other.name)}
-						{@render listItem(other.name, other.url)}
+					{#each mainNavigation.filter((page) => page.id === "statistics" || page.id === "contact") as other (other.id)}
+						{@render listItem(other.title, other.href)}
 					{/each}
 				</ul>
 			</div>

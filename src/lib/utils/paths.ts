@@ -1,7 +1,7 @@
-import { resolve } from "$app/paths";
-import type { ResolvedPathname, RouteId } from "$app/types";
+import { base } from "$app/paths";
+import type { ResolvedPathname } from "$app/types";
+import type { InternalHref } from "$lib/types/civic.types";
 
-export function resolveRoute(url: RouteId | string): ResolvedPathname {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- resolve() requires a single literal route; data-driven URLs are only validated at the data source
-	return resolve(url as any);
+export function resolveRoute<const T extends InternalHref>(url: T): ResolvedPathname {
+	return `${base}${url}` as ResolvedPathname;
 }

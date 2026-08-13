@@ -1,384 +1,114 @@
-import { emergencyHotlines, medicalEmergencyHotlines } from "$lib/data/contact.data";
+import { contactSections, generalContacts } from "$lib/data/contact.data";
 import { barangays, departments, executive, legislative } from "$lib/data/government.data";
-import { business, certificates } from "$lib/data/services.data";
-import type { RouteId } from "$app/types";
+import { offices } from "$lib/data/offices.data";
+import { publishedPages } from "$lib/data/site.data";
+import { serviceRecords } from "$lib/data/services.data";
+import type { InternalHref } from "$lib/types/civic.types";
 
 export type SearchRecord = {
 	id: string;
 	title: string;
-	url: RouteId | string;
-	keywords: string[];
+	url: InternalHref;
+	keywords: readonly string[];
 	type: "page" | "service" | "government" | "barangay" | "contact";
 };
 
-const pages: Omit<SearchRecord, "id" | "type">[] = [
-	{
-		title: "Government",
-		url: "/(content)/government",
-		keywords: ["government", "officials", "departments", "barangays"]
-	},
-	{
-		title: "Officials",
-		url: "/(content)/government/officials",
+const serviceHrefs = new Set<InternalHref>(
+	Object.values(serviceRecords).map((service) => service.href)
+);
+
+const pages: SearchRecord[] = publishedPages
+	.filter((page) => !serviceHrefs.has(page.href))
+	.map((page) => ({
+		id: `page:${page.id}`,
+		title: page.title,
+		url: page.href,
+		keywords: page.keywords,
+		type: "page"
+	}));
+
+const services: SearchRecord[] = Object.values(serviceRecords).map((service) => ({
+	id: `service:${service.id}`,
+	title: service.title,
+	url: service.href,
+	keywords: [
+		service.summary,
+		...service.aliases,
+		...service.requirements,
+		service.fee.details,
+		service.fee.status,
+		service.category,
+		...("office" in service ? [service.office.name, service.office.address] : ["barangay hall"])
+	],
+	type: "service"
+}));
+
+const government: SearchRecord[] = [
+	...[...executive, ...legislative].map((official) => ({
+		id: `official:${official.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
+		title: official.name,
+		url: "/government/officials" as const,
 		keywords: [
+			official.title,
+			"official",
 			"government",
-			"officials",
-			"executive branch",
-			"legislative branch",
-			"mayor",
-			"vice mayor",
-			"city councilor"
-		]
-	},
-	{
-		title: "Departments",
-		url: "/(content)/government/departments",
-		keywords: ["government", "departments"]
-	},
-	{
-		title: "Barangays",
-		url: "/(content)/government/barangays",
-		keywords: ["government", "barangays", "bayanan II"]
-	},
-	{
-		title: "Services",
-		url: "/(content)/services",
-		keywords: [
-			"services",
-			"certificates",
-			"business",
-			"tax payments",
-			"social services",
-			"health",
-			"agriculture",
-			"infrastructure",
-			"education",
-			"public safety",
-			"environment"
-		]
-	},
-	{
-		title: "Certificates",
-		url: "/(content)/services/certificates",
-		keywords: [
-			"services",
-			"certificates",
-			"birth certificate",
-			"marriage certificate",
-			"death certificate",
-			"barangay clearance",
-			"barangay id",
-			"police clearance",
-			`driver's license`,
-			"city civil registry"
-		]
-	},
-	{
-		title: "Birth Certificate",
-		url: "/(content)/services/certificates/birth-certificate",
-		keywords: [
-			"birth certificate",
-			"services",
-			"certificates",
-			"owner",
-			"representative",
-			"valid id",
-			"original",
-			"photocopy",
-			"150",
-			"authorization letter",
-			"eligibility",
-			"civil registrar",
-			"civil registry",
-			"request form"
-		]
-	},
-	{
-		title: "Marriage Certificate",
-		url: "/(content)/services/certificates/marriage-certificate",
-		keywords: [
-			"marriage certificate",
-			"certificate of marriage",
-			"marriage registration",
-			"civil registry",
-			"civil registrar",
-			"marriage license",
-			"late registration",
-			"authorized representative",
-			"services",
-			"certificates"
-		]
-	},
-	{
-		title: "Death Certificate",
-		url: "/(content)/services/certificates/death-certificate",
-		keywords: [
-			"death certificate",
-			"certificate of death",
-			"death registration",
-			"burial permit",
-			"transfer permit",
-			"late registration",
-			"civil registry",
-			"philippine statistics authority",
-			"psa",
-			"services",
-			"certificates"
-		]
-	},
-	{
-		title: "Barangay Clearance",
-		url: "/(content)/services/certificates/barangay-clearance",
-		keywords: [
-			"barangay clearance",
-			"clearance",
-			"barangay hall",
-			"proof of residency",
-			"good standing",
-			"authorized representative",
-			"services",
-			"certificates"
-		]
-	},
-	{
-		title: "Barangay ID",
-		url: "/(content)/services/certificates/barangay-id",
-		keywords: [
-			"barangay id",
-			"barangay identification card",
-			"local id",
-			"barangay hall",
-			"proof of residency",
-			"id application",
-			"id replacement",
-			"services",
-			"certificates"
-		]
-	},
-	{
-		title: "Police Clearance",
-		url: "/(content)/services/certificates/police-clearance",
-		keywords: [
-			"police clearance",
-			"pnp clearance",
-			"philippine national police",
-			"police station",
-			"online appointment",
-			"biometrics",
-			"background check",
-			"services",
-			"certificates"
-		]
-	},
-	{
-		title: "Driver's License",
-		url: "/(content)/services/certificates/drivers-license",
-		keywords: [
-			"driver's license",
-			"drivers license",
-			"driving license",
-			"lto",
-			"land transportation office",
-			"license renewal",
-			"student permit",
-			"medical certificate",
-			"driving test",
-			"services",
-			"certificates"
-		]
-	},
-	{
-		title: "Business",
-		url: "/(content)/services/business",
-		keywords: [
-			"business",
-			"services",
-			"business permit",
-			"special permit",
-			"business status certificate",
-			"certified true copy of business license and mayor's permit",
-			"occupational permit",
-			"safety seal certificate",
-			"calapan city hall"
-		]
-	},
-	{
-		title: "Business Permit",
-		url: "/(content)/services/business/business-permit",
-		keywords: [
-			"business permit",
-			"business license",
-			"mayor's permit",
-			"permit application",
-			"permit renewal",
-			"bplo",
-			"business permit and licensing office",
-			"services",
-			"business"
-		]
-	},
-	{
-		title: "Business Status Certificate",
-		url: "/(content)/services/business/business-status-certificate",
-		keywords: [
-			"business status certificate",
-			"business certification",
-			"business status verification",
-			"business records",
-			"bplo",
-			"business permit and licensing office",
-			"services",
-			"business"
-		]
-	},
-	{
-		title: "Certified True Copy of Business License and Mayor's Permit",
-		url: "/(content)/services/business/ctc-business-license",
-		keywords: [
-			"certified true copy",
-			"ctc business license",
-			"business license",
-			"mayor's permit",
-			"bplo",
-			"business permit and licensing office",
-			"services",
-			"business"
-		]
-	},
-	{
-		title: "Occupational Permit",
-		url: "/(content)/services/business/occupational-permit",
-		keywords: [
-			"occupational permit",
-			"occupational mayor's permit",
-			"worker permit",
-			"employee permit",
-			"first-time job seeker",
-			"food handler",
-			"bplo",
-			"services",
-			"business"
-		]
-	},
-	{
-		title: "Safety Seal Certificate",
-		url: "/(content)/services/business/safety-seal-certificate",
-		keywords: [
-			"safety seal certificate",
-			"safety seal certification",
-			"minimum public health standards",
-			"mphs",
-			"health and safety protocols",
-			"business inspection",
-			"bplo",
-			"services",
-			"business"
-		]
-	},
-	{
-		title: "Special Permit",
-		url: "/(content)/services/business/special-permit",
-		keywords: [
-			"special permit",
-			"business establishment permit",
-			"unified application form",
-			"business name registration",
-			"zoning fees",
-			"bplo",
-			"business permit and licensing office",
-			"services",
-			"business"
-		]
-	},
-	{
-		title: "Statistics",
-		url: "/(content)/statistics",
-		keywords: ["statistics"]
-	},
-	{
-		title: "Contact",
-		url: "/(content)/contact",
-		keywords: ["contact"]
-	},
-	{
-		title: "Report a website issue",
-		url: "/(content)/report",
-		keywords: ["report", "website issue", "incorrect content", "broken link", "accessibility"]
-	},
-	{
-		title: "Terms of Use",
-		url: "/(content)/terms-of-use",
-		keywords: ["terms of use, conditions"]
-	},
-	{
-		title: "Privacy Policy",
-		url: "/(content)/privacy-policy",
-		keywords: ["privacy policy"]
-	},
-	{
-		title: "Accessibility",
-		url: "/(content)/accessibility",
-		keywords: ["accessibility"]
-	},
-	{
-		title: "Sitemap",
-		url: "/(content)/sitemap",
-		keywords: ["sitemap"]
-	}
-];
-
-const serviceRecords = [...certificates.data, ...business.data].map((service) => ({
-	id: `service:${service.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
-	title: service.name,
-	url: service.url,
-	keywords: [service.name, "service", "requirements", "fees"],
-	type: "service" as const
-}));
-
-const governmentRecords = [...executive, ...legislative].map((official) => ({
-	id: `official:${official.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
-	title: official.name,
-	url: "/(content)/government/officials" as RouteId,
-	keywords: [official.title, "official", "government"],
-	type: "government" as const
-}));
-
-governmentRecords.push(
+			...("description" in official && official.description ? [official.description] : []),
+			...("email" in official ? [official.email, official.phoneNumber, official.workingHours] : [])
+		],
+		type: "government" as const
+	})),
 	...departments.data.map((department) => ({
 		id: `department:${department.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
 		title: department,
-		url: "/(content)/government/departments" as RouteId,
+		url: "/government/departments" as const,
 		keywords: ["department", "government", "office"],
 		type: "government" as const
+	})),
+	...Object.values(offices).map((office) => ({
+		id: `office:${office.id}`,
+		title: office.name,
+		url: "/government/departments" as const,
+		keywords: [office.address, office.hours, ...office.contacts.map((contact) => contact.value)],
+		type: "government" as const
 	}))
-);
+];
 
-const barangayRecords = barangays.data.map((barangay) => ({
+const barangayRecords: SearchRecord[] = barangays.data.map((barangay) => ({
 	id: `barangay:${barangay.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
 	title: barangay.name,
-	url: "/(content)/government/barangays" as RouteId,
-	keywords: ["barangay", barangay.captain, ...(barangay.aliases ?? [])],
-	type: "barangay" as const
+	url: "/government/barangays",
+	keywords: ["barangay", barangay.captain, barangay.phoneNumber, ...(barangay.aliases ?? [])],
+	type: "barangay"
 }));
 
-const contactRecords = [...emergencyHotlines, ...medicalEmergencyHotlines].map((organization) => ({
-	id: `contact:${organization.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
-	title: organization.name,
-	url: "/(content)/contact#emergency-hotlines",
-	keywords: ["emergency", "hotline", ...organization.contact.map((contact) => contact.name)],
-	type: "contact" as const
-}));
+const contacts: SearchRecord[] = [
+	...generalContacts.map((contact) => ({
+		id: `contact:general:${contact.kind}`,
+		title: "BetterCalapan contact",
+		url: "/contact" as const,
+		keywords: ["contact", contact.value],
+		type: "contact" as const
+	})),
+	...contactSections.flatMap((section) =>
+		section.organizations.map((organization) => ({
+			id: `contact:${organization.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`,
+			title: organization.name,
+			url: "/contact" as const,
+			keywords: [
+				section.heading,
+				"emergency",
+				"hotline",
+				...organization.contacts.map((contact) => contact.value)
+			],
+			type: "contact" as const
+		}))
+	)
+];
 
 export const index: SearchRecord[] = [
-	...pages
-		.filter((page) => !serviceRecords.some((service) => service.url === page.url))
-		.map((page) => ({
-			...page,
-			id: `page:${page.url}`,
-			type: "page" as const
-		})),
-	...serviceRecords,
-	...governmentRecords,
+	...pages,
+	...services,
+	...government,
 	...barangayRecords,
-	...contactRecords
+	...contacts
 ];

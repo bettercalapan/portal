@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { NavigationMenu } from "bits-ui";
 	import { government } from "$lib/data/government.data";
+	import { mainNavigation } from "$lib/data/site.data";
 	import { services } from "$lib/data/services.data";
 	import { navItem } from "$lib/snippets/nav-item.snippet.svelte";
-	import { resolve } from "$app/paths";
+	import { resolveRoute } from "$lib/utils/paths";
 	import ChevronDown from "@lucide/svelte/icons/chevron-down";
 </script>
 
 <NavigationMenu.Root class="page-section-root">
 	<NavigationMenu.List class="page-section-list">
 		<NavigationMenu.Item class="page-section-item">
-			<NavigationMenu.Link class="page-section-link" href={resolve("/(content)/services")}>
-				Services
+			<NavigationMenu.Link class="page-section-link" href={resolveRoute("/services")}>
+				{mainNavigation.find((page) => page.id === "services")?.title}
 			</NavigationMenu.Link>
 			<NavigationMenu.Trigger class="page-section-trigger" aria-label="Open Services menu">
 				<ChevronDown />
@@ -29,8 +30,8 @@
 		</NavigationMenu.Item>
 
 		<NavigationMenu.Item class="page-section-item">
-			<NavigationMenu.Link class="page-section-link" href={resolve("/(content)/government")}>
-				Government
+			<NavigationMenu.Link class="page-section-link" href={resolveRoute("/government")}>
+				{mainNavigation.find((page) => page.id === "government")?.title}
 			</NavigationMenu.Link>
 			<NavigationMenu.Trigger class="page-section-trigger" aria-label="Open Government menu">
 				<ChevronDown />
@@ -47,18 +48,13 @@
 			</NavigationMenu.Content>
 		</NavigationMenu.Item>
 
-		<NavigationMenu.Item class="page-section-item">
-			<NavigationMenu.Link class="page-section-link" href={resolve("/(content)/statistics")}
-				>Statistics</NavigationMenu.Link
-			>
-		</NavigationMenu.Item>
-
-		<NavigationMenu.Item class="page-section-item">
-			<NavigationMenu.Link
-				class="page-section-link"
-				href={resolve("/(content)/contact#emergency-hotlines")}>Contact</NavigationMenu.Link
-			>
-		</NavigationMenu.Item>
+		{#each mainNavigation.filter((page) => page.id === "statistics" || page.id === "contact") as page (page.id)}
+			<NavigationMenu.Item class="page-section-item">
+				<NavigationMenu.Link class="page-section-link" href={resolveRoute(page.href)}
+					>{page.title}</NavigationMenu.Link
+				>
+			</NavigationMenu.Item>
+		{/each}
 	</NavigationMenu.List>
 </NavigationMenu.Root>
 

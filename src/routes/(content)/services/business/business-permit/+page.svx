@@ -3,9 +3,9 @@ layout: content
 title: Business Permit
 breadcrumbs:
   - name: Services
-    url: /(content)/services
+    url: /services
   - name: Business
-    url: /(content)/services/business
+    url: /services/business
 onThisPage:
   - name: Business Permit
     id: title
@@ -19,18 +19,19 @@ onThisPage:
     id: frequently-asked-questions
 relatedContent:
   - name: Business Status Certificate
-    url: /(content)/services/business/business-status-certificate
+    url: /services/business/business-status-certificate
   - name: Certified True Copy of Business License & Mayor's Permit
-    url: /(content)/services/business/ctc-business-license
+    url: /services/business/ctc-business-license
   - name: Special Permit
-    url: /(content)/services/business/special-permit
+    url: /services/business/special-permit
 ---
 
 <script>
 	import Accordion from "$lib/components/macro/accordion.svelte";
 	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+	import { offices } from "$lib/data/offices.data";
 	import Source from "$lib/components/macro/source.svelte";
-	import { serviceSources } from "$lib/data/services.data";
+	import { serviceRecords } from "$lib/data/services.data";
 
 	const faq = [
 		{
@@ -135,15 +136,10 @@ Follow these steps to apply for or renew your business permit.
 
 ## Office info
 
-<OfficeInfo
-	landmark="Calapan City Hall"
-	location="95HM+H9J Calapan City Hall, Roxas Dr, Calapan City, 5200 Oriental Mindoro"
-	phone="+63432882496"
-	time="Mon-Fri: 8AM - 5PM"
-/>
+<OfficeInfo office={offices.businessPermitAndLicensing} />
 
 ## Frequently asked questions
 
 <Accordion {faq} />
 
-<Source source={serviceSources.businessPermit} />
+<Source source={serviceRecords.businessPermit.source} />

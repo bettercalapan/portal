@@ -26,6 +26,17 @@ export function getSitemapPaths(routeFiles: string[]): string[] {
 	return uniquePaths;
 }
 
+export function expectRegisteredPaths(
+	paths: readonly string[],
+	registeredPaths: readonly string[]
+) {
+	const actual = [...paths].sort((a, b) => a.localeCompare(b));
+	const expected = [...registeredPaths].sort((a, b) => a.localeCompare(b));
+	if (actual.join("\n") !== expected.join("\n")) {
+		throw new Error("Published page registry does not match sitemap routes");
+	}
+}
+
 export function getSitemapOrigin(requestUrl: URL): string {
 	if (["localhost", "127.0.0.1", "[::1]"].includes(requestUrl.hostname)) return requestUrl.origin;
 	return CANONICAL_ORIGIN;

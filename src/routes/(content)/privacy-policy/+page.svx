@@ -40,17 +40,17 @@ onThisPage:
     id: changes-to-this-policy
 relatedContent:
   - name: Terms of Use
-    url: /(content)/terms-of-use
+    url: /terms-of-use
   - name: Accessibility
-    url: /(content)/accessibility
+    url: /accessibility
 ---
 
 <script>
 	import Info from "$lib/components/macro/info.svelte";
 	import { resolveRoute } from "$lib/utils/paths";
 
-	const reportUrl = resolveRoute("/(content)/report");
-	const termsOfUseUrl = resolveRoute("/(content)/terms-of-use");
+	const reportUrl = resolveRoute("/report");
+	const termsOfUseUrl = resolveRoute("/terms-of-use");
 </script>
 
 # {title}

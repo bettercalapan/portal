@@ -1,13 +1,17 @@
 <script module lang="ts">
-	import type { RouteId } from "$app/types";
+	import type { InternalHref } from "$lib/types/civic.types";
 	import { resolveRoute } from "$lib/utils/paths";
 	import ArrowRight from "@lucide/svelte/icons/arrow-right";
 
 	export { listItem };
+
+	function isExternalLink(url: InternalHref | `https://${string}`): url is `https://${string}` {
+		return url.startsWith("https://");
+	}
 </script>
 
-{#snippet listItem(name: string, url: RouteId | string)}
-	{@const external = url.startsWith("http")}
+{#snippet listItem(name: string, url: InternalHref | `https://${string}`)}
+	{@const external = isExternalLink(url)}
 
 	{#snippet linkContent()}
 		<div class="icon">

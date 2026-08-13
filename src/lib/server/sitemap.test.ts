@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { createSitemapXml, getSitemapOrigin, getSitemapPaths } from "./sitemap";
+import {
+	createSitemapXml,
+	expectRegisteredPaths,
+	getSitemapOrigin,
+	getSitemapPaths
+} from "./sitemap";
 
 describe("getSitemapPaths", () => {
 	it("converts SvelteKit page files into sorted public routes", () => {
@@ -12,6 +17,18 @@ describe("getSitemapPaths", () => {
 				"/workspace/src/routes/api/+server.ts"
 			])
 		).toEqual(["/", "/search", "/services"]);
+	});
+
+	describe("expectRegisteredPaths", () => {
+		it("accepts equal path sets regardless of order", () => {
+			expect(() => expectRegisteredPaths(["/services", "/"], ["/", "/services"])).not.toThrow();
+		});
+
+		it("rejects missing or extra registered pages", () => {
+			expect(() => expectRegisteredPaths(["/", "/services"], ["/"])).toThrow(
+				"Published page registry does not match sitemap routes"
+			);
+		});
 	});
 
 	it("rejects routes that need concrete parameter values", () => {

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Clock from "@lucide/svelte/icons/clock";
+	import type { OfficeRecord } from "$lib/types/civic.types";
 	import Landmark from "@lucide/svelte/icons/landmark";
 	import MapPin from "@lucide/svelte/icons/map-pin";
 	import Phone from "@lucide/svelte/icons/phone";
-	import ContactAction from "$lib/components/macro/contact-action.svelte";
-	import LocationActions from "$lib/components/macro/location-actions.svelte";
+	import { formatPhoneNumber } from "$lib/utils/contact";
 
-	let { landmark, location, phone, time } = $props();
+	let { office }: { office: OfficeRecord } = $props();
 </script>
 
 <ul>
@@ -14,30 +14,29 @@
 		<div class="icon">
 			<Landmark />
 		</div>
-		{landmark}
+		{office.name}
 	</li>
 	<li>
 		<div class="icon">
 			<MapPin />
 		</div>
-		<div>
-			<div>{location}</div>
-			<LocationActions destination={`${landmark}, ${location}`} />
-		</div>
+		{office.address}
 	</li>
-	{#if phone}
-		<li>
-			<div class="icon">
-				<Phone />
-			</div>
-			<ContactAction {phone} phoneType="landline" />
-		</li>
-	{/if}
+	{#each office.contacts as method (method.kind + method.value)}
+		{#if method.kind === "phone"}
+			<li>
+				<div class="icon">
+					<Phone />
+				</div>
+				{formatPhoneNumber(method.value, method.phoneType)}
+			</li>
+		{/if}
+	{/each}
 	<li>
 		<div class="icon">
 			<Clock />
 		</div>
-		{time}
+		{office.hours}
 	</li>
 </ul>
 

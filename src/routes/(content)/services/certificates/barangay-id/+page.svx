@@ -3,9 +3,9 @@ layout: content
 title: Barangay ID
 breadcrumbs:
   - name: Services
-    url: /(content)/services
+    url: /services
   - name: Certificates
-    url: /(content)/services/certificates
+    url: /services/certificates
 onThisPage:
   - name: Barangay ID
     id: title
@@ -17,17 +17,17 @@ onThisPage:
     id: frequently-asked-questions
 relatedContent:
   - name: Barangay Clearance
-    url: /(content)/services/certificates/barangay-clearance
+    url: /services/certificates/barangay-clearance
   - name: Police Clearance
-    url: /(content)/services/certificates/police-clearance
+    url: /services/certificates/police-clearance
   - name: Driver's License
-    url: /(content)/services/certificates/drivers-license
+    url: /services/certificates/drivers-license
 ---
 
 <script>
 	import Accordion from "$lib/components/macro/accordion.svelte";
 	import Source from "$lib/components/macro/source.svelte";
-	import { serviceSources } from "$lib/data/services.data";
+	import { serviceRecords } from "$lib/data/services.data";
 
 	const faq = [
 		{
@@ -89,4 +89,4 @@ Follow these steps to apply for a barangay ID.
 
 <Accordion {faq} />
 
-<Source source={serviceSources.barangayId} />
+<Source source={serviceRecords.barangayId.source} />

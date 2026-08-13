@@ -28,11 +28,11 @@ onThisPage:
     id: governing-law
 relatedContent:
   - name: Privacy Policy
-    url: /(content)/privacy-policy
+    url: /privacy-policy
   - name: Accessibility
-    url: /(content)/accessibility
+    url: /accessibility
   - name: Sitemap 
-    url: /(content)/sitemap
+    url: /sitemap
 ---
 
 <script>

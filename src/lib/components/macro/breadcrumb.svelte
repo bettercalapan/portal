@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
+	import type { InternalHref } from "$lib/types/civic.types";
 	import { resolveRoute } from "$lib/utils/paths";
 
 	type BreadcrumbItem = {
 		name: string;
-		url: string;
+		url: InternalHref;
 	};
 
 	let {

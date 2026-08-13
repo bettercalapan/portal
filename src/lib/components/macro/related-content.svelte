@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { listItem } from "$lib/snippets/list-item.snippet.svelte";
+	import type { InternalHref } from "$lib/types/civic.types";
 
 	type RelatedItem = {
 		name: string;
-		url: string;
+		url: InternalHref;
 	};
 
 	let { relatedContent }: { relatedContent: RelatedItem[] } = $props();

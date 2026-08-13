@@ -3,9 +3,9 @@ layout: content
 title: Police Clearance
 breadcrumbs:
   - name: Services
-    url: /(content)/services
+    url: /services
   - name: Certificates
-    url: /(content)/services/certificates
+    url: /services/certificates
 onThisPage:
   - name: Police Clearance
     id: title
@@ -19,18 +19,19 @@ onThisPage:
     id: frequently-asked-questions
 relatedContent:
   - name: Barangay Clearance
-    url: /(content)/services/certificates/barangay-clearance
+    url: /services/certificates/barangay-clearance
   - name: Barangay ID
-    url: /(content)/services/certificates/barangay-id
+    url: /services/certificates/barangay-id
   - name: Driver's License
-    url: /(content)/services/certificates/drivers-license
+    url: /services/certificates/drivers-license
 ---
 
 <script>
 	import Accordion from "$lib/components/macro/accordion.svelte";
 	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+	import { offices } from "$lib/data/offices.data";
 	import Source from "$lib/components/macro/source.svelte";
-	import { serviceSources } from "$lib/data/services.data";
+	import { serviceRecords } from "$lib/data/services.data";
 
 	const faq = [
 		{
@@ -89,14 +90,10 @@ Follow these steps to request a police clearance.
 
 ## Office info
 
-<OfficeInfo
-	landmark="Calapan Police Headquarters"
-	location="Camp Efigenio C Navarro, Calapan City, Oriental Mindoro"
-	time="Mon-Fri: 8AM - 5PM"
-/>
+<OfficeInfo office={offices.policeHeadquarters} />
 
 ## Frequently asked questions
 
 <Accordion {faq} />
 
-<Source source={serviceSources.policeClearance} />
+<Source source={serviceRecords.policeClearance.source} />

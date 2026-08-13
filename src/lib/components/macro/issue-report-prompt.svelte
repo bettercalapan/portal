@@ -14,7 +14,7 @@
 	<p>
 		Found an issue with this page? Send us a
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- the route is resolved before its query string is appended -->
-		<a href={`${resolveRoute("/(content)/report")}${query}`}>report</a>.
+		<a href={`${resolveRoute("/report")}${query}`}>report</a>.
 	</p>
 </div>
 

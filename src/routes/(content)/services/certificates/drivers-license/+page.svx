@@ -3,9 +3,9 @@ layout: content
 title: Driver's License
 breadcrumbs:
   - name: Services
-    url: /(content)/services
+    url: /services
   - name: Certificates
-    url: /(content)/services/certificates
+    url: /services/certificates
 onThisPage:
   - name: Driver's License
     id: title
@@ -19,18 +19,19 @@ onThisPage:
     id: frequently-asked-questions
 relatedContent:
   - name: Police Clearance
-    url: /(content)/services/certificates/police-clearance
+    url: /services/certificates/police-clearance
   - name: Barangay ID
-    url: /(content)/services/certificates/barangay-id
+    url: /services/certificates/barangay-id
   - name: Barangay Clearance
-    url: /(content)/services/certificates/barangay-clearance
+    url: /services/certificates/barangay-clearance
 ---
 
 <script>
 	import Accordion from "$lib/components/macro/accordion.svelte";
 	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+	import { offices } from "$lib/data/offices.data";
 	import Source from "$lib/components/macro/source.svelte";
-	import { serviceSources } from "$lib/data/services.data";
+	import { serviceRecords } from "$lib/data/services.data";
 
 	const faq = [
 		{
@@ -96,14 +97,10 @@ Follow these general steps for an LTO license transaction.
 
 ## Office info
 
-<OfficeInfo
-	landmark="Land Transportation Office"
-	location="95Q9+QWC Land Transportation Office, Calapan City, Oriental Mindoro"
-	time="Mon-Fri: 8AM - 5PM"
-/>
+<OfficeInfo office={offices.landTransportationOffice} />
 
 ## Frequently asked questions
 
 <Accordion {faq} />
 
-<Source source={serviceSources.driversLicense} />
+<Source source={serviceRecords.driversLicense.source} />

@@ -5,7 +5,7 @@
 	let { source }: { source: DataSource } = $props();
 </script>
 
-<aside class="source" aria-label="Data source and verification">
+<aside class="source" aria-label="Data source">
 	<Info aria-hidden="true" />
 	<div>
 		<p>
@@ -27,7 +27,7 @@
 		grid-template-columns: 18px minmax(0, 1fr);
 		align-items: start;
 		gap: 0.75rem;
-		color: var(--fg-secondary);
+		color: var(--fg);
 		font-size: 0.875rem;
 	}
 

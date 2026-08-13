@@ -1,20 +1,24 @@
-import type { DataSource } from "$lib/types/source.types";
-
-export type Contact = {
-	name: string;
-	type: "mobile" | "landline";
-};
+import type { ContactMethod, DataSource } from "$lib/types/civic.types";
 
 export type ContactOrganization = {
 	name: string;
-	contact: readonly Contact[];
+	contacts: readonly ContactMethod[];
 	source: DataSource;
 };
 
-export const generalContacts = {
-	email: "mbscalapanofficial@gmail.com",
-	phone: { name: "043-288-7508", type: "landline" }
-} as const;
+export type { ContactMethod } from "$lib/types/civic.types";
+
+export type ContactSection = {
+	id: string;
+	heading: string;
+	organizations: readonly ContactOrganization[];
+	showLocationActions?: boolean;
+};
+
+export const generalContacts = [
+	{ kind: "email", value: "mbscalapanofficial@gmail.com" },
+	{ kind: "phone", value: "043-288-7508", phoneType: "landline" }
+] as const satisfies readonly ContactMethod[];
 
 const cityEmergencySource = {
 	sources: [
@@ -37,16 +41,6 @@ const provincialHospitalSource = {
 	lastVerified: "2026-08-12"
 } as const satisfies DataSource;
 
-const holyCrossSource = {
-	sources: [
-		{
-			name: "Hospital of the Holy Cross contact page",
-			url: "https://hospitaloftheholycross.com/contactus"
-		}
-	],
-	lastVerified: "2026-08-12"
-} as const satisfies DataSource;
-
 const legacyDirectorySource = {
 	sources: [
 		{
@@ -58,101 +52,111 @@ const legacyDirectorySource = {
 	note: "Retained from the previous BetterCalapan contact directory; confirm the number with the organization before relying on it."
 } as const satisfies DataSource;
 
-export const emergencyHotlines: readonly ContactOrganization[] = [
+const emergencyHotlines: readonly ContactOrganization[] = [
 	{
 		name: "National Emergency Hotline",
-		contact: [{ name: "911", type: "landline" }],
+		contacts: [{ kind: "phone", value: "911", phoneType: "landline" }],
 		source: cityEmergencySource
 	},
 	{
 		name: "City Health and Sanitation Department",
-		contact: [
-			{ name: "(043) 288-7408", type: "landline" },
-			{ name: "0908-366-1556", type: "mobile" }
+		contacts: [
+			{ kind: "phone", value: "(043) 288-7408", phoneType: "landline" },
+			{ kind: "phone", value: "0908-366-1556", phoneType: "mobile" }
 		],
 		source: cityEmergencySource
 	},
 	{
 		name: "CDRRMD (Rescue/Fire)",
-		contact: [
-			{ name: "0999-735-6447", type: "mobile" },
-			{ name: "0915-744-9698", type: "mobile" },
-			{ name: "0966-029-9777", type: "mobile" },
-			{ name: "(043) 288-6111", type: "landline" },
-			{ name: "(043) 288-7521", type: "landline" }
+		contacts: [
+			{ kind: "phone", value: "0999-735-6447", phoneType: "mobile" },
+			{ kind: "phone", value: "0915-744-9698", phoneType: "mobile" },
+			{ kind: "phone", value: "0966-029-9777", phoneType: "mobile" },
+			{ kind: "phone", value: "(043) 288-6111", phoneType: "landline" },
+			{ kind: "phone", value: "(043) 288-7521", phoneType: "landline" }
 		],
 		source: cityEmergencySource
 	},
 	{
 		name: "Calapan City Police Station (PNP)",
-		contact: [
-			{ name: "0998-598-5813", type: "mobile" },
-			{ name: "0906-179-1105", type: "mobile" }
+		contacts: [
+			{ kind: "phone", value: "0998-598-5813", phoneType: "mobile" },
+			{ kind: "phone", value: "0906-179-1105", phoneType: "mobile" }
 		],
 		source: cityEmergencySource
 	},
 	{
 		name: "Calapan City Fire Station (BFP)",
-		contact: [
-			{ name: "0915-603-1561", type: "mobile" },
-			{ name: "(043) 288-7777", type: "landline" }
+		contacts: [
+			{ kind: "phone", value: "0915-603-1561", phoneType: "mobile" },
+			{ kind: "phone", value: "(043) 288-7777", phoneType: "landline" }
 		],
 		source: cityEmergencySource
 	},
 	{
 		name: "Tamaraw Fire Volunteer",
-		contact: [
-			{ name: "0917-534-2419", type: "mobile" },
-			{ name: "0917-136-4603", type: "mobile" },
-			{ name: "0925-812-9639", type: "mobile" }
+		contacts: [
+			{ kind: "phone", value: "0917-534-2419", phoneType: "mobile" },
+			{ kind: "phone", value: "0917-136-4603", phoneType: "mobile" },
+			{ kind: "phone", value: "0925-812-9639", phoneType: "mobile" }
 		],
 		source: cityEmergencySource
 	},
 	{
 		name: "PNP EOD K9 Unit (Explosives Related Incident)",
-		contact: [{ name: "0916-695-0155", type: "mobile" }],
+		contacts: [{ kind: "phone", value: "0916-695-0155", phoneType: "mobile" }],
 		source: legacyDirectorySource
 	}
 ];
 
-export const medicalEmergencyHotlines: readonly ContactOrganization[] = [
+const medicalEmergencyHotlines: readonly ContactOrganization[] = [
 	{
 		name: "Oriental Mindoro Provincial Hospital",
-		contact: [
-			{ name: "0963-783-2169", type: "mobile" },
-			{ name: "(043) 288-3077", type: "landline" },
-			{ name: "(043) 288-7193", type: "landline" }
+		contacts: [
+			{ kind: "phone", value: "0963-783-2169", phoneType: "mobile" },
+			{ kind: "phone", value: "(043) 288-3077", phoneType: "landline" },
+			{ kind: "phone", value: "(043) 288-7193", phoneType: "landline" }
 		],
 		source: provincialHospitalSource
 	},
 	{
 		name: "MMG Hospital",
-		contact: [
-			{ name: "0923-709-5439", type: "mobile" },
-			{ name: "(043) 288-2275", type: "landline" }
+		contacts: [
+			{ kind: "phone", value: "0923-709-5439", phoneType: "mobile" },
+			{ kind: "phone", value: "(043) 288-2275", phoneType: "landline" }
 		],
 		source: legacyDirectorySource
 	},
 	{
 		name: "Maria Estrella General Hospital",
-		contact: [
-			{ name: "0917-702-5210", type: "mobile" },
-			{ name: "(043) 286-7386", type: "landline" }
+		contacts: [
+			{ kind: "phone", value: "0917-702-5210", phoneType: "mobile" },
+			{ kind: "phone", value: "(043) 286-7386", phoneType: "landline" }
 		],
 		source: legacyDirectorySource
 	},
 	{
 		name: "Luna Goco Medical Center",
-		contact: [
-			{ name: "0919-097-9155", type: "mobile" },
-			{ name: "0947-897-0588", type: "mobile" },
-			{ name: "(043) 286-7208", type: "landline" }
+		contacts: [
+			{ kind: "phone", value: "0919-097-9155", phoneType: "mobile" },
+			{ kind: "phone", value: "0947-897-0588", phoneType: "mobile" },
+			{ kind: "phone", value: "(043) 286-7208", phoneType: "landline" }
 		],
 		source: legacyDirectorySource
 	},
 	{
 		name: "Mindoro Medical Center",
-		contact: [{ name: "0917-567-8102", type: "mobile" }],
+		contacts: [{ kind: "phone", value: "0917-567-8102", phoneType: "mobile" }],
 		source: legacyDirectorySource
 	}
 ];
+
+export const contactSections = [
+	{ id: "emergency-hotlines", heading: "Emergency Hotlines", organizations: emergencyHotlines },
+	{
+		id: "medical-emergency-hotlines",
+		heading: "Medical Emergency Hotlines",
+		organizations: medicalEmergencyHotlines,
+		showLocationActions: true
+	}
+] as const satisfies readonly ContactSection[];

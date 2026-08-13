@@ -18,16 +18,16 @@ onThisPage:
     id: scope-and-review
 relatedContent:
   - name: Terms of Use
-    url: /(content)/terms-of-use
+    url: /terms-of-use
   - name: Privacy Policy
-    url: /(content)/privacy-policy
+    url: /privacy-policy
 ---
 
 <script>
 	import Info from "$lib/components/macro/info.svelte";
 	import { resolveRoute } from "$lib/utils/paths";
 
-	const reportUrl = resolveRoute("/(content)/report");
+	const reportUrl = resolveRoute("/report");
 </script>
 
 # {title}

@@ -3,7 +3,7 @@ layout: content
 title: Departments
 breadcrumbs:
   - name: Government
-    url: /(content)/government
+    url: /government
 ---
 
 <script>

@@ -3,11 +3,12 @@
 	import IssueReportPrompt from "$lib/components/macro/issue-report-prompt.svelte";
 	import OnThisPage from "$lib/components/macro/on-this-page.svelte";
 	import RelatedContent from "$lib/components/macro/related-content.svelte";
+	import type { InternalHref } from "$lib/types/civic.types";
 	import type { Snippet } from "svelte";
 
 	type LinkItem = {
 		name: string;
-		url: string;
+		url: InternalHref;
 	};
 	type PageSection = {
 		id: string;

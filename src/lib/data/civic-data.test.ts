@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { emergencyHotlines, generalContacts, medicalEmergencyHotlines } from "./contact.data";
+import { contactSections, generalContacts } from "./contact.data";
 import { barangays, departments, executive, legislative, officials } from "./government.data";
-import { business, certificates, serviceSources } from "./services.data";
+import { offices } from "./offices.data";
+import { publishedPages } from "./site.data";
+import { business, certificates, serviceRecords } from "./services.data";
 import {
 	barangayPopulation,
 	cityIncomeSource,
@@ -112,32 +114,74 @@ describe("civic data integrity", () => {
 		}
 	});
 
-	it("provides sources for every published service", () => {
+	it("publishes complete canonical service records", () => {
 		const publishedServices = [...certificates.data, ...business.data];
-		const sourceRecords = Object.values(serviceSources);
+		const records = Object.values(serviceRecords);
 
 		expect(publishedServices).toHaveLength(13);
-		expect(sourceRecords).toHaveLength(publishedServices.length);
-		for (const source of sourceRecords) expectCompleteSource(source);
+		expect(records).toHaveLength(publishedServices.length);
+		expect(new Set(records.map((service) => service.id)).size).toBe(records.length);
+		expect(new Set(records.map((service) => service.href)).size).toBe(records.length);
+		for (const service of records) {
+			expect(service.id.trim()).not.toBe("");
+			expect(service.title.trim()).not.toBe("");
+			expect(service.href).toMatch(/^\/services\//);
+			expect(["certificates", "business"]).toContain(service.category);
+			expect(service.summary.trim()).not.toBe("");
+			expect(service.aliases.length).toBeGreaterThan(0);
+			expect(service.requirements.length).toBeGreaterThan(0);
+			expect(["fixed", "free", "variable", "unknown"]).toContain(service.fee.status);
+			expect(service.fee.details.trim()).not.toBe("");
+			expect("office" in service || "locationMode" in service).toBe(true);
+			expectCompleteSource(service.source);
+		}
 	});
 
 	it("publishes only complete hotline organizations with sources", () => {
-		const organizations = [...emergencyHotlines, ...medicalEmergencyHotlines];
+		const organizations = contactSections.flatMap(({ organizations }) => organizations);
 
 		expect(organizations.length).toBeGreaterThan(0);
 		for (const organization of organizations) {
 			expect(organization.name.trim()).not.toBe("");
-			expect(organization.contact.length).toBeGreaterThan(0);
-			for (const contact of organization.contact) {
-				expect(contact.name.trim()).not.toBe("");
-				expect(["landline", "mobile"]).toContain(contact.type);
+			expect(organization.contacts.length).toBeGreaterThan(0);
+			for (const contact of organization.contacts) {
+				expect(contact.value.trim()).not.toBe("");
+				if (contact.kind === "phone") expect(["landline", "mobile"]).toContain(contact.phoneType);
 			}
 			expectCompleteSource(organization.source);
 		}
 	});
 
 	it("publishes complete general contacts", () => {
-		expect(generalContacts.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-		expect(generalContacts.phone.name).not.toBe("");
+		const email = generalContacts.find((contact) => contact.kind === "email");
+		const phone = generalContacts.find((contact) => contact.kind === "phone");
+
+		expect(email?.value).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+		expect(phone?.value).not.toBe("");
+	});
+
+	it("publishes complete office records", () => {
+		for (const office of Object.values(offices)) {
+			expect(office.id.trim()).not.toBe("");
+			expect(office.name.trim()).not.toBe("");
+			expect(office.address.trim()).not.toBe("");
+			expect(office.hours.trim()).not.toBe("");
+			expectCompleteSource(office.source);
+			for (const contact of office.contacts) {
+				expect(contact.value.trim()).not.toBe("");
+				if (contact.kind === "phone") expect(contact.phoneType).toMatch(/^(mobile|landline)$/);
+			}
+		}
+	});
+
+	it("uses unique public paths for every registered page", () => {
+		expect(new Set(publishedPages.map((page) => page.id)).size).toBe(publishedPages.length);
+		expect(new Set(publishedPages.map((page) => page.href)).size).toBe(publishedPages.length);
+		for (const page of publishedPages) {
+			expect(page.title.trim()).not.toBe("");
+			expect(page.href).toMatch(/^\//);
+			expect(page.href).not.toContain("(content)");
+			expect(page.keywords.length).toBeGreaterThan(0);
+		}
 	});
 });

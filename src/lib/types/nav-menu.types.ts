@@ -1,6 +1,6 @@
-import type { RouteId } from "$app/types";
+import type { InternalHref } from "$lib/types/civic.types";
 
 export type ListItemProps = {
 	name: string;
-	url: RouteId;
+	url: InternalHref;
 };

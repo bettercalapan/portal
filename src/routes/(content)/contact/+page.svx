@@ -6,11 +6,7 @@ title: Contact
 <script lang="ts">
 	import ContactAction from "$lib/components/macro/contact-action.svelte";
 	import LocationActions from "$lib/components/macro/location-actions.svelte";
-	import {
-		emergencyHotlines,
-		generalContacts,
-		medicalEmergencyHotlines
-	} from "$lib/data/contact.data";
+	import { contactSections, generalContacts } from "$lib/data/contact.data";
 	import Email from "@lucide/svelte/icons/mail";
 	import Phone from "@lucide/svelte/icons/phone";
 	import Smartphone from "@lucide/svelte/icons/smartphone";
@@ -23,61 +19,51 @@ We're here to help. Reach out to us through any of these channels.
 
 <div class="contact-content">
 	<ul class="general">
-		<li><Email /> <ContactAction email={generalContacts.email} /></li>
-		<li><Phone /> <ContactAction phone={generalContacts.phone.name} phoneType="landline" /></li>
+		{#each generalContacts as contact (contact.value)}
+			<li>
+				{#if contact.kind === "email"}
+					<Email />
+				{:else}
+					<Phone />
+				{/if}
+				<ContactAction method={contact} />
+			</li>
+		{/each}
 	</ul>
 	<div class="hotlines">
-		<div class="section hotline-section emergency-hotlines" id="emergency-hotlines">
-			<h2>Emergency Hotlines</h2>
+		{#each contactSections as section (section.id)}
+		<div class="section hotline-section" id={section.id}>
+			<h2>{section.heading}</h2>
 			<ul class="content">
-				{#each emergencyHotlines as eh, i (eh.name)}
+				{#each section.organizations as organization (organization.name)}
 					<li>
 						<div>
-							<h3>{eh.name}</h3>
+							<h3>{organization.name}</h3>
 							<ul class="contacts">
-								{#each emergencyHotlines[i].contact as contact (contact.name)}
+								{#each organization.contacts as contact (contact.value)}
 									<li>
-										{#if contact.type == "landline"}
+										{#if contact.kind === "phone" && contact.phoneType === "landline"}
 											<Phone />
-										{:else if contact.type == "mobile"}
+										{:else if contact.kind === "phone" && contact.phoneType === "mobile"}
 											<Smartphone />
+										{:else}
+											<Email />
 										{/if}
-										<ContactAction phone={contact.name} phoneType={contact.type} />
+										<ContactAction method={contact} />
 									</li>
 								{/each}
 							</ul>
+							{#if section.showLocationActions}
+								<div class="location-actions-wrapper">
+									<LocationActions destination={`${organization.name}, Calapan City, Oriental Mindoro`} />
+								</div>
+							{/if}
 						</div>
 					</li>
 				{/each}
 			</ul>
 		</div>
-		<div class="section hotline-section medical-emergency-hotlines" id="medical-emergency-hotlines">
-			<h2>Medical Emergency Hotlines</h2>
-			<ul class="content">
-				{#each medicalEmergencyHotlines as eh, i (eh.name)}
-					<li>
-						<div>
-							<h3>{eh.name}</h3>
-							<ul class="contacts">
-								{#each medicalEmergencyHotlines[i].contact as contact (contact.name)}
-									<li>
-										{#if contact.type == "landline"}
-											<Phone />
-										{:else if contact.type == "mobile"}
-											<Smartphone />
-										{/if}
-										<ContactAction phone={contact.name} phoneType={contact.type} />
-									</li>
-								{/each}
-							</ul>
-							<div class="location-actions-wrapper">
-								<LocationActions destination={`${eh.name}, Calapan City, Oriental Mindoro`} />
-							</div>
-						</div>
-					</li>
-				{/each}
-			</ul>
-		</div>
+		{/each}
 	</div>
 </div>
 

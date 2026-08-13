@@ -1,19 +1,21 @@
 <script lang="ts">
-	import { formatPhoneNumber, type PhoneType } from "$lib/utils/contact";
+	import type { ContactMethod } from "$lib/data/contact.data";
+	import { formatPhoneNumber } from "$lib/utils/contact";
 	import Check from "@lucide/svelte/icons/check";
 	import Copy from "@lucide/svelte/icons/copy";
 
-	type Props = { phone?: string; phoneType?: PhoneType; email?: string };
+	type Props = { method: ContactMethod };
 
-	let { phone, phoneType, email }: Props = $props();
+	let { method }: Props = $props();
 	let message = $state("");
 	let copied = $state(false);
-	const value = $derived(phone ?? email ?? "");
-	const label = $derived(phone ? formatPhoneNumber(phone, phoneType ?? "landline") : (email ?? ""));
+	const label = $derived(
+		method.kind === "phone" ? formatPhoneNumber(method.value, method.phoneType) : method.value
+	);
 
 	async function copyValue() {
 		try {
-			await navigator.clipboard.writeText(value);
+			await navigator.clipboard.writeText(method.value);
 			message = "Copied to clipboard.";
 			copied = true;
 			setTimeout(() => (copied = false), 2_000);

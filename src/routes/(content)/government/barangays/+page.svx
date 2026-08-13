@@ -3,7 +3,7 @@ layout: content
 title: Barangays
 breadcrumbs:
   - name: Government
-    url: /(content)/government
+    url: /government
 ---
 
 <script>
@@ -24,7 +24,7 @@ breadcrumbs:
 		<li>
 			<h2>{barangay.name}</h2>
 			<p><User /> {barangay.captain}</p>
-			<p class="contact"><Phone /> <ContactAction phone={splitPhoneNumbers(barangay.phoneNumber)[0]} phoneType="mobile" /></p>
+			<p class="contact"><Phone /> <ContactAction method={{ kind: "phone", value: splitPhoneNumbers(barangay.phoneNumber)[0], phoneType: "mobile" }} /></p>
 		</li>
 	{/each}
 </ul>

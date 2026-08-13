@@ -3,9 +3,9 @@ layout: content
 title: Death Certificate
 breadcrumbs:
   - name: Services
-    url: /(content)/services
+    url: /services
   - name: Certificates
-    url: /(content)/services/certificates
+    url: /services/certificates
 onThisPage:
   - name: Death Certificate
     id: title
@@ -19,18 +19,19 @@ onThisPage:
     id: frequently-asked-questions
 relatedContent:
   - name: Birth Certificate
-    url: /(content)/services/certificates/birth-certificate
+    url: /services/certificates/birth-certificate
   - name: Marriage Certificate
-    url: /(content)/services/certificates/marriage-certificate
+    url: /services/certificates/marriage-certificate
   - name: Barangay Clearance
-    url: /(content)/services/certificates/barangay-clearance
+    url: /services/certificates/barangay-clearance
 ---
 
 <script>
 	import Accordion from "$lib/components/macro/accordion.svelte";
 	import OfficeInfo from "$lib/components/macro/office-info.svelte";
+	import { offices } from "$lib/data/offices.data";
 	import Source from "$lib/components/macro/source.svelte";
-	import { serviceSources } from "$lib/data/services.data";
+	import { serviceRecords } from "$lib/data/services.data";
 
 	const faq = [
 		{
@@ -96,15 +97,10 @@ Follow these steps to register your marriage certificate.
 
 ## Office info
 
-<OfficeInfo
-	landmark="Calapan City Hall"
-	location="95HM+H9J Calapan City Hall, Roxas Dr, Calapan City, 5200 Oriental Mindoro"
-	phone="(043) 288-2412"
-	time="Mon-Fri: 8AM - 5PM"
-/>
+<OfficeInfo office={offices.civilRegistry} />
 
 ## Frequently asked questions
 
 <Accordion {faq} />
 
-<Source source={serviceSources.deathCertificate} />
+<Source source={serviceRecords.deathCertificate.source} />

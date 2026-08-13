@@ -1,33 +1,10 @@
 <script lang="ts">
 	import { resolveRoute } from "$lib/utils/paths";
 	import { government } from "$lib/data/government.data";
+	import { footerPages } from "$lib/data/site.data";
 	import { services } from "$lib/data/services.data";
 	import Facebook from "$lib/icons/facebook.svelte";
 	import GitHub from "$lib/icons/github.svelte";
-
-	const prefix = "/(content)";
-	const others = [
-		{
-			name: "Terms of Use",
-			url: `${prefix}/terms-of-use`
-		},
-		{
-			name: "Privacy Policy",
-			url: `${prefix}/privacy-policy`
-		},
-		{
-			name: "Accessibility",
-			url: `${prefix}/accessibility`
-		},
-		{
-			name: "Report",
-			url: `${prefix}/report`
-		},
-		{
-			name: "Sitemap",
-			url: `${prefix}/sitemap`
-		}
-	];
 </script>
 
 <footer>
@@ -83,9 +60,9 @@
 			<div class="footer-section">
 				<h1>Others</h1>
 				<ul class="footer-section-list">
-					{#each others as other (other.name)}
+					{#each footerPages as other (other.id)}
 						<li class="other">
-							<a class="link" href={resolveRoute(other.url)}>{other.name}</a>
+							<a class="link" href={resolveRoute(other.href)}>{other.title}</a>
 						</li>
 					{/each}
 				</ul>
