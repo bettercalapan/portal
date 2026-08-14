@@ -21,6 +21,11 @@ export function formatPhoneNumber(value: string, type: PhoneType) {
 	return local.replace(/^(\d{3})(\d{3})(\d{4})$/, "($1) $2-$3");
 }
 
+export function contactHref(method: { kind: "email" | "phone"; value: string }) {
+	if (method.kind === "email") return `mailto:${method.value}`;
+	return `tel:${method.value.replace(/[^\d+]/g, "")}`;
+}
+
 export function googleMapsSearchHref(query: string) {
 	return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }

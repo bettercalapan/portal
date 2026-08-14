@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ContactMethod } from "$lib/data/contact.data";
-	import { formatPhoneNumber } from "$lib/utils/contact";
+	import { contactHref, formatPhoneNumber } from "$lib/utils/contact";
 	import Check from "@lucide/svelte/icons/check";
 	import Copy from "@lucide/svelte/icons/copy";
 
@@ -26,7 +26,9 @@
 </script>
 
 <span class="contact-action">
-	<span>{label}</span>
+	<!-- Contact schemes are not app routes and must not go through resolve(). -->
+	<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+	<a href={contactHref(method)}>{label}</a>
 	<button
 		type="button"
 		onclick={copyValue}
@@ -47,6 +49,10 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 0.25rem;
+	}
+
+	a {
+		text-decoration: none;
 	}
 
 	button {
