@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "wrangler types && vite build",
-		"verify": "pnpm gen && pnpm lint && pnpm check && pnpm test && pnpm test:routes && pnpm benchmark && pnpm pa11y && pnpm lychee && pnpm preview",
+		"verify": "pnpm gen && pnpm lint && pnpm check && pnpm test && pnpm test:routes && pnpm test:pwa && pnpm benchmark && pnpm pa11y && pnpm lychee && pnpm preview",
 		"deploy": "wrangler deploy",
 		"preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
 		"prepare": "svelte-kit sync || echo ''",
@@ -27,7 +27,8 @@
 		"pa11y:ci": "node scripts/pa11y.mjs ci",
 		"lychee": "node scripts/lychee.mjs",
 		"lychee:ci": "node scripts/lychee.mjs ci",
-		"test:routes": "node scripts/route-smoke.mjs"
+		"test:routes": "node scripts/route-smoke.mjs",
+		"test:pwa": "node scripts/pwa.mjs"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",

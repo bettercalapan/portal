@@ -3,6 +3,7 @@
 	import favicon from "$lib/assets/logo.png";
 	import Header from "$lib/components/macro/header.svelte";
 	import Footer from "$lib/components/macro/footer.svelte";
+	import InstallPrompt from "$lib/components/macro/install-prompt.svelte";
 
 	let { children } = $props();
 </script>
@@ -18,6 +19,7 @@
 	</div>
 </main>
 <Footer />
+<InstallPrompt />
 
 <style>
 	main {

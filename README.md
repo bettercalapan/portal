@@ -46,6 +46,9 @@ pnpm pa11y
 
 # Check external links across the site
 pnpm lychee
+
+# Verify manifest, installability, offline fallback, and cache behavior
+pnpm test:pwa
 ```
 
 **Don't have pnpm?** See the [installation](https://pnpm.io/installation).
@@ -83,6 +86,16 @@ The XML sitemap is generated from static `+page.svelte` and `+page.svx` routes. 
 The checks use the axe and HTML CodeSniffer runners at WCAG 2 AA and fail on any confirmed accessibility error. Axe findings that require manual review remain non-blocking warnings. Pa11y requires Node.js 20, 22, or 24; CI uses Node.js 22 and runs both viewports as separate jobs on every push.
 
 Each CI job publishes a compact Markdown summary with route and error totals plus any failing rule codes. Full selectors, HTML context, and remediation links remain in the job log. The temporary JSON reports in `.pa11y/` are ignored by Git and are not uploaded as artifacts.
+
+## PWA and Offline Behavior
+
+BetterCalapan is installable in supported browsers. Its service worker precaches public pages, the app's JavaScript, CSS, fonts, icons, manifest, and offline fallback.
+
+Public pages, charts, and search work offline after installation. The worker fetches current pages when online, then uses the cached page when offline. Report submissions, Turnstile, email sending, and external links always require connectivity. If a route has not been cached, BetterCalapan shows a fallback page that explains that emergency contacts, fees, requirements, and office information may be outdated.
+
+Each deployment creates a versioned cache and removes only older BetterCalapan caches after activation. The worker does not use `skipWaiting`, so open tabs finish on their current deployment before the new worker takes over. Cloudflare revalidates the service worker and manifest by default. `pnpm test:pwa` checks Chromium installability, the manifest, offline public pages and search, fallback behavior, mobile overflow, and cache cleanup against the production Worker preview.
+
+Before a release, manually check installation and icon appearance in desktop Chromium, Android, and iOS Add to Home Screen.
 
 ## External Link Checks
 

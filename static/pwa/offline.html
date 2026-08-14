@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex" />
+		<meta name="theme-color" content="#ffffff" />
+		<title>You're offline | BetterCalapan</title>
+		<style>
+			@font-face {
+				font-family: "figtree";
+				font-display: swap;
+				font-style: normal;
+				font-weight: 400 900;
+				src: url("/pwa/figtree-variable.woff2") format("woff2");
+			}
+
+			:root {
+				color: #3d3d3d;
+				background: #ffffff;
+				font-family: "figtree", system-ui, sans-serif;
+			}
+
+			body {
+				min-height: 100dvh;
+				margin: 0;
+				display: grid;
+				place-items: center;
+				padding: 1.5rem;
+				box-sizing: border-box;
+			}
+
+			main {
+				max-width: 36rem;
+			}
+
+			img {
+				width: 4rem;
+				height: 4rem;
+				border-radius: 1rem;
+			}
+
+			h1 {
+				margin: 1.5rem 0 0.5rem;
+				font-size: clamp(2rem, 8vw, 3rem);
+				line-height: 1.1;
+			}
+
+			p {
+				font-size: 1.125rem;
+				line-height: 1.5;
+			}
+
+			button {
+				margin-top: 1rem;
+				padding: 0.75rem 1rem;
+				border: 0;
+				border-radius: 999px;
+				background: #ff5500;
+				color: #ffffff;
+				font: inherit;
+				font-weight: 700;
+				cursor: pointer;
+			}
+
+			button:focus-visible {
+				outline: 3px solid #3d3d3d;
+				outline-offset: 3px;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<img src="/pwa/icon-192.png" alt="BetterCalapan" width="192" height="192" />
+			<h1>You're offline</h1>
+			<p>BetterCalapan needs an internet connection to show current public information.</p>
+			<p>
+				Emergency contacts, service requirements, fees, and office information may change. Check them
+				again when you are online.
+			</p>
+			<button type="button" onclick="location.reload()">Try again</button>
+		</main>
+	</body>
+</html>

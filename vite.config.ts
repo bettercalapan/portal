@@ -23,6 +23,12 @@ export default defineConfig({
 							: true
 			},
 			extensions: [".svelte", ".svx"],
+			serviceWorker: {
+				register: true,
+				files: (file) =>
+					(file === "manifest.webmanifest" || file.startsWith("pwa/")) &&
+					file !== "pwa/offline.html"
+			},
 			preprocess: [
 				mdsvex({
 					layout: { content: contentLayout },
