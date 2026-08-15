@@ -18,7 +18,7 @@
 			<div class="socials">
 				<a
 					class="social"
-					href="https://facebook.com/bettercalapan.org"
+					href="https://facebook.com/bettercalapan"
 					target="_blank"
 					rel="external noopener noreferrer"
 					aria-label="Go to Facebook page"

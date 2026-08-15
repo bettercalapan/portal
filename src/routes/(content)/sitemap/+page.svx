@@ -46,7 +46,7 @@ Navigate all pages and services of BetterCalapan.
 	<section>
 		<h2>Services</h2>
 		<ul>
-			{#each services as item (item.name)}
+			{#each services.slice(0, 2) as item (item.name)}
 				{@render listItem(item.name, item.url)}
 			{/each}
 		</ul>
@@ -60,17 +60,17 @@ Navigate all pages and services of BetterCalapan.
 		</ul>
 	</section>
 	<section>
-		<h2>External Resources</h2>
+		<h2>Others</h2>
 		<ul>
-			{#each externalResources as item (item.name)}
+			{#each others as item (item.name)}
 				{@render listItem(item.name, item.url)}
 			{/each}
 		</ul>
 	</section>
 	<section>
-		<h2>Others</h2>
+		<h2>External Resources</h2>
 		<ul>
-			{#each others as item (item.name)}
+			{#each externalResources as item (item.name)}
 				{@render listItem(item.name, item.url)}
 			{/each}
 		</ul>

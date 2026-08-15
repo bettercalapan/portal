@@ -81,7 +81,9 @@
 		}
 
 		.content-sidebar {
-			margin-top: 2.5rem;
+			margin-top: 2.25rem;
+			margin-inline: -0.25rem;
+			padding: 0.25rem;
 			position: sticky;
 			top: 2.5rem;
 			display: flex;
