@@ -6,9 +6,6 @@ BetterCalapan is an open-source community-driven platform that makes Calapan's g
 
 Check the portal out at [bettercalapan.org](https://bettercalapan.org/)! 🧡
 
-> [!NOTE]  
-> The platform is currently in beta. Versions >= 0.1.x are usable for the public, but 1.0.0 won't come until the codebase lives up to the platform's philosophy of great UX, accessibility, and performance. We want to make this as best as it can be!
-
 ## Tech Stack
 
 | Tool               | Purpose         |
@@ -53,57 +50,26 @@ pnpm test:pwa
 
 **Don't have pnpm?** See the [installation](https://pnpm.io/installation).
 
-## Report Form Configuration
-
-The `/report` form uses Cloudflare Turnstile and the Email Sending binding configured in `wrangler.jsonc`. Before enabling it in production:
-
-1. Enable Email Sending for `bettercalapan.org`, route `reports@bettercalapan.org` to the maintainers, and allow `website@bettercalapan.org` as a sender.
-2. Create a managed Turnstile widget for `bettercalapan.org`. Local development widgets should also allow `localhost` and `127.0.0.1`.
-3. Set `TURNSTILE_SITE_KEY` as a Worker variable and `TURNSTILE_SECRET` as a Worker secret.
-4. Set `TURNSTILE_HOSTNAMES` to a comma-separated allowlist. Production must contain only production frontend hostnames, not local development names.
-
-For local development, copy `.env.example` to `.env` and provide development or Cloudflare test credentials. Never commit real Turnstile secrets. The server validates every token's success status, `report` action, and hostname before sending email.
-
-For a manual production deployment, first run `pnpm verify` and review the local preview. Stop the preview with `Ctrl+C`, then run `pnpm deploy`. Wrangler preserves the Turnstile variables configured in the Cloudflare dashboard because `keep_vars` is enabled in `wrangler.jsonc`.
-
 ## Performance Checks
 
-`pnpm benchmark` builds the site, serves it locally, and checks every sitemap route against the mobile and desktop Lighthouse budgets.
+`pnpm benchmark` checks every sitemap route against mobile and desktop Lighthouse budgets. It fails below 90 on mobile or 70 on desktop across performance, accessibility, best-practices, or SEO. CI runs both viewports on every push to `main`.
 
-It reads every route from the generated `/sitemap.xml` and fails if any page's category score drops below the budget:
-
-- Mobile: 90
-- Desktop: 70
-
-Budgets apply to all four Lighthouse categories (performance, accessibility, best-practices, SEO). Reports are written to `.unlighthouse/` locally. CI runs each viewport on a separate runner for every push to `main` and publishes compact Markdown job summaries instead of report artifacts.
-
-The XML sitemap is generated from static `+page.svelte` and `+page.svx` routes. New static pages are included automatically; parameterized routes must provide concrete URLs before they can be added.
+> [!NOTE]  
+> The `--desktop` flag for Unlighthouse is a bit buggy. Despite the desktop version of the page being very performant as shown on manual Lighthouse tests, it shows lower scores on the benchmark. As a compromise, the budget is set to 70 until a more reliable solution is found.
 
 ## Accessibility Checks
 
-`pnpm pa11y` builds and serves the site locally, then checks every route in `/sitemap.xml` at mobile and desktop widths using Pa11y. Use `pnpm pa11y:mobile` or `pnpm pa11y:desktop` to run one viewport.
-
-The checks use the axe and HTML CodeSniffer runners at WCAG 2 AA and fail on any confirmed accessibility error. Axe findings that require manual review remain non-blocking warnings. Pa11y requires Node.js 20, 22, or 24; CI uses Node.js 22 and runs both viewports as separate jobs on every push.
-
-Each CI job publishes a compact Markdown summary with route and error totals plus any failing rule codes. Full selectors, HTML context, and remediation links remain in the job log. The temporary JSON reports in `.pa11y/` are ignored by Git and are not uploaded as artifacts.
+`pnpm pa11y` checks every sitemap route at mobile and desktop widths with axe and HTML CodeSniffer against WCAG 2 AA. Use `pnpm pa11y:mobile` or `pnpm pa11y:desktop` for one viewport. Confirmed errors fail the check, while manual-review warnings remain non-blocking. CI runs both viewports on every push to `main`.
 
 ## PWA and Offline Behavior
 
-BetterCalapan is installable in supported browsers. Its service worker precaches public pages, the app's JavaScript, CSS, fonts, icons, manifest, and offline fallback.
+BetterCalapan is installable in supported browsers. After installation, public pages, charts, and search work offline, while report submissions, Turnstile, email, and external links require connectivity. Uncached routes show an offline fallback. `pnpm test:pwa` checks installability, the manifest, offline behavior, responsive layout, and cache cleanup.
 
-Public pages, charts, and search work offline after installation. The worker fetches current pages when online, then uses the cached page when offline. Report submissions, Turnstile, email sending, and external links always require connectivity. If a route has not been cached, BetterCalapan shows a fallback page that explains that emergency contacts, fees, requirements, and office information may be outdated.
-
-Each deployment creates a versioned cache and removes only older BetterCalapan caches after activation. The worker does not use `skipWaiting`, so open tabs finish on their current deployment before the new worker takes over. Cloudflare revalidates the service worker and manifest by default. `pnpm test:pwa` checks Chromium installability, the manifest, offline public pages and search, fallback behavior, mobile overflow, and cache cleanup against the production Worker preview.
-
-Before a release, manually check installation and icon appearance in desktop Chromium, Android, and iOS Add to Home Screen.
+Before a release, manually check installation and icons in desktop Chromium, Android, and iOS.
 
 ## External Link Checks
 
-`pnpm lychee` builds and serves the site locally, reads every route from `/sitemap.xml`, and uses [Lychee](https://lychee.cli.rs/) to check external HTTP and HTTPS links found in the rendered pages. The pinned Lychee 0.24.2 binary downloads and verifies automatically on first use. New static pages are included automatically without maintaining a route list.
-
-The check fails on broken external links. BetterCalapan's local preview and canonical production origins are excluded as internal links, while email addresses are outside the HTTP link-checking scope. HTTP 403 responses are accepted because several government sites block automated clients while remaining publicly reachable. CI runs `pnpm lychee:ci` on every push.
-
-CI publishes a Markdown job summary with one row per unique external URL, its result, and every sitemap page where it appears. Successful links, accepted 403 responses, redirects, failures, and timeouts are labeled separately. The temporary JSON report and `.lychee/summary.md` are ignored by Git and are not uploaded as artifacts.
+`pnpm lychee` checks external HTTP and HTTPS links in every rendered sitemap route. Internal origins and email addresses are excluded, and HTTP 403 responses are accepted. CI runs `pnpm lychee:ci` on every push to `main`.
 
 ## Contributing
 
