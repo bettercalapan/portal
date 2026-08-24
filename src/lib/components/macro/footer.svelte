@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolveRoute } from "$lib/utils/paths";
+	import { apps } from "$lib/data/apps.data";
 	import { government } from "$lib/data/government.data";
 	import { footerPages } from "$lib/data/site.data";
 	import { services } from "$lib/data/services.data";
@@ -53,6 +54,18 @@
 					{#each government.data as gov (gov.name)}
 						<li class="government">
 							<a href={resolveRoute(gov.url)} class="link">{gov.name}</a>
+						</li>
+					{/each}
+				</ul>
+			</div>
+			<div class="footer-section">
+				<h1>Apps</h1>
+				<ul class="footer-section-list">
+					{#each apps as app (app.name)}
+						<li class="app">
+							<a href={app.url} target="_blank" rel="external noopener noreferrer" class="link"
+								>{app.name}</a
+							>
 						</li>
 					{/each}
 				</ul>
@@ -151,7 +164,7 @@
 			.wrapper {
 				display: grid;
 				grid-template-columns: 24rem 1fr;
-				gap: 16rem;
+				gap: 10rem;
 
 				.footer-sections {
 					margin: 0;
